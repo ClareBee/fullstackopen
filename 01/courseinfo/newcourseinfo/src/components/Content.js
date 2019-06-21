@@ -2,7 +2,7 @@ import React from 'react';
 import Part from './Part';
 
 const Content = (props) => {
-  return props.content.map((item, index) => {
+  return props.parts.map((item, index) => {
     return (
       <Part key={index} item={item} />
     )
