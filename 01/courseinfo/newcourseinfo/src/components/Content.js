@@ -1,12 +1,6 @@
 import React from 'react';
 import Part from './Part';
 
-const Content = (props) => {
-  return props.parts.map((item, index) => {
-    return (
-      <Part key={index} item={item} />
-    )
-  });
-}
+const Content = ({ parts }) => parts.map((item, index) => <Part key={index} item={item} />);
 
 export default Content;
