@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Statistic = (props) => {
+const Statistic = ({ title, value, percent }) => {
   return (
-    <p>{props.title} {props.value} {props.percent ? '%' : ''}</p>
+    <p>{title} {value} {percent ? '%' : ''}</p>
   )
 }
 
