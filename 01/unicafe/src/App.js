@@ -9,9 +9,10 @@ const App = ({course}) => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
   const [total, setTotal] = useState(0)
-  const [average, setAverage] = useState(0)
+  const [reveal, setReveal] = useState(false)
 
   const addVote = (vote) => {
+    setReveal(true)
     if (vote === 'good'){
       setGood(good + 1)
     }
@@ -49,6 +50,7 @@ const App = ({course}) => {
       <ButtonContainer course={course} addVote={addVote}/>
       <StatsContainer
         course={course}
+        reveal={reveal}
         bad={bad}
         good={good}
         neutral={neutral}
