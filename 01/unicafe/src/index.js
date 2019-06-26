@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 
 const course = {
-  title: 'Give Feedback'
+  feedbackTitle: 'Give Feedback',
+  statsTitle: 'Statistics'
 }
 ReactDOM.render(<App course={course} />, document.getElementById('root'));

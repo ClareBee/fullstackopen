@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
-import Header from './Components/Header'
+import ButtonContainer from './Containers/ButtonContainer'
+import StatsContainer from './Containers/StatsContainer'
 
 const App = ({course}) => {
   // save clicks of each button to own state
@@ -9,7 +10,8 @@ const App = ({course}) => {
   const [bad, setBad] = useState(0)
   return (
     <React.Fragment>
-      <Header title={course.title} />
+      <ButtonContainer course={course} />
+      <StatsContainer course={course} />
     </React.Fragment>
   )
 }
