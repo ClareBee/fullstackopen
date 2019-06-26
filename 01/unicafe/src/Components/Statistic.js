@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Result = (props) => {
+const Statistic = (props) => {
   return (
     <p>{props.title} {props.value} {props.percent ? '%' : ''}</p>
   )
 }
 
-export default Result
+export default Statistic

@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from '../Components/Header'
-import Result from '../Components/Result'
+import Statistic from '../Components/Statistic'
 
 const StatsContainer = ({course, bad, good, neutral, total, average, positive, reveal}) => {
   return (
@@ -8,12 +8,12 @@ const StatsContainer = ({course, bad, good, neutral, total, average, positive, r
       <Header title={course.statsTitle} />
       {reveal ?
         <React.Fragment>
-          <Result value={bad} title='bad'/>
-          <Result value={good} title='good'/>
-          <Result value={neutral} title='neutral'/>
-          <Result value={total()} title='total' />
-          <Result value={average()} title='average' />
-          <Result value={positive()} title='positive' percent />
+          <Statistic value={bad} title='bad'/>
+          <Statistic value={good} title='good'/>
+          <Statistic value={neutral} title='neutral'/>
+          <Statistic value={total()} title='total' />
+          <Statistic value={average()} title='average' />
+          <Statistic value={positive()} title='positive' percent />
         </React.Fragment>
         : <p>No feedback given</p>}
     </div>
