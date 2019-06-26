@@ -6,9 +6,9 @@ const ButtonContainer = ({course}) => {
   return (
     <div>
       <Header title={course.feedbackTitle} />
-      <Button />
-      <Button />
-      <Button />
+      <Button text="good" />
+      <Button text="neutral" />
+      <Button text="bad" />
     </div>
   )
 }
