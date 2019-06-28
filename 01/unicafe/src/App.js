@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
+import './App.css';
 import ButtonContainer from './Containers/ButtonContainer'
 import StatsContainer from './Containers/StatsContainer'
 
@@ -46,7 +46,7 @@ const App = ({course}) => {
   }
 
   return (
-    <React.Fragment>
+    <div class="container">
       <ButtonContainer course={course} addVote={addVote}/>
       <StatsContainer
         course={course}
@@ -58,7 +58,7 @@ const App = ({course}) => {
         average={() => calcAverage()}
         positive={() => calcPositive()}
       />
-    </React.Fragment>
+    </div>
   )
 }
 

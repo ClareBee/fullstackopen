@@ -1,0 +1,75 @@
+html, body {
+  font-family: arial, sans-serif;
+}
+
+button {
+  display: inline-block;
+  border-radius: 5px;
+  border: none;
+  padding: 1rem 2rem;
+  margin: 0 1rem;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  transition: background 250ms ease-in-out,
+              transform 150ms ease;
+}
+
+button.good {
+  background: #B8E4BA;
+}
+
+button.neutral {
+  background: #FFC273;
+}
+
+button.bad {
+  background: #C7738F;
+}
+
+button:focus {
+  outline: 1px solid white;
+  outline-offset: -5px;
+}
+
+button:active {
+  transform: scale(0.99);
+}
+
+button.good:hover,
+button.good:focus {
+  background: #72BC77;
+}
+
+button.neutral:hover,
+button.neutral:focus {
+  background: #FF9000;
+}
+
+button.bad:hover,
+button.bad:focus {
+  background: #990033;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 20%;
+}
+
+td, th {
+  min-width: 300px;
+  border: 1px solid #69DDFF;
+  text-align: left;
+  padding: 1rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

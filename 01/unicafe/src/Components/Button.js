@@ -2,7 +2,7 @@ import React from 'react'
 
 const Button = ({text, addVote}) => {
   return (
-    <button onClick={() => addVote(text)}>{text}</button>
+    <button className={text} onClick={() => addVote(text)}>{text}</button>
   )
 }
 
