@@ -2,7 +2,10 @@ import React from 'react'
 
 const Statistic = ({ title, value, percent }) => {
   return (
-    <p>{title} {value} {percent ? '%' : ''}</p>
+    <tr>
+      <td>{title}</td>
+      <td>{value} {percent ? '%' : ''}</td>
+    </tr>
   )
 }
 

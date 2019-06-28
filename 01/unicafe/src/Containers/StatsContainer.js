@@ -8,6 +8,7 @@ const StatsContainer = (props) => {
       <Header title={props.course.statsTitle} />
       {props.reveal ?
         <React.Fragment>
+        <table>
           <Statistic value={props.good} title='good'/>
           <Statistic value={props.neutral} title='neutral'/>
           <Statistic value={props.bad} title='bad'/>
@@ -15,6 +16,7 @@ const StatsContainer = (props) => {
           <Statistic value={props.total()} title='total' />
           <Statistic value={props.average()} title='average' />
           <Statistic value={props.positive()} title='positive' percent />
+        </table>
         </React.Fragment>
         : <p>No feedback given</p>}
     </div>
