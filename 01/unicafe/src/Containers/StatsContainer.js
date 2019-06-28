@@ -7,17 +7,17 @@ const StatsContainer = (props) => {
     <div>
       <Header title={props.course.statsTitle} />
       {props.reveal ?
-        <React.Fragment>
         <table>
-          <Statistic value={props.good} title='good'/>
-          <Statistic value={props.neutral} title='neutral'/>
-          <Statistic value={props.bad} title='bad'/>
+          <tbody>
+            <Statistic value={props.good} title='good'/>
+            <Statistic value={props.neutral} title='neutral'/>
+            <Statistic value={props.bad} title='bad'/>
 
-          <Statistic value={props.total()} title='total' />
-          <Statistic value={props.average()} title='average' />
-          <Statistic value={props.positive()} title='positive' percent />
+            <Statistic value={props.total()} title='total' />
+            <Statistic value={props.average()} title='average' />
+            <Statistic value={props.positive()} title='positive' percent />
+          </tbody>
         </table>
-        </React.Fragment>
         : <p>No feedback given</p>}
     </div>
   )

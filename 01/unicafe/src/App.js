@@ -46,7 +46,7 @@ const App = ({course}) => {
   }
 
   return (
-    <div class="container">
+    <div className="container">
       <ButtonContainer course={course} addVote={addVote}/>
       <StatsContainer
         course={course}
