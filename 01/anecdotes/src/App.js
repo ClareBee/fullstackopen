@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import './App.css';
+import { Header } from './components/header'
+import { Result } from './components/result'
+import { Title } from './components/title'
+import { Button } from './components/button'
 
 const App = ({anecdotes}) => {
   const stateObject = () => {
@@ -32,12 +36,13 @@ const App = ({anecdotes}) => {
   }
 
   return (
-    <div>
-      {anecdotes[selected]}
-      Number of Votes: {votes[selected]['vote']}
-      <button onClick={() => generateRandomAnecdote(anecdotes)}>Get Anecdote</button>
-      Anecdote with most votes:
-      {anecdotes[highest['index']]} Votes: {highest['vote']}
+    <div className="container">
+      <Header text={'Progamming Anecdotes'} />
+      <Title text={'Random Anecdote'} />
+      <Result result={anecdotes[selected]} score={votes[selected]['vote']}/>
+      <Button handleClick={generateRandomAnecdote} anecdotes={anecdotes} />
+      <Title text={'Most Popular Anecdote'} />
+      <Result result={anecdotes[highest['index']]} score={highest['vote']} />
     </div>
   )
 }
