@@ -3,14 +3,78 @@ body, html {
   font-size: 1rem;
 }
 
+.display {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .container {
+  width: 60%;
+  padding: 2rem;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+}
+
+button {
+  display: inline-block;
+  border-radius: 5px;
+  border: none;
+  padding: 1rem 2rem;
+  margin: 1rem;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  background: teal;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  transition: background 250ms ease-in-out,
+              transform 150ms ease;
+}
+
+button:focus {
+  outline: 1px solid white;
+  outline-offset: -5px;
+}
+
+button:active {
+  transform: scale(0.99);
+  background: lightgreen;
+}
+
+.header {
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+
+.title {
+  padding: .5rem;
+  margin-top: 1rem;
+  border: solid 2px teal;
+  border-radius: 5px;
+}
+
+.result {
+  min-height: 150px;
+  margin: 30px 50px;
+}
+
+.label, .votes {
+  font-size: 1.5rem;
+}
+
+.votes {
+  padding: 15px;
+  border: solid 1px grey;
+  border-radius: 5px;
+  margin: 10px;
 }
 
 .anecdote {
-  width: 80%;
-  padding: 2rem;
-  border-radius: 5px;
+  margin: 10px;
+  min-height: 90px;
+  font-size: 1.25rem;
 }

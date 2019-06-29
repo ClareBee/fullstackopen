@@ -36,13 +36,15 @@ const App = ({anecdotes}) => {
   }
 
   return (
-    <div className="container">
-      <Header text={'Progamming Anecdotes'} />
-      <Title text={'Random Anecdote'} />
-      <Result result={anecdotes[selected]} score={votes[selected]['vote']}/>
-      <Button handleClick={generateRandomAnecdote} anecdotes={anecdotes} />
-      <Title text={'Most Popular Anecdote'} />
-      <Result result={anecdotes[highest['index']]} score={highest['vote']} />
+    <div className="display">
+      <div className="container">
+        <Header text={'Progamming Anecdotes'} />
+        <Title text={'Random Anecdote'} />
+        <Result result={anecdotes[selected]} score={votes[selected]['vote']}/>
+        <Button handleClick={generateRandomAnecdote} anecdotes={anecdotes} />
+        <Title text={'Most Popular Anecdote'} />
+        <Result result={anecdotes[highest['index']]} score={highest['vote']} />
+      </div>
     </div>
   )
 }
