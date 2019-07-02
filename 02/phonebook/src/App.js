@@ -34,7 +34,6 @@ const App = () => {
 
   const renderPeople = () => {
     if (searchInput === ''){
-      console.log('hello')
       return persons.map(person => <p key={person.name}>{person.name} - {person.number}</p>)
     } else {
      return persons
@@ -47,8 +46,7 @@ const App = () => {
     }
   }
 
-  const showNames =(event) => {
-    console.log(event.target.value)
+  const showNames = (event) => {
     setSearchInput(event.target.value)
   }
 
