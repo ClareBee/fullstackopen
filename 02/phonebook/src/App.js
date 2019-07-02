@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Filter from './components/filter'
 import PersonForm from './components/person_form'
+import People from './components/people'
 
 const App = () => {
   const [ persons, setPersons] = useState([
@@ -36,15 +37,15 @@ const App = () => {
 
   const renderPeople = () => {
     if (searchInput === ''){
-      return persons.map(person => <p key={person.name}>{person.name} - {person.number}</p>)
-    } else {
+      return persons
+    }
+    else {
      return persons
       .filter(person => {
         if (person.name.toUpperCase().match(searchInput.toUpperCase())){
           return person
         }
       })
-      .map(person => <p key={person.name}>{person.name} - {person.number}</p>)
     }
   }
 
@@ -70,7 +71,7 @@ const App = () => {
       />
       <h2>Numbers</h2>
       <div>
-        {renderPeople()}
+        <People people={renderPeople()} />
       </div>
     </div>
   )
