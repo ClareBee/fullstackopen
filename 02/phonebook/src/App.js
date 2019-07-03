@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './App.css'
 import Filter from './components/filter'
 import PersonForm from './components/person_form'
 import People from './components/people'
@@ -50,8 +51,8 @@ const App = () => {
   }
 
   return (
-    <div>
-      <h2>Phonebook</h2>
+    <div className="container">
+      <h1>Phonebook</h1>
       <Filter
         showNames={showNames}
         searchInput={searchInput}
