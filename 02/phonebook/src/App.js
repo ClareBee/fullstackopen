@@ -41,11 +41,7 @@ const App = () => {
     }
     else {
      return persons
-      .filter(person => {
-        if (person.name.toUpperCase().match(searchInput.toUpperCase())){
-          return person
-        }
-      })
+      .filter(person => person.name.toUpperCase().match(searchInput.toUpperCase()))
     }
   }
 
