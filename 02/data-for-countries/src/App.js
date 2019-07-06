@@ -36,13 +36,27 @@ function App() {
     setFilteredCountries(results)
   }
 
+  const switchView = (event) => {
+    event.preventDefault()
+    let newCountry = countries.filter(country => {
+      if(country.name.toUpperCase() === event.target.value.toUpperCase()){
+        return country
+      }
+    })
+    setCountry(newCountry[0])
+  }
+
   return (
     <div>
       <Search handleInput={handleInput} searchInput={searchInput} />
 
-      {filteredCountries.length > 1 && <ResultList countries={filteredCountries}/> }
-
-      {filteredCountries.length === 1 && <CountryResult country={country} />}
+      {filteredCountries.length > 1 &&
+        <ResultList
+          countries={filteredCountries}
+          switchView={switchView}
+        />
+      }
+      <CountryResult country={country} />
     </div>
   );
 }
