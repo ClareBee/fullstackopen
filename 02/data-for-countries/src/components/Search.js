@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Search = (props) => (
-  <input onChange={props.handleInput} value={props.searchInput} />
+  <input onChange={(e) => props.handleInput(e)} value={props.searchInput} />
 )
 
 export default Search

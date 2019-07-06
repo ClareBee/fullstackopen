@@ -23,21 +23,24 @@ function App() {
   }, [])
 
   const handleInput = (event) => {
-    setSearchInput(event.target.value)
-    filterCountries(countries)
+    const searchValue = event.target.value
+    setSearchInput(searchValue)
+    filterCountries(countries, searchValue)
   }
 
-  const filterCountries = (countries) => {
-    const results = countries.filter(country => country.name.toUpperCase().match(searchInput.toUpperCase()))
+  const filterCountries = (countries, searchValue) => {
+    const results = countries.filter(country => country.name.toUpperCase().match(searchValue.toUpperCase()))
+    setFilteredCountries(results)
+
     if(results.length === 1){
       setCountry(results[0])
     }
-    setFilteredCountries(results)
   }
 
   const switchView = (event) => {
     event.preventDefault()
-    let newCountry = countries.filter(country => country.name.toUpperCase() === event.target.value.toUpperCase())
+    const selectedCountry = event.target.value
+    let newCountry = countries.filter(country => country.name.toUpperCase() === selectedCountry.toUpperCase())
     setCountry(newCountry[0])
   }
 
