@@ -1,9 +1,9 @@
 import React from 'react'
 
 const ResultItem = ({ country, switchView }) => {
-  return (<li>
+  return (<li className="country-list">
     {country.name}
-    <button value={country.name} onClick={(e) => switchView(e)}>Show</button>
+    <button value={country.name} onClick={(e) => switchView(e)}>SHOW</button>
   </li>)
 }
 

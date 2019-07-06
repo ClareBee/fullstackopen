@@ -16,8 +16,9 @@ const Weather = ({ capital }) => {
 
   return (
     weather &&
-      <div>
-        <p>Weather in {capital}: {weather.condition.text}</p>
+      <div className="weather-block">
+        <h2>Weather in {capital}</h2>
+        <p>Today: {weather.condition.text}</p>
         <p>Temperature: {weather.temp_c} &#8451;</p>
         <img src={weather.condition.icon} alt="weather"/>
         <p>Wind: {weather.wind_mph} mph. Direction: {weather.wind_dir}</p>
