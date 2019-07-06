@@ -6,6 +6,7 @@ import ResultList from './components/ResultList'
 import CountryResult from './components/CountryResult'
 
 function App() {
+  const [ country, setCountry ] = useState({})
   const [ countries, setCountries ] = useState([])
   const [ searchInput, setSearchInput ] = useState('')
   const [ filteredCountries, setFilteredCountries ] = useState([])
@@ -20,7 +21,6 @@ function App() {
 
   const handleInput = (event) => {
     setSearchInput(event.target.value)
-    console.log(event.target.value)
     filterCountries(countries)
   }
 
@@ -30,14 +30,19 @@ function App() {
         return country
       }
     })
+    if(results.length === 1){
+      setCountry(results[0])
+    }
     setFilteredCountries(results)
   }
 
   return (
     <div>
       <Search handleInput={handleInput} searchInput={searchInput} />
-      <ResultList countries={filteredCountries}/>
-      <CountryResult />
+
+      {filteredCountries.length > 1 && <ResultList countries={filteredCountries}/> }
+
+      {country && <CountryResult country={country} />}
     </div>
   );
 }

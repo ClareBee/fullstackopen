@@ -1,7 +1,8 @@
 import React from 'react'
 
-const CountryResult = (props) => (
+const CountryResult = ({country}) => (
   <div>
+    {country.name}
   </div>
 )
 
