@@ -42,7 +42,7 @@ function App() {
 
       {filteredCountries.length > 1 && <ResultList countries={filteredCountries}/> }
 
-      {country && <CountryResult country={country} />}
+      {filteredCountries.length === 1 && <CountryResult country={country} />}
     </div>
   );
 }
