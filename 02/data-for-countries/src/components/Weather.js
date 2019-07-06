@@ -10,17 +10,16 @@ const Weather = ({ capital }) => {
 
     axios.get(weatherUrl)
     .then(response => {
-      console.log(response.data.current)
       setWeather(response.data.current)
     })
-  }, [])
+  }, [capital])
 
   return (
     weather &&
       <div>
         <p>Weather in {capital}: {weather.condition.text}</p>
         <p>Temperature: {weather.temp_c} &#8451;</p>
-        <img src={weather.condition.icon} />
+        <img src={weather.condition.icon} alt="weather"/>
         <p>Wind: {weather.wind_mph} mph. Direction: {weather.wind_dir}</p>
       </div>
   )
