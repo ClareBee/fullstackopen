@@ -4,6 +4,7 @@ import './App.css';
 import Search from './components/Search'
 import ResultList from './components/ResultList'
 import CountryResult from './components/CountryResult'
+import Weather from './components/Weather'
 
 function App() {
   const [ country, setCountry ] = useState({})
@@ -57,6 +58,8 @@ function App() {
         />
       }
       <CountryResult country={country} />
+      {country.capital &&
+        <Weather capital={country.capital} />}
     </div>
   );
 }
