@@ -22,14 +22,22 @@ const App = () => {
   const addPerson = (event) => {
     event.preventDefault()
     const personObject = { name: newName, number: newNumber }
+    if(!newName || !newNumber){
+      // TODO: add error message to UI
+      return null;
+    }
     const namesArray = persons.map(person => person.name)
     if (namesArray.includes(newName)) {
       alert(`${newName} is already added to phonebook`)
     } else {
-      setPersons(persons.concat(personObject))
+      axios
+        .post('http://localhost:3001/persons', personObject)
+        .then(response => {
+          setPersons(persons.concat(personObject))
+          setNewName('')
+          setNewNumber('')
+        })
     }
-    setNewName('')
-    setNewNumber('')
   }
 
   const handleNameChange = (event) => {
@@ -46,7 +54,12 @@ const App = () => {
     }
     else {
      return persons
-      .filter(person => person.name.toUpperCase().match(searchInput.toUpperCase()))
+      .filter(person => {
+        if (!person.name){
+          return null;
+        }
+        return person.name.toUpperCase().match(searchInput.toUpperCase())
+      })
     }
   }
 
