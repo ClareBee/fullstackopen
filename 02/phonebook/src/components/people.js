@@ -2,11 +2,16 @@ import React from 'react'
 
 const People = ({people, deletePerson}) => (
   people.map((person, index) =>
-    <div key={person.name + person.index}>
-      <p>
-        {person.name} | {person.number}
-      </p>
-      <button onClick={(e) => deletePerson(e, person.id)}>Delete</button>
+    <div className="person" key={person.name + person.index}>
+      <div>
+        <strong>{person.name} | {person.number}</strong>
+      </div>
+      <button
+        onClick={(e) => deletePerson(e, person.id)}
+        className="delete"
+      >
+        Delete
+      </button>
     </div>
   )
 )

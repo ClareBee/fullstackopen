@@ -42,12 +42,16 @@ const App = () => {
 
   const deletePerson = (event, oldPersonId) => {
     const clonePersons = [...persons]
-    const filteredPersons = clonePersons.filter(person => person.id !== oldPersonId)
-    console.log(oldPersonId, filteredPersons)
+    const personToDelete = clonePersons.find(person => person.id === oldPersonId)
+    const filteredPersons = clonePersons.filter(person => person !== personToDelete)
     event.preventDefault()
-    personService
-      .destroy(oldPersonId)
-      .then(response => setPersons(filteredPersons))
+    if(window.confirm(`Are you sure you want to delete ${personToDelete.name}`)){
+      personService
+        .destroy(oldPersonId)
+        .then(response => setPersons(filteredPersons))
+    } else {
+      return null;
+    }
   }
 
   const handleNameChange = (event) => {

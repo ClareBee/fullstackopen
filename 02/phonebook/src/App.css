@@ -31,3 +31,16 @@ button {
   flex-grow: 1;
   line-height: 1.5rem;
 }
+
+.delete {
+  background-color: #E8869A;
+  color: white;
+  width: 150px;
+}
+
+.person {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+}
