@@ -40,6 +40,16 @@ const App = () => {
     }
   }
 
+  const deletePerson = (event, oldPersonId) => {
+    const clonePersons = [...persons]
+    const filteredPersons = clonePersons.filter(person => person.id !== oldPersonId)
+    console.log(oldPersonId, filteredPersons)
+    event.preventDefault()
+    personService
+      .destroy(oldPersonId)
+      .then(response => setPersons(filteredPersons))
+  }
+
   const handleNameChange = (event) => {
     setNewName(event.target.value)
   }
@@ -85,7 +95,10 @@ const App = () => {
       />
       <h2>Numbers</h2>
       <div>
-        <People people={renderPeople()} />
+        <People
+          people={renderPeople()}
+          deletePerson={deletePerson}
+        />
       </div>
     </div>
   )

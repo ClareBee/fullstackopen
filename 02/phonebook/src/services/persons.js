@@ -11,4 +11,9 @@ const create = newPerson => {
   return request.then(response => response.data)
 }
 
-export default { getAll, create }
+const destroy = oldPersonId => {
+  const request = axios.delete(`${baseUrl}/${oldPersonId}`)
+  console.log(request, oldPersonId)
+  return request.then(response => response.data)
+}
+export default { getAll, create, destroy }
