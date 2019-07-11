@@ -26,9 +26,20 @@ const App = () => {
       // TODO: add error message to UI
       return null;
     }
-    const namesArray = persons.map(person => person.name)
-    if (namesArray.includes(newName)) {
-      alert(`${newName} is already added to phonebook`)
+    const personAlreadyThere = persons.find(person => person.name.toUpperCase() === newName.toUpperCase())
+    if (!!personAlreadyThere) {
+      const id = personAlreadyThere.id
+      if (window.confirm(`${personAlreadyThere.name} is already added to phonebook`)){
+        personService
+          .update(id, personObject)
+          .then(returnedPerson => {
+            setPersons(persons.map(person => person.id !== id ? person : returnedPerson))
+            setNewName('')
+            setNewNumber('')
+          })
+      } else {
+        return null;
+      }
     } else {
       personService
         .create(personObject)
@@ -37,6 +48,7 @@ const App = () => {
           setNewName('')
           setNewNumber('')
         })
+      return null;
     }
   }
 
