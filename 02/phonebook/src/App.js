@@ -29,7 +29,7 @@ const App = () => {
     const personAlreadyThere = persons.find(person => person.name.toUpperCase() === newName.toUpperCase())
     if (!!personAlreadyThere) {
       const id = personAlreadyThere.id
-      if (window.confirm(`${personAlreadyThere.name} is already added to phonebook`)){
+      if (window.confirm(`${personAlreadyThere.name} is already added to phonebook. Replace the old number with the new one?`)){
         personService
           .update(id, personObject)
           .then(returnedPerson => {
