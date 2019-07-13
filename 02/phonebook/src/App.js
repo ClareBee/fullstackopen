@@ -28,11 +28,16 @@ const App = () => {
     }, 5000)
   }
 
+  const reset = () => {
+    setNewName('')
+    setNewNumber('')
+  }
+
   const addPerson = (event) => {
     event.preventDefault()
     const personObject = { name: newName, number: newNumber }
     if(!newName || !newNumber){
-      // TODO: add error message to UI
+      notify('error', 'Please enter all requested info')
       return null;
     }
     const personAlreadyThere = persons.find(person => person.name.toUpperCase() === newName.toUpperCase())
@@ -44,11 +49,11 @@ const App = () => {
           .then(returnedPerson => {
             setPersons(persons.map(person => person.id !== id ? person : returnedPerson))
             notify('success', `${newName} successfully updated`)
-            setNewName('')
-            setNewNumber('')
+            reset()
           })
           .catch(err => {
             notify('error', `${newName} was already deleted!`)
+            reset()
           })
       } else {
         return null;
@@ -58,16 +63,8 @@ const App = () => {
         .create(personObject)
         .then(response => {
           setPersons(persons.concat(personObject))
-          setNewName('')
-          setNewNumber('')
-          setMsg(
-            { type: 'success',
-              content: `${personObject.name} was added successfully!`
-            }
-          )
-          setTimeout(() => {
-            setMsg(null)
-          }, 5000)
+          notify('success', `${personObject.name} was added successfully!`)
+          reset()
         })
       return null;
     }
@@ -83,15 +80,7 @@ const App = () => {
         .destroy(oldPersonId)
         .then(response => setPersons(filteredPersons))
         .catch(err => {
-          setMsg(
-            {
-              type: 'error',
-              content: `${personToDelete.name} was already removed!`
-            }
-          )
-          setTimeout(() => {
-            setMsg(null)
-          }, 5000)
+          notify('error', `${personToDelete.name} was already removed!`)
         })
     } else {
       return null;
