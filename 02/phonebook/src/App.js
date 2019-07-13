@@ -4,12 +4,14 @@ import './App.css'
 import Filter from './components/filter'
 import PersonForm from './components/person_form'
 import People from './components/people'
+import Notification from './components/notification'
 
 const App = () => {
   const [ persons, setPersons] = useState([])
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ searchInput, setSearchInput ] = useState('')
+  const [ message, setMsg ] = useState(null)
 
   useEffect(() => {
     personService
@@ -18,6 +20,13 @@ const App = () => {
         setPersons(response)
       })
   }, [])
+
+  const notify = (type, content) => {
+    setMsg({ type, content })
+    setTimeout(() => {
+      setMsg(null)
+    }, 5000)
+  }
 
   const addPerson = (event) => {
     event.preventDefault()
@@ -34,8 +43,12 @@ const App = () => {
           .update(id, personObject)
           .then(returnedPerson => {
             setPersons(persons.map(person => person.id !== id ? person : returnedPerson))
+            notify('success', `${newName} successfully updated`)
             setNewName('')
             setNewNumber('')
+          })
+          .catch(err => {
+            notify('error', `${newName} was already deleted!`)
           })
       } else {
         return null;
@@ -47,6 +60,14 @@ const App = () => {
           setPersons(persons.concat(personObject))
           setNewName('')
           setNewNumber('')
+          setMsg(
+            { type: 'success',
+              content: `${personObject.name} was added successfully!`
+            }
+          )
+          setTimeout(() => {
+            setMsg(null)
+          }, 5000)
         })
       return null;
     }
@@ -61,6 +82,17 @@ const App = () => {
       personService
         .destroy(oldPersonId)
         .then(response => setPersons(filteredPersons))
+        .catch(err => {
+          setMsg(
+            {
+              type: 'error',
+              content: `${personToDelete.name} was already removed!`
+            }
+          )
+          setTimeout(() => {
+            setMsg(null)
+          }, 5000)
+        })
     } else {
       return null;
     }
@@ -102,6 +134,7 @@ const App = () => {
       />
 
       <h2>Add a New </h2>
+      <Notification message={message} />
       <PersonForm
         newName={newName}
         newNumber={newNumber}

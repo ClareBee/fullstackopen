@@ -44,3 +44,20 @@ button {
   align-items: center;
   justify-content: space-between;
 }
+
+.notification {
+  width: 90%;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.error {
+  border: 2px solid #E8869A;
+  background-color: #FFE9F5;
+}
+
+.success {
+  border: 2px solid lightseagreen;
+  background-color: #D2EFEE;
+}
