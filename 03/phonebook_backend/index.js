@@ -2,9 +2,11 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
+const cors = require('cors')
 
 app.use(bodyParser.json())
 app.use(morgan(':method :url :response-time ms :person'))
+app.use(cors())
 
 const baseUrl = '/api'
 let persons = [
