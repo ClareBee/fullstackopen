@@ -3,7 +3,7 @@ const app = express()
 const bodyParser = require('body-parser')
 
 app.use(bodyParser.json())
-
+const baseUrl = '/api'
 let persons = [
   {
     "name": "Arto Hellas",
@@ -27,22 +27,28 @@ let persons = [
   }
 ]
 
-const generateId = () => {
-  const maxId = persons.length > 0
-  ? Math.max(...persons.map(person => person.id))
-  : 0
-  return maxId + 1
+const generateId = (max) => {
+  return Math.floor(Math.random() * Math.floor(max));
 }
 
-app.get('/', (req, res) => {
+const checkUniqueness = (name) => {
+  return persons.map(person => person.name.toUpperCase() === name.toUpperCase())
+}
+
+app.get(`${baseUrl}`, (req, res) => {
   res.send('<h1>Hello world</h1>')
 })
 
-app.get('/persons', (req, res) => {
+app.get(`${baseUrl}/info`, (req, res) => {
+  res.send(`<h1>Phonebook has info for ${persons.length} people</h1>
+    <p>Request received at ${new Date()}</p>`)
+})
+
+app.get(`${baseUrl}/persons`, (req, res) => {
   res.json(persons)
 })
 
-app.get('/persons/:id', (req, res) => {
+app.get(`${baseUrl}/persons/:id`, (req, res) => {
   const id = Number(req.params.id)
   const person = persons.find(person => person.id === id)
   if (person){
@@ -53,26 +59,31 @@ app.get('/persons/:id', (req, res) => {
   }
 })
 
-app.delete('/persons/:id', (req, res) => {
+app.delete(`${baseUrl}/persons/:id`, (req, res) => {
   const id = Number(req.params.id)
   persons = persons.filter(person => person.id !== id)
 
   res.status(204).end()
 })
 
-app.post('/persons', (req, res) => {
+app.post(`${baseUrl}/persons`, (req, res) => {
   const body = req.body
-  console.log('req', req)
-  if (!body.name) {
+  if (!body.name || !body.number) {
    return res.status(400).json({
      error: 'content missing'
    })
+  }
+  const notUnique = checkUniqueness(body.name)
+  if(notUnique){
+    return res.status(400).json({
+      error: 'name must be unique'
+    })
   }
   const person = {
     name: body.name,
     number: body.number,
     date: new Date(),
-    id: generateId(),
+    id: generateId(500),
   }
   persons = persons.concat(person)
   console.log('person', person)
