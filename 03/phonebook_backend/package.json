@@ -6,6 +6,10 @@
   "scripts": {
     "start": "node index.js",
     "watch": "nodemon index.js",
+    "deploy": "git push heroku master",
+    "logs:prod": "heroku logs --tail",
+    "build:ui": "rm -rf build && cd ../../02/phonebook && npm run build --prod && cp -r build ../../03/phonebook_backend/",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",    
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
