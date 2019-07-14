@@ -35,7 +35,9 @@ const generateId = (max) => {
 }
 
 const checkUniqueness = (name) => {
-  return persons.map(person => person.name.toUpperCase() === name.toUpperCase())
+  const found = persons.find(person => person.name.toUpperCase() === name.toUpperCase())
+  console.log(found)
+  return !!found
 }
 
 app.get(`${baseUrl}`, (req, res) => {
@@ -90,6 +92,8 @@ app.post(`${baseUrl}/persons`, (req, res) => {
   }
   persons = persons.concat(person)
   console.log('person', person)
+  const content = morgan.token('content', function(req, res) { return person })
+  morgan(':method :url :response-time ms :content')
   res.json(person)
 })
 
