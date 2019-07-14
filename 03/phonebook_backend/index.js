@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const morgan = require('morgan')
 
 app.use(bodyParser.json())
-app.use(morgan('tiny'))
+app.use(morgan(':method :url :response-time ms :person'))
 
 const baseUrl = '/api'
 let persons = [
@@ -35,9 +35,7 @@ const generateId = (max) => {
 }
 
 const checkUniqueness = (name) => {
-  const found = persons.find(person => person.name.toUpperCase() === name.toUpperCase())
-  console.log(found)
-  return !!found
+  return persons.find(person => person.name.toUpperCase() === name.toUpperCase())
 }
 
 app.get(`${baseUrl}`, (req, res) => {
@@ -91,9 +89,7 @@ app.post(`${baseUrl}/persons`, (req, res) => {
     id: generateId(500),
   }
   persons = persons.concat(person)
-  console.log('person', person)
-  const content = morgan.token('content', function(req, res) { return person })
-  morgan(':method :url :response-time ms :content')
+  morgan.token('person', function(req, res) { return JSON.stringify(person) })
   res.json(person)
 })
 
