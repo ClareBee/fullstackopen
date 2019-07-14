@@ -5,6 +5,7 @@ const morgan = require('morgan')
 const cors = require('cors')
 
 app.use(bodyParser.json())
+morgan.token('person', function(req, res){ return '' })
 app.use(morgan(':method :url :response-time ms :person'))
 app.use(cors())
 
@@ -95,7 +96,7 @@ app.post(`${baseUrl}/persons`, (req, res) => {
   res.json(person)
 })
 
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
