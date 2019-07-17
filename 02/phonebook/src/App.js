@@ -17,6 +17,7 @@ const App = () => {
     personService
       .getAll()
       .then(response => {
+        console.log(response)
         setPersons(response)
       })
   }, [])
