@@ -55,7 +55,8 @@ app.put(`${baseUrl}/persons/:id`, (req, res, next) => {
     .catch(error => next(error))
 })
 
-app.delete(`${baseUrl}/persons/:id`, (req, res) => {
+app.delete(`${baseUrl}/persons/:id`, (req, res, next) => {
+  console.log(req)
   Person.findByIdAndRemove(req.params.id)
     .then(result => {
       res.status(204).end()
@@ -63,7 +64,7 @@ app.delete(`${baseUrl}/persons/:id`, (req, res) => {
     .catch(error => next(error))
 })
 
-app.post(`${baseUrl}/persons`, (req, res) => {
+app.post(`${baseUrl}/persons`, (req, res, next) => {
   const body = req.body
   if (!body.name || !body.number) {
    return res.status(400).json({
@@ -74,10 +75,10 @@ app.post(`${baseUrl}/persons`, (req, res) => {
     name: body.name,
     number: body.number
   })
-  console.log(person)
   person.save().then(savedPerson => {
     res.json(savedPerson.toJSON())
   })
+  .catch(error => next(error))
   morgan.token('person', function(req, res) { return JSON.stringify(person) })
 })
 

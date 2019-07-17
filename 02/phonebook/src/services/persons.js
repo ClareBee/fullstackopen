@@ -9,7 +9,6 @@ const getAll = () => {
 
 const create = newPerson => {
   const request = axios.post(baseUrl, newPerson)
-  console.log(newPerson)
   return request.then(response => response.data)
 }
 
@@ -22,4 +21,5 @@ const destroy = oldPersonId => {
   const request = axios.delete(`${baseUrl}/${oldPersonId}`)
   return request.then(response => response.data)
 }
+
 export default { getAll, create, update, destroy }

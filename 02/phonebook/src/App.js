@@ -48,6 +48,7 @@ const App = () => {
         personService
           .update(id, personObject)
           .then(returnedPerson => {
+            console.log(returnedPerson)
             setPersons(persons.map(person => person.id !== id ? person : returnedPerson))
             notify('success', `${newName} successfully updated`)
             reset()
@@ -63,7 +64,8 @@ const App = () => {
       personService
         .create(personObject)
         .then(response => {
-          setPersons(persons.concat(personObject))
+          console.log(response)
+          setPersons(persons.concat(response))
           notify('success', `${personObject.name} was added successfully!`)
           reset()
         })
@@ -77,6 +79,8 @@ const App = () => {
     const filteredPersons = clonePersons.filter(person => person !== personToDelete)
     event.preventDefault()
     if(window.confirm(`Are you sure you want to delete ${personToDelete.name}`)){
+      console.log('id', oldPersonId)
+      console.log('person', personToDelete)
       personService
         .destroy(oldPersonId)
         .then(response => {
