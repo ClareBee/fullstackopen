@@ -79,7 +79,10 @@ const App = () => {
     if(window.confirm(`Are you sure you want to delete ${personToDelete.name}`)){
       personService
         .destroy(oldPersonId)
-        .then(response => setPersons(filteredPersons))
+        .then(response => {
+          console.log('response', response)
+          setPersons(filteredPersons)
+        })
         .catch(err => {
           notify('error', `${personToDelete.name} was already removed!`)
         })

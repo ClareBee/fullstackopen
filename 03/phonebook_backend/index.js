@@ -6,23 +6,16 @@ const Person = require('./models/person')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const cors = require('cors')
-
-
+app.use(cors())
 app.use(bodyParser.json())
 morgan.token('person', function(req, res){ return '' })
 app.use(morgan(':method :url :response-time ms :person'))
 app.use(express.static('build'))
-app.use(cors())
 
 const baseUrl = '/api'
 
 app.get(`${baseUrl}`, (req, res) => {
   res.send('<h1>Hello world</h1>')
-})
-
-app.get(`${baseUrl}/info`, (req, res) => {
-  res.send(`<h1>Phonebook has info for ${persons.length} people</h1>
-    <p>Request received at ${new Date()}</p>`)
 })
 
 app.get(`${baseUrl}/persons`, (req, res) => {
@@ -31,7 +24,7 @@ app.get(`${baseUrl}/persons`, (req, res) => {
   })
 })
 
-app.get(`${baseUrl}/persons/:id`, (req, res) => {
+app.get(`${baseUrl}/persons/:id`, (req, res, next) => {
   Person.findById(req.params.id).then(person => {
     if (person) {
       res.json(person.toJSON())
@@ -39,17 +32,30 @@ app.get(`${baseUrl}/persons/:id`, (req, res) => {
       res.status(404).end()
     }
   })
-  .catch(error => {
-    console.log(error);
-    res.status(400).send({ error: 'malformatted id' })
-  })
+  .catch(error => next(error))
+})
+
+app.put(`${baseUrl}/persons/:id`, (req, res, next) => {
+  const body = req.body
+
+  const person = {
+    name: body.name,
+    number: body.number
+  }
+
+  Person.findByIdAndUpdate(req.params.id, person, { new: true })
+    .then(updatedPerson => {
+      res.json(updatedPerson.toJSON())
+    })
+    .catch(error => next(error))
 })
 
 app.delete(`${baseUrl}/persons/:id`, (req, res) => {
-  const id = Number(req.params.id)
-  persons = persons.filter(person => person.id !== id)
-
-  res.status(204).end()
+  Person.findByIdAndRemove(req.params.id)
+    .then(result => {
+      res.status(204).end()
+    })
+    .catch(error => next(error))
 })
 
 app.post(`${baseUrl}/persons`, (req, res) => {
@@ -69,6 +75,25 @@ app.post(`${baseUrl}/persons`, (req, res) => {
   })
   morgan.token('person', function(req, res) { return JSON.stringify(person) })
 })
+
+// has to be last middleware loaded in!
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: 'unknown endpoint' })
+}
+
+app.use(unknownEndpoint)
+
+const errorHandler = (error, request, response, next) => {
+  console.error(error.message)
+
+  if (error.name === 'CastError' && error.kind == 'ObjectId') {
+    return response.status(400).send({ error: 'malformatted id' })
+  }
+
+  next(error)
+}
+
+app.use(errorHandler)
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {
