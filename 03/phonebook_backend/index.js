@@ -18,6 +18,11 @@ app.get(`${baseUrl}`, (req, res) => {
   res.send('<h1>Hello world</h1>')
 })
 
+app.get(`${baseUrl}/info`, (req, res) => {
+  Person.find({}).then(people => {
+    res.send(`<p>Phoneback has info on ${people.length} people</p>`)
+  })})
+
 app.get(`${baseUrl}/persons`, (req, res) => {
   Person.find({}).then(people => {
     res.json(people.map(person => person.toJSON()))
