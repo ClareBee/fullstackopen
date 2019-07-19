@@ -69,6 +69,11 @@ const App = () => {
           notify('success', `${personObject.name} was added successfully!`)
           reset()
         })
+        .catch(error => {
+          const errorMsg = error.response.data
+          console.log(errorMsg)
+          notify('error', `${error}: ${errorMsg.error}`)
+        })
       return null;
     }
   }

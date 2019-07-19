@@ -78,15 +78,15 @@ app.post(`${baseUrl}/persons`, (req, res, next) => {
   person.save()
     .then(savedPerson => savedPerson.toJSON())
     .then(savedAndFormattedPerson => {
-      response.json(savedAndFormattedPerson)
+      res.json(savedAndFormattedPerson)
     })
     .catch(error => next(error))
   morgan.token('person', function(req, res) { return JSON.stringify(person) })
 })
 
 // has to be last middleware loaded in!
-const unknownEndpoint = (request, response) => {
-  response.status(404).send({ error: 'unknown endpoint' })
+const unknownEndpoint = (req, res) => {
+  res.status(404).send({ error: 'unknown endpoint' })
 }
 
 app.use(unknownEndpoint)
