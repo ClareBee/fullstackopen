@@ -21,8 +21,6 @@ const blogSchema = mongoose.Schema({
   }
 })
 
-const Blog = mongoose.model('Blog', blogSchema)
-
 blogSchema.plugin(uniqueValidator)
 
 blogSchema.set('toJSON', {
