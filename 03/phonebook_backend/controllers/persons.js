@@ -2,16 +2,16 @@ const personsRouter = require('express').Router()
 const Person = require('../models/person')
 
 personsRouter.get('/', (req, res) => {
-  Person.find({}).then(notes => {
-    res.json(notes.map(note => note.toJSON()))
+  Person.find({}).then(persons => {
+    res.json(persons.map(person => person.toJSON()))
   })
 })
 
 personsRouter.get('/:id', (req, res, next) => {
   Person.findById(req.params.id)
-    .then(note => {
-      if (note) {
-        res.json(note.toJSON())
+    .then(person => {
+      if (person) {
+        res.json(person.toJSON())
       } else {
         res.status(404).end()
       }
