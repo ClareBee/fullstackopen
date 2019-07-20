@@ -10,6 +10,7 @@
     "logs:prod": "heroku logs --tail",
     "build:ui": "rm -rf build && cd ../../02/phonebook && npm run build --prod && cp -r build ../../03/phonebook_backend/",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
+    "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -24,6 +25,7 @@
     "morgan": "^1.9.1"
   },
   "devDependencies": {
+    "eslint": "^6.0.1",
     "nodemon": "^1.19.1"
   }
 }

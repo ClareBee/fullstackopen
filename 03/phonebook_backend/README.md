@@ -14,13 +14,13 @@ Serve up frontend folder
 or streamlined via scripts:
 ```json
 {
-  "scripts": {
-    "build:ui": "rm -rf build && cd ../../02/phonebook && npm run build --prod && cp -r build ../../../02/phonebook_backend/",
-    "deploy": "git push heroku master",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",    
-    "logs:prod": "heroku logs --tail"
-  }
+  "deploy": "git push heroku master",
+  "logs:prod": "heroku logs --tail",
+  "build:ui": "rm -rf build && cd ../../02/phonebook && npm run build --prod && cp -r build ../../03/phonebook_backend/",
+  "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
 }
 ```
 Deploying db to production:
-heroku config:set MONGODB_URI=mongodb+srv://clarebee:{password}@cluster0-qugsl.mongodb.net/people?retryWrites=true
+`heroku config:set MONGODB_URI=mongodb+srv://clarebee:{password}@cluster0-qugsl.mongodb.net/people?retryWrites=true`
+
+`node_modules/.bin/eslint --init`
