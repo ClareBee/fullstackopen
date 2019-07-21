@@ -8,10 +8,8 @@
     "watch": "nodemon index.js",
     "deploy": "git push heroku master",
     "logs:prod": "heroku logs --tail",
-    "build:ui": "rm -rf build && cd ./blog_ui && npm run build --prod && cp -r build ./blog_list",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
     "lint": "eslint .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --verbose"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +24,10 @@
   },
   "devDependencies": {
     "eslint": "^6.0.1",
+    "jest": "^24.8.0",
     "nodemon": "^1.19.1"
+  },
+  "jest": {
+  "testEnvironment": "node"
   }
 }
