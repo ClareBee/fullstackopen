@@ -10,11 +10,11 @@ const Blog = require('../models/blog')
 beforeEach(async () => {
   await Blog.deleteMany({})
 
-  let blogObject = new Blog(helper.initialBlogs[0])
-  await blogObject.save()
-
-  blogObject = new Blog(helper.initialBlogs[1])
-  await blogObject.save()
+  const blogObjects = helper.initialBlogs
+    .map(blog => new Blog(blog))
+  const promiseArray = blogObjects.map(blog => blog.save())
+  // prevents tests running before async operations in beforeEach complete
+  await Promise.all(promiseArray)
 })
 
 test('blog list is returned as json', async () => {
@@ -83,7 +83,6 @@ test('blog without title is not added', async () => {
 
 test('a specific blog can be viewed', async () => {
   const blogsAtStart = await helper.blogsInDb()
-
   const blogToView = blogsAtStart[0]
 
   const resultBlog = await api
@@ -92,6 +91,18 @@ test('a specific blog can be viewed', async () => {
     .expect('Content-Type', /application\/json/)
 
   expect(resultBlog.body).toEqual(blogToView)
+})
+
+test('the unique identifier of a blog is id', async () => {
+  const blogsAtStart = await helper.blogsInDb()
+  const blogToView = blogsAtStart[0]
+
+  const resultBlog = await api
+    .get(`/api/blogs/${blogToView.id}`)
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+
+  expect(resultBlog.body.id).toBeDefined()
 })
 
 test('a blog can be deleted', async () => {
