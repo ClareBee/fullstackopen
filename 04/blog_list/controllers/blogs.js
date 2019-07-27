@@ -46,7 +46,7 @@ blogsRouter.delete('/:id', async (req, res, next) => {
   }
 })
 
-blogsRouter.put('/:id', (req, res, next) => {
+blogsRouter.put('/:id', async (req, res, next) => {
   const body = req.body
 
   const blog = {
@@ -57,9 +57,10 @@ blogsRouter.put('/:id', (req, res, next) => {
   }
 
   try {
-    const updatedBlog = Blog.findByIdAndUpdate(req.params.id, blog, { new: true })
+    const updatedBlog = await Blog.findByIdAndUpdate(req.params.id, blog, { new: true })
     res.json(updatedBlog.toJSON())
   } catch(error) {
+    console.log(error)
     next(error)
   }
 })
