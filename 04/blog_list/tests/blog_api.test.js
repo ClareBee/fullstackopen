@@ -94,6 +94,25 @@ test('a specific blog can be viewed', async () => {
   expect(resultBlog.body).toEqual(blogToView)
 })
 
+test('a blog can be deleted', async () => {
+  const blogsAtStart = await helper.blogsInDb()
+  const blogToDelete = blogsAtStart[0]
+
+  await api
+    .delete(`/api/blogs/${blogToDelete.id}`)
+    .expect(204)
+
+  const blogsAtEnd = await helper.blogsInDb()
+
+  expect(blogsAtEnd.length).toBe(
+    helper.initialBlogs.length - 1
+  )
+
+  const authors = blogsAtEnd.map(r => r.author)
+
+  expect(authors).not.toContain(blogToDelete.author)
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })
