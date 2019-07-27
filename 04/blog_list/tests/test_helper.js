@@ -5,7 +5,7 @@ const initialUsers = [
   {
     name: 'Bob',
     password: 'BobsPassword',
-    username: 'bobby'
+    username: 'bobby',
   }
 ]
 const initialBlogs = [

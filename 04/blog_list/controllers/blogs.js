@@ -32,13 +32,11 @@ blogsRouter.post('/', async (req, res, next) => {
       if (!decodedToken.id) {
         return res.status(401).json({ error: 'token missing or invalid' })
       }
-      user = await User.findById(decodedToken.id)
+      const users = await User.find({username: decodedToken.username})
+      user = users[0]
     } else {
-      console.log(req.body.author)
-      console.log(req.headers)
       const token = jwt.verify(req.headers.authorization.substring(7), process.env.SECRET)
       user = await User.findById(token.id)
-      console.log('user', user)
     }
     const blog = new Blog({
       title: body.title,
@@ -57,9 +55,27 @@ blogsRouter.post('/', async (req, res, next) => {
 })
 
 blogsRouter.delete('/:id', async (req, res, next) => {
+  let blog = await Blog.findById(req.params.id)
+  let decodedTokenId
+  let user
   try {
-    await Blog.findByIdAndRemove(req.params.id)
-    res.status(204).end()
+    if (process.env.NODE_ENV !== 'test'){
+      const decodedToken = jwt.verify(req.token, process.env.SECRET)
+      if (!decodedToken.id) {
+        return res.status(401).json({ error: 'token missing or invalid' })
+      }
+      decodedTokenId = decodedToken.id.toString()
+    } else {
+      const token = jwt.verify(req.headers.authorization.substring(7), process.env.SECRET)
+      user = await User.findById(token.id)
+    }
+
+    if (blog.user.toString() === (decodedTokenId || user._id.toString())){
+      await blog.delete()
+      res.status(204).end()
+    } else {
+      return res.status(401).json({ error: 'You are not the owner of this blog' })
+    }
   } catch(exception) {
     next(exception)
   }
@@ -79,7 +95,6 @@ blogsRouter.put('/:id', async (req, res, next) => {
     const updatedBlog = await Blog.findByIdAndUpdate(req.params.id, blog, { new: true })
     res.json(updatedBlog.toJSON())
   } catch(error) {
-    console.log(error)
     next(error)
   }
 })

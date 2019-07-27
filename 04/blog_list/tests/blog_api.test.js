@@ -141,8 +141,6 @@ describe('when there are initially some blogs saved', () => {
     test('fails with status 404 if blog does not exist', async () => {
       const validNonexistingId = await helper.nonExistingId()
 
-      console.log(validNonexistingId)
-
       await api
         .get(`/api/blogs/${validNonexistingId}`)
         .expect(404)
@@ -177,31 +175,42 @@ describe('when there are initially some blogs saved', () => {
       const addedBlog = await api
         .post('/api/blogs')
         .send(blogMissingLikes)
-        .set('Authorization', `Bearer ${token}`)
+        .set('authorization', `Bearer ${token}`)
         .expect(200)
 
       expect(addedBlog.body.likes).toEqual(0)
     })
   })
 
-  test('a blog can be deleted', async () => {
-    const blogsAtStart = await helper.blogsInDb()
-    const blogToDelete = blogsAtStart[0]
-
+  test('a blog can be deleted by its owner', async () => {
+    const newUser = await User.find({name: 'Bob'})
+    console.log(newUser)
+    const newBlogData = {
+      title: 'my blog',
+      author: 'new user',
+      url: 'avalidurl',
+      likes: 0,
+      userId: newUser._id
+    }
+    const newBlog = await api
+      .post('/api/blogs')
+      .send(newBlogData)
+      .set('authorization', `Bearer ${token}`)
+      .expect(200)
     await api
-      .delete(`/api/blogs/${blogToDelete.id}`)
+      .delete(`/api/blogs/${newBlog.body.id}`)
       .set('Authorization', `Bearer ${token}`)
       .expect(204)
 
     const blogsAtEnd = await helper.blogsInDb()
-
+    const totalBlogs = helper.initialBlogs.concat(newBlogData).length
     expect(blogsAtEnd.length).toBe(
-      helper.initialBlogs.length - 1
+      totalBlogs - 1
     )
 
     const authors = blogsAtEnd.map(r => r.author)
 
-    expect(authors).not.toContain(blogToDelete.author)
+    expect(authors).not.toContain(newBlog.author)
   })
 
   test('a blog can be edited', async () => {
