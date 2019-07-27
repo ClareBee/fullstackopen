@@ -81,6 +81,24 @@ test('blog without title is not added', async () => {
   expect(blogsAtEnd.length).toBe(helper.initialBlogs.length)
 })
 
+test('blog without url is not added', async () => {
+  const newBlog = {
+    title: 'Something',
+    author: 'Sally',
+    url: '',
+    likes: 0
+  }
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(400)
+
+  const blogsAtEnd = await helper.blogsInDb()
+
+  expect(blogsAtEnd.length).toBe(helper.initialBlogs.length)
+})
+
 test('a specific blog can be viewed', async () => {
   const blogsAtStart = await helper.blogsInDb()
   const blogToView = blogsAtStart[0]
