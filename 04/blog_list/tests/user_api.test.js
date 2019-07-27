@@ -10,8 +10,11 @@ const User = require('../models/user')
 describe('when there is initially one user at db', () => {
   beforeEach(async () => {
     await User.deleteMany({})
-    const user = new User({ username: 'root', password: 'sekret' })
-    await user.save()
+    const userObjects = helper.initialUsers
+      .map(user => new User(user))
+    const promiseArray = userObjects.map(user => user.save())
+    // prevents tests running before async operations in beforeEach complete
+    await Promise.all(promiseArray)
   })
 
   test('creation succeeds with a unique username', async () => {
@@ -40,7 +43,7 @@ describe('when there is initially one user at db', () => {
     const usersAtStart = await helper.usersInDb()
 
     const newUser = {
-      username: 'root',
+      username: 'bobby',
       name: 'Superuser',
       password: 'salainen',
     }
