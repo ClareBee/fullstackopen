@@ -105,6 +105,22 @@ test('the unique identifier of a blog is id', async () => {
   expect(resultBlog.body.id).toBeDefined()
 })
 
+test('likes on blog defaults to 0 if missing', async () => {
+  const blogMissingLikes = {
+    title: 'No likes',
+    author: 'Jim',
+    url: 'http://www.example.com/jimsblog',
+  }
+  await api
+    .post('/api/blogs')
+    .send(blogMissingLikes)
+    .expect(200)
+
+  const blogsAtEnd = await helper.blogsInDb()
+  const newlyAddedBlog = blogsAtEnd.find(blog => blog.author === 'Jim')
+  expect(newlyAddedBlog.likes).toEqual(0)
+})
+
 test('a blog can be deleted', async () => {
   const blogsAtStart = await helper.blogsInDb()
   const blogToDelete = blogsAtStart[0]
