@@ -8,6 +8,7 @@ const helper = require('./test_helper')
 const Blog = require('../models/blog')
 const User = require('../models/user')
 let token
+let newUser
 
 beforeAll(async () => {
   const request = await api.post('/api/users')
@@ -16,7 +17,7 @@ beforeAll(async () => {
       name: 'New',
       password: 'abcde'
     })
-  const newUser = request.body
+  newUser = request.body
   const response = await api.post('/api/login')
     .send({
       username: newUser.username,
@@ -54,9 +55,7 @@ describe('when there are initially some blogs saved', () => {
 
     const authors = response.body.map(r => r.author)
 
-    expect(authors).toContain(
-      'Clare'
-    )
+    expect(authors).toContain('Clare')
   })
 
   describe('addition of a new blog', () => {
@@ -66,7 +65,8 @@ describe('when there are initially some blogs saved', () => {
         title: 'new',
         author: 'Sally',
         url: 'http://www.example.com/sallysblog',
-        likes: 10
+        likes: 10,
+        userId: newUser._id
       }
 
       await api
@@ -80,9 +80,7 @@ describe('when there are initially some blogs saved', () => {
       expect(blogsAtEnd.length).toBe(helper.initialBlogs.length + 1)
 
       const authors = blogsAtEnd.map(n => n.author)
-      expect(authors).toContain(
-        'Sally'
-      )
+      expect(authors).toContain('Sally')
     })
 
     test('blog without title is not added', async () => {
@@ -90,7 +88,8 @@ describe('when there are initially some blogs saved', () => {
         title: '',
         author: 'Sally',
         url: 'http://www.example.com/sallysblog',
-        likes: 0
+        likes: 0,
+        userId: newUser._id
       }
 
       await api
@@ -109,7 +108,8 @@ describe('when there are initially some blogs saved', () => {
         title: 'Something',
         author: 'Sally',
         url: '',
-        likes: 0
+        likes: 0,
+        userId: newUser._id
       }
 
       await api
