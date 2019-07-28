@@ -183,8 +183,6 @@ describe('when there are initially some blogs saved', () => {
   })
 
   test('a blog can be deleted by its owner', async () => {
-    const newUser = await User.find({name: 'Bob'})
-    console.log(newUser)
     const newBlogData = {
       title: 'my blog',
       author: 'new user',
@@ -207,10 +205,22 @@ describe('when there are initially some blogs saved', () => {
     expect(blogsAtEnd.length).toBe(
       totalBlogs - 1
     )
-
     const authors = blogsAtEnd.map(r => r.author)
-
     expect(authors).not.toContain(newBlog.author)
+  })
+
+  test('a blog cannot be deleted by someone else', async () =>{
+    const blogsAtStart = await helper.blogsInDb()
+    const blogToDelete = blogsAtStart[0]
+    await api
+      .delete(`/api/blogs/${blogToDelete.id}`)
+      .set('Authorization', `Bearer ${token}`)
+      .expect(401)
+
+    const blogsAtEnd = await helper.blogsInDb()
+    expect(blogsAtEnd.length).toEqual(
+      helper.initialBlogs.length
+    )
   })
 
   test('a blog can be edited', async () => {
