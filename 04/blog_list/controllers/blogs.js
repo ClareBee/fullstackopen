@@ -27,17 +27,12 @@ blogsRouter.post('/', async (req, res, next) => {
   const body = req.body
   let user
   try {
-    if (process.env.NODE_ENV !== 'test') {
-      const decodedToken = jwt.verify(req.token, process.env.SECRET)
-      if (!decodedToken.id) {
-        return res.status(401).json({ error: 'token missing or invalid' })
-      }
-      const users = await User.find({username: decodedToken.username})
-      user = users[0]
-    } else {
-      const token = jwt.verify(req.headers.authorization.substring(7), process.env.SECRET)
-      user = await User.findById(token.id)
+    const decodedToken = jwt.verify(req.token, process.env.SECRET)
+    if (!decodedToken.id) {
+      return res.status(401).json({ error: 'token missing or invalid' })
     }
+    const users = await User.find({username: decodedToken.username})
+    user = users[0]
     const blog = new Blog({
       title: body.title,
       author: body.author,
@@ -59,19 +54,11 @@ blogsRouter.delete('/:id', async (req, res, next) => {
   let decodedTokenId
   let user
   try {
-    if (process.env.NODE_ENV !== 'test'){
-      const decodedToken = jwt.verify(req.token, process.env.SECRET)
-      if (!decodedToken.id || !blog.user) {
-        return res.status(401).json({ error: 'token missing or invalid' })
-      }
-      decodedTokenId = decodedToken.id.toString()
-    } else {
-      const token = jwt.verify(req.headers.authorization.substring(7), process.env.SECRET)
-      user = await User.findById(token.id)
-      if (!user || !blog.user) {
-        return res.status(401).json({ error: 'token missing or invalid' })
-      }
+    const decodedToken = jwt.verify(req.token, process.env.SECRET)
+    if (!decodedToken.id || !blog.user) {
+      return res.status(401).json({ error: 'token missing or invalid' })
     }
+    decodedTokenId = decodedToken.id.toString()
     if (blog.user.toString() === (decodedTokenId || user._id.toString())){
       await blog.delete()
       res.status(204).end()
