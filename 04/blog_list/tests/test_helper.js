@@ -1,13 +1,6 @@
 const Blog = require('../models/blog')
 const User = require('../models/user')
 
-const initialUsers = [
-  {
-    name: 'Bob',
-    password: 'BobsPassword',
-    username: 'bobby',
-  }
-]
 const initialBlogs = [
   {
     title: 'Testing Title',
@@ -21,6 +14,14 @@ const initialBlogs = [
     url: 'http://www.example.com/bobsblog',
     likes: 10,
   },
+]
+
+const initialUsers = [
+  {
+    name: 'Bob',
+    password: 'BobsPassword',
+    username: 'bobby',
+  }
 ]
 
 const nonExistingId = async () => {
