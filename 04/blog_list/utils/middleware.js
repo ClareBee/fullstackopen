@@ -36,7 +36,7 @@ const tokenExtractor = (request, response, next) => {
     request.token = authorization.substring(7)
     next()
   } else {
-    return response.status(401).json({ error: 'invalid token'})
+    next()
   }
 }
 
