@@ -1,18 +1,10 @@
 import axios from 'axios'
 const baseUrl = '/api/login'
-let token = null
-
-const setToken = newToken => {
-  token = `bearer ${newToken}`
-}
 
 const login = async credentials => {
-  const config = {
-    headers: { Authorization: token },
-  }
-  const response = await axios.post(baseUrl, credentials, config)
+  const response = await axios.post(baseUrl, credentials)
   console.log('response', response.data)
   return response.data
 }
 
-export default { login, setToken }
+export default { login }
