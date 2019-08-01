@@ -15,8 +15,15 @@ const BlogForm = ({ addBlog }) => {
     const {name, value} = e.target
     setNewBlog({...newBlog, [name]: value})
   }
+
+  const handleAddingBlog = (e, blog) => {
+    e.preventDefault()
+    addBlog(newBlog)
+    setNewBlog(initialBlog)
+  }
+
   return (
-    <form onSubmit={(e) => addBlog(e, newBlog)}>
+    <form onSubmit={(e) => handleAddingBlog(e)}>
       <div>
         <label>Title</label>
         <input

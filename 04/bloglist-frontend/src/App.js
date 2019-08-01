@@ -4,11 +4,12 @@ import loginService from './services/login'
 import Blog from './components/Blog'
 import BlogForm from './components/BlogForm'
 import Notification from './components/Notification'
+import './index.css'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-  const [newBlog, setNewBlog] = useState({})
   const [errorMessage, setErrorMessage] = useState(null)
+  const [successMessage, setSuccessMessage] = useState(null)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
@@ -34,17 +35,17 @@ const App = () => {
     event.preventDefault()
     try {
       const user = await loginService.login({
-          username, password,
-        })
-        // saved as DOMstring
-        window.localStorage.setItem('name', JSON.stringify(user))
-        blogService.setToken(user.token)
-        setUser(user)
-        setUsername('')
-        setPassword('')
-      } catch (exception) {
-        setErrorMessage('Wrong credentials')
-        setTimeout(() => {
+        username, password,
+      })
+      // saved as DOMstring
+      window.localStorage.setItem('name', JSON.stringify(user))
+      blogService.setToken(user.token)
+      setUser(user)
+      setUsername('')
+      setPassword('')
+    } catch (exception) {
+      setErrorMessage('Wrong credentials')
+      setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
     }
@@ -55,20 +56,26 @@ const App = () => {
     window.localStorage.removeItem('name')
   }
 
-  const addBlog = (e, blog) => {
-    e.preventDefault()
-    console.log('blog', blog)
-    blogService
-      .create(blog)
-      .then(data => {
-        setBlogs(blogs.concat(blog))
-      })
+  const addBlog = async (blog) => {
+    try {
+        console.log('blog', blog)
+        const addedBlog = await blogService.create(blog)
+        setBlogs(blogs.concat(addedBlog))
+        setSuccessMessage(`${addedBlog.title} added successfully!`)
+        setTimeout(() => {
+          setSuccessMessage(null)
+        }, 5000)
+      } catch(exception) {
+        console.log('exception', exception)
+        setErrorMessage(`${exception}`)
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
+      }
   }
 
   const loginForm = () => (
     <React.Fragment>
-      <Notification message={errorMessage}/>
-
       <h2>Log in to application</h2>
       <form onSubmit={handleLogin}>
         <div>
@@ -96,6 +103,10 @@ const App = () => {
 
   const blogDisplay = () => (
     <React.Fragment>
+      <Notification
+        message={errorMessage || successMessage}
+        messageType={errorMessage ? "error" : "success"}
+        />
       <p>{ `${user.name} logged in` }</p>
       <button
         onClick={() => handleLogout()}
