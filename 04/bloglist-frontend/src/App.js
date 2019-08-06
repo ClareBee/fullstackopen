@@ -3,6 +3,7 @@ import blogService from './services/blogs'
 import loginService from './services/login'
 import Blog from './components/Blog'
 import BlogForm from './components/BlogForm'
+import LoginForm from './components/LoginForm'
 import Notification from './components/Notification'
 import './index.css'
 
@@ -13,6 +14,7 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
+  const [blogFormVisible, setBlogFormVisible] = useState(null)
 
 
   useEffect(() => {
@@ -58,7 +60,6 @@ const App = () => {
 
   const addBlog = async (blog) => {
     try {
-        console.log('blog', blog)
         const addedBlog = await blogService.create(blog)
         setBlogs(blogs.concat(addedBlog))
         setSuccessMessage(`${addedBlog.title} added successfully!`)
@@ -77,47 +78,43 @@ const App = () => {
   const loginForm = () => (
     <React.Fragment>
       <h2>Log in to application</h2>
-      <form onSubmit={handleLogin}>
-        <div>
-          username
-          <input
-            type="text"
-            value={username}
-            name="Username"
-            onChange={({ target }) => setUsername(target.value)}
-            />
-        </div>
-        <div>
-        password
-          <input
-            type="password"
-            value={password}
-            name="Password"
-            onChange={({ target }) => setPassword(target.value)}
-            />
-        </div>
-        <button type="submit">Login</button>
-      </form>
+      <LoginForm
+        username={username}
+        password={password}
+        handleLogin={handleLogin}
+        handleUsernameChange={({ target }) => setUsername(target.value)}
+        handlePasswordChange={({ target }) => setPassword(target.value)}
+      />
     </React.Fragment>
   )
 
-  const blogDisplay = () => (
-    <React.Fragment>
-      <Notification
-        message={errorMessage || successMessage}
-        messageType={errorMessage ? "error" : "success"}
-        />
-      <p>{ `${user.name} logged in` }</p>
-      <button
-        onClick={() => handleLogout()}
-        type="button">Logout</button>
-      <BlogForm addBlog={addBlog} />
-      <h2>blogs</h2>
-      {blogs.map(blog =>
-        <Blog key={blog.title} blog={blog} />
-      )}
-    </React.Fragment>
-  )
+  const blogDisplay = () => {
+    const hideWhenVisible = { display: blogFormVisible ? 'none' : '' }
+    const showWhenVisible = { display: blogFormVisible ? '' : 'none' }
+
+    return (
+      <React.Fragment>
+        <Notification
+          message={errorMessage || successMessage}
+          messageType={errorMessage ? "error" : "success"}
+          />
+        <p>{ `${user.name} logged in` }</p>
+        <button
+          onClick={() => handleLogout()}
+          type="button">Logout</button>
+        <div style={hideWhenVisible}>
+          <button onClick={() => setBlogFormVisible(true)}>Add Blog</button>
+        </div>
+        <div style={showWhenVisible}>
+          <BlogForm addBlog={addBlog} />
+        </div>
+        <h2>blogs</h2>
+        {blogs.map(blog =>
+          <Blog key={blog.title} blog={blog} />
+        )}
+      </React.Fragment>
+    )
+  }
 
   return (
     <div>
