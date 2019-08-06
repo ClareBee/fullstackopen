@@ -5,6 +5,7 @@ import Blog from './components/Blog'
 import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
 import Notification from './components/Notification'
+import Toggleable from './components/Toggleable'
 import './index.css'
 
 const App = () => {
@@ -14,8 +15,6 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [blogFormVisible, setBlogFormVisible] = useState(null)
-
 
   useEffect(() => {
     blogService
@@ -89,8 +88,6 @@ const App = () => {
   )
 
   const blogDisplay = () => {
-    const hideWhenVisible = { display: blogFormVisible ? 'none' : '' }
-    const showWhenVisible = { display: blogFormVisible ? '' : 'none' }
 
     return (
       <React.Fragment>
@@ -102,12 +99,9 @@ const App = () => {
         <button
           onClick={() => handleLogout()}
           type="button">Logout</button>
-        <div style={hideWhenVisible}>
-          <button onClick={() => setBlogFormVisible(true)}>Add Blog</button>
-        </div>
-        <div style={showWhenVisible}>
+        <Toggleable buttonLabel="New Blog">
           <BlogForm addBlog={addBlog} />
-        </div>
+        </Toggleable>
         <h2>blogs</h2>
         {blogs.map(blog =>
           <Blog key={blog.title} blog={blog} />
