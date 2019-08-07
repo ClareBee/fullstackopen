@@ -21,7 +21,7 @@ const App = () => {
       .getAll().then(initialBlogs => {
         setBlogs(initialBlogs)
       })
-  }, [])
+  }, [successMessage])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('name')
@@ -59,19 +59,37 @@ const App = () => {
 
   const addBlog = async (blog) => {
     try {
-        const addedBlog = await blogService.create(blog)
-        setBlogs(blogs.concat(addedBlog))
-        setSuccessMessage(`${addedBlog.title} added successfully!`)
-        setTimeout(() => {
-          setSuccessMessage(null)
-        }, 5000)
-      } catch(exception) {
-        console.log('exception', exception)
-        setErrorMessage(`${exception}`)
-        setTimeout(() => {
-          setErrorMessage(null)
-        }, 5000)
-      }
+      const addedBlog = await blogService.create(blog)
+      setBlogs(blogs.concat(addedBlog))
+      setSuccessMessage(`${addedBlog.title} added successfully!`)
+      setTimeout(() => {
+        setSuccessMessage(null)
+      }, 5000)
+    } catch(exception) {
+      console.log('exception', exception)
+      setErrorMessage(`${exception}`)
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+    }
+  }
+
+  const addLike = async (blog) => {
+    let blogLikes = blog.likes;
+    const blogWithAddedLike = {...blog, likes: blogLikes += 1}
+    try {
+      const editedBlog = await blogService.update(blogWithAddedLike)
+      setSuccessMessage(`Blog ${editedBlog.title} now has ${editedBlog.likes} likes!`)
+      setTimeout(() => {
+        setSuccessMessage(null)
+      }, 5000)
+    } catch(exception) {
+      console.log('exception', exception)
+      setErrorMessage(`${exception}`)
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+    }
   }
 
   const loginForm = () => (
@@ -87,8 +105,18 @@ const App = () => {
     </React.Fragment>
   )
 
-  const blogDisplay = () => {
+  const orderByLikes = blogs => (
+    blogs.sort((a,b) => b.likes - a.likes)
+  )
 
+  const renderSortedBlogs = blogs => {
+    const sorted = orderByLikes(blogs)
+    return sorted.map(blog =>
+      <Blog key={blog.title} blog={blog} addLike={addLike}/>
+    )
+  }
+
+  const blogDisplay = () => {
     return (
       <React.Fragment>
         <Notification
@@ -103,9 +131,7 @@ const App = () => {
           <BlogForm addBlog={addBlog} />
         </Toggleable>
         <h2>blogs</h2>
-        {blogs.map(blog =>
-          <Blog key={blog.title} blog={blog} />
-        )}
+        {renderSortedBlogs(blogs)}
       </React.Fragment>
     )
   }
