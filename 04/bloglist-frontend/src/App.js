@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react'
 import blogService from './services/blogs'
 import loginService from './services/login'
 import Blog from './components/Blog'
@@ -85,7 +85,7 @@ const App = () => {
           setSuccessMessage(null)
         }, 5000)
       }
-      return;
+      return
     } catch(exception) {
       console.log('exception', exception)
       setErrorMessage(`${exception}`)
@@ -96,8 +96,8 @@ const App = () => {
   }
 
   const addLike = async (blog) => {
-    let blogLikes = blog.likes;
-    const blogWithAddedLike = {...blog, likes: blogLikes += 1}
+    let blogLikes = blog.likes
+    const blogWithAddedLike = { ...blog, likes: blogLikes += 1 }
     try {
       const editedBlog = await blogService.update(blogWithAddedLike)
       setSuccessMessage(`Blog ${editedBlog.title} now has ${editedBlog.likes} likes!`)
@@ -148,8 +148,8 @@ const App = () => {
       <React.Fragment>
         <Notification
           message={errorMessage || successMessage}
-          messageType={errorMessage ? "error" : "success"}
-          />
+          messageType={errorMessage ? 'error' : 'success'}
+        />
         <p>{ `${user.name} logged in` }</p>
         <button
           onClick={() => handleLogout()}
@@ -166,10 +166,10 @@ const App = () => {
   return (
     <div>
       { user
-       ? blogDisplay()
-       : loginForm() }
+        ? blogDisplay()
+        : loginForm() }
     </div>
   )
 }
 
-export default App;
+export default App

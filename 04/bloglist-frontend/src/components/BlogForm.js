@@ -13,11 +13,11 @@ const BlogForm = ({ addBlog }) => {
 
   const handleNewBlog = (e) => {
     e.preventDefault()
-    const {name, value} = e.target
-    setNewBlog({...newBlog, [name]: value})
+    const { name, value } = e.target
+    setNewBlog({ ...newBlog, [name]: value })
   }
 
-  const handleAddingBlog = (e, blog) => {
+  const handleAddingBlog = (e) => {
     e.preventDefault()
     addBlog(newBlog)
     setNewBlog(initialBlog)
@@ -32,7 +32,7 @@ const BlogForm = ({ addBlog }) => {
           value={title}
           name="title"
           onChange={handleNewBlog}
-          />
+        />
       </div>
       <div>
         <label>Author</label>
@@ -41,7 +41,7 @@ const BlogForm = ({ addBlog }) => {
           value={author}
           name="author"
           onChange={handleNewBlog}
-          />
+        />
       </div>
       <div>
         <label>URL</label>
@@ -50,7 +50,7 @@ const BlogForm = ({ addBlog }) => {
           value={url}
           name="url"
           onChange={handleNewBlog}
-          />
+        />
       </div>
       <button type="submit">Create</button>
     </form>
