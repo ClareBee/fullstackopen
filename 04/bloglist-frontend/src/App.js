@@ -74,6 +74,27 @@ const App = () => {
     }
   }
 
+  const deleteBlog = async (blog) => {
+    try {
+      const title = blog.title
+      if(window.confirm(`Do you want to delete ${title}?`)){
+        const deletedBlog = await blogService.destroy(blog)
+        console.log(deletedBlog)
+        setSuccessMessage(`${title} deleted successfully!`)
+        setTimeout(() => {
+          setSuccessMessage(null)
+        }, 5000)
+      }
+      return;
+    } catch(exception) {
+      console.log('exception', exception)
+      setErrorMessage(`${exception}`)
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+    }
+  }
+
   const addLike = async (blog) => {
     let blogLikes = blog.likes;
     const blogWithAddedLike = {...blog, likes: blogLikes += 1}
@@ -112,7 +133,13 @@ const App = () => {
   const renderSortedBlogs = blogs => {
     const sorted = orderByLikes(blogs)
     return sorted.map(blog =>
-      <Blog key={blog.title} blog={blog} addLike={addLike}/>
+      <Blog
+        key={blog.title}
+        blog={blog}
+        addLike={addLike}
+        deleteBlog={deleteBlog}
+        currentUser={user}
+      />
     )
   }
 
