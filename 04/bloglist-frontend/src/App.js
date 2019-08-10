@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import  { useField } from './hooks'
+
 import blogService from './services/blogs'
 import loginService from './services/login'
 import Blog from './components/Blog'
@@ -12,8 +14,10 @@ const App = () => {
   const [blogs, setBlogs] = useState([])
   const [errorMessage, setErrorMessage] = useState(null)
   const [successMessage, setSuccessMessage] = useState(null)
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  // const [username, setUsername] = useState('')
+  const username = useField('text')
+  const password = useField('password')
+  // const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
 
   useEffect(() => {
@@ -36,15 +40,16 @@ const App = () => {
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
+      console.log(username, password)
       const user = await loginService.login({
-        username, password,
+        username: username.value, password: password.value,
       })
       // saved as DOMstring
       window.localStorage.setItem('name', JSON.stringify(user))
       blogService.setToken(user.token)
       setUser(user)
-      setUsername('')
-      setPassword('')
+      // setUsername('')
+      // setPassword('')
     } catch (exception) {
       setErrorMessage('Wrong credentials')
       setTimeout(() => {
@@ -121,8 +126,6 @@ const App = () => {
         username={username}
         password={password}
         handleLogin={handleLogin}
-        handleUsernameChange={({ target }) => setUsername(target.value)}
-        handlePasswordChange={({ target }) => setPassword(target.value)}
       />
     </React.Fragment>
   )
