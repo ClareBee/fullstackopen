@@ -38,7 +38,7 @@ const Blog = ({ blog, addLike, deleteBlog, currentUser }) => {
             <div>
               {ownerLoggedIn &&
                 <button
-                  className="cancel"
+                  className="cancel delete-blog"
                   onClick={() => deleteBlog(blog)}>
                   Delete
                 </button>

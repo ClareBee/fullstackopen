@@ -27,7 +27,7 @@ test('renders default content only', () => {
   )
   const heading = component.container.querySelector('.heading')
   expect(heading).toHaveTextContent(
-    'Component testing is done with react-testing-library - Test - 10 likes'
+    'Component testing is done with react-testing-library - Test 10 likes'
   )
   const moreDetails = component.container.querySelector('.more-details')
   expect(moreDetails).toHaveStyle('display: none')
