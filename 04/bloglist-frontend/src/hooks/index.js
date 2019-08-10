@@ -4,6 +4,7 @@ export const useField = (type) => {
   const [value, setValue] = useState('')
 
   const onChange = (event) => {
+    console.log(event.target.value)
     setValue(event.target.value)
   }
 
@@ -11,10 +12,15 @@ export const useField = (type) => {
     setValue('')
   }
 
+  const inputValues = () => {
+    return { type, value, onChange }
+  }
+
   return {
     type,
     value,
     onChange,
-    reset
+    reset,
+    inputValues
   }
 }

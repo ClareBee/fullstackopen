@@ -14,10 +14,8 @@ const App = () => {
   const [blogs, setBlogs] = useState([])
   const [errorMessage, setErrorMessage] = useState(null)
   const [successMessage, setSuccessMessage] = useState(null)
-  // const [username, setUsername] = useState('')
   const username = useField('text')
   const password = useField('password')
-  // const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
 
   useEffect(() => {
@@ -40,7 +38,6 @@ const App = () => {
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
-      console.log(username, password)
       const user = await loginService.login({
         username: username.value, password: password.value,
       })

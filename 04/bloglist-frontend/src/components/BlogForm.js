@@ -15,6 +15,9 @@ const BlogForm = ({ addBlog }) => {
       url: url.value
     }
     addBlog(newBlog)
+    title.reset()
+    author.reset()
+    url.reset()
   }
 
   return (
@@ -22,19 +25,19 @@ const BlogForm = ({ addBlog }) => {
       <div>
         <label>Title</label>
         <input
-          {...title}
+          {...title.inputValues()}
         />
       </div>
       <div>
         <label>Author</label>
         <input
-          {...author}
+          {...author.inputValues()}
         />
       </div>
       <div>
         <label>URL</label>
         <input
-          {...url}
+          {...url.inputValues()}
         />
       </div>
       <button type="submit">Create</button>

@@ -9,13 +9,13 @@ const LoginForm = ({
     <div>
       Username
       <input
-        {...username}
+        {...username.inputValues()}
       />
     </div>
     <div>
       Password
       <input
-        {...password}
+        {...password.inputValues()}
       />
     </div>
     <button type="submit">Login</button>
