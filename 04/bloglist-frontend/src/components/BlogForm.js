@@ -1,26 +1,20 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useField } from '../hooks'
 import PropTypes from 'prop-types'
 
-const initialBlog = {
-  title: '',
-  author: '',
-  url: ''
-}
-
 const BlogForm = ({ addBlog }) => {
-  const [newBlog, setNewBlog] = useState(initialBlog)
-  const { title, author, url } = newBlog
-
-  const handleNewBlog = (e) => {
-    e.preventDefault()
-    const { name, value } = e.target
-    setNewBlog({ ...newBlog, [name]: value })
-  }
+  const title = useField('text')
+  const author = useField('text')
+  const url = useField('text')
 
   const handleAddingBlog = (e) => {
     e.preventDefault()
+    const newBlog = {
+      title: title.value,
+      author: author.value,
+      url: url.value
+    }
     addBlog(newBlog)
-    setNewBlog(initialBlog)
   }
 
   return (
@@ -28,28 +22,19 @@ const BlogForm = ({ addBlog }) => {
       <div>
         <label>Title</label>
         <input
-          type="text"
-          value={title}
-          name="title"
-          onChange={handleNewBlog}
+          {...title}
         />
       </div>
       <div>
         <label>Author</label>
         <input
-          type="text"
-          value={author}
-          name="author"
-          onChange={handleNewBlog}
+          {...author}
         />
       </div>
       <div>
         <label>URL</label>
         <input
-          type="text"
-          value={url}
-          name="url"
-          onChange={handleNewBlog}
+          {...url}
         />
       </div>
       <button type="submit">Create</button>
