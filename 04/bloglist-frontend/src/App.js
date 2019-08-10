@@ -151,21 +151,25 @@ const App = () => {
           message={errorMessage || successMessage}
           messageType={errorMessage ? 'error' : 'success'}
         />
-        <p>{ `${user.name} logged in` }</p>
-        <button
-          onClick={() => handleLogout()}
-          type="button">Logout</button>
-        <Toggleable buttonLabel="New Blog">
+        <div className="login-details">
+          <button
+            className="logout"
+            onClick={() => handleLogout()}
+            type="button">Logout</button>
+          <h3>{ `Logged in as ${user.username}` }</h3>
+        </div>
+        <Toggleable buttonLabel="New Blog" className="success">
           <BlogForm addBlog={addBlog} />
         </Toggleable>
-        <h2>blogs</h2>
+        <h2>Blogs</h2>
         {renderSortedBlogs(blogs)}
       </React.Fragment>
     )
   }
 
   return (
-    <div>
+    <div className="container">
+      <h1>FullStack BlogApp</h1>
       { user
         ? blogDisplay()
         : loginForm() }

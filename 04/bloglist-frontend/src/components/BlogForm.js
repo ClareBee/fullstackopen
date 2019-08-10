@@ -22,6 +22,7 @@ const BlogForm = ({ addBlog }) => {
 
   return (
     <form onSubmit={(e) => handleAddingBlog(e)}>
+      <h2>New Blog</h2>
       <div>
         <label>Title</label>
         <input
@@ -40,7 +41,7 @@ const BlogForm = ({ addBlog }) => {
           {...url.inputValues()}
         />
       </div>
-      <button type="submit">Create</button>
+      <button className="success" type="submit">Create</button>
     </form>
   )
 }

@@ -7,18 +7,18 @@ const LoginForm = ({
 }) => (
   <form onSubmit={handleLogin}>
     <div>
-      Username
+      <label>Username:</label>
       <input
         {...username.inputValues()}
       />
     </div>
     <div>
-      Password
+      <label>Password:</label>
       <input
         {...password.inputValues()}
       />
     </div>
-    <button type="submit">Login</button>
+    <button className="success" type="submit">Login</button>
   </form>
 )
 

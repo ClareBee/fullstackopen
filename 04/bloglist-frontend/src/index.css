@@ -1,15 +1,115 @@
+body, html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+button {
+  font-size: 1.25rem;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+button.logout {
+  background-color: #9EB9BE;
+  color: white;
+}
+
+button.success {
+  background-color: #427F60;
+  color: white;
+}
+
+button.cancel {
+  background-color: #7D2B4D;
+  color: white;
+}
+
+button.add-like {
+  border: 5px solid #427F60;
+}
+
+h1, h2 {
+  text-decoration: underline;
+}
+
+form {
+  border: 3px solid black;
+  border-radius: 5px;
+  padding: 25px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+input {
+  width: 100%;
+  line-height: 1.75rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 1.25rem;
+}
+
+label {
+  font-size: 1.25rem;
+}
+
+.click-target {
+  cursor: pointer;
+  padding: 5px 10px;
+}
+.heading {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container {
+  width: 65%;
+  border: 10px solid #7D2B4D;
+  border-radius: 8px;
+  padding: 10px 50px;
+  margin: 25px auto;
+  background-color: #E8F7F2;
+}
+
+.login-details {
+  display: flex;
+  flex-flow: row-reverse nowrap;
+  align-items: center;
+  height: 100px;
+}
+
+.more-details {
+  margin:  25px 10px;
+}
+
+.user {
+  display: flex;
+  justify-content: space-between;
+}
+
+.blog {
+  background-color: white;
+}
+
+.likes {
+  font-size: 1.5rem;
+}
+
 .error {
-  color: red;
-  border: 1px solid red;
+  color: white;
+  background-color: #D8BFC9;
+  border: 5px solid #7D2B4D;
   border-radius: 5px;
   margin: 10px;
   padding: 10px;
 }
 
 .success {
-  color: green;
-  border: 1px solid green;
+  color: black;
+  border: 5px solid #427F60;
   border-radius: 5px;
+  background-color: white;
   margin: 10px;
   padding: 10px;
 }
