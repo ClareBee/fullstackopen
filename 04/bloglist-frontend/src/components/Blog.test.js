@@ -1,6 +1,7 @@
 import React from 'react'
-import { render, fireEvent, createEvent } from '@testing-library/react'
-import { prettyDOM } from '@testing-library/dom'
+import { render, fireEvent } from '@testing-library/react'
+//  for debugging:
+// import { prettyDOM } from '@testing-library/dom'
 import Blog from './Blog'
 
 test('renders default content only', () => {

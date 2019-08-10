@@ -25,6 +25,7 @@ const App = () => {
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('name')
+    console.log(loggedUserJSON)
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
@@ -115,7 +116,7 @@ const App = () => {
 
   const loginForm = () => (
     <React.Fragment>
-      <h2>Log in to application</h2>
+      <h2 className="login-header">Log in to application</h2>
       <LoginForm
         username={username}
         password={password}

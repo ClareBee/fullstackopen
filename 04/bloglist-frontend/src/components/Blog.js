@@ -19,7 +19,7 @@ const Blog = ({ blog, addLike, deleteBlog, currentUser }) => {
   const user = blog.user ? blog.user.username : 'Anon'
   const ownerLoggedIn = blog.user && (blog.user.name === currentUser.name)
   return (
-    <div style={blogStyle}>
+    <div style={blogStyle} className="blog">
       <div className="click-target" onClick={() => toggleVisibility()}>
         <span className="heading">
           {blog.title} - {blog.author} - {blog.likes} likes
