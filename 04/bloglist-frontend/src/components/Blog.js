@@ -20,19 +20,23 @@ const Blog = ({ blog, addLike, deleteBlog, currentUser }) => {
   const ownerLoggedIn = blog.user && (blog.user.name === currentUser.name)
   return (
     <div style={blogStyle}>
-      <div onClick={() => toggleVisibility()}>
-        {blog.title} {blog.author} - {blog.likes} likes
-        <div style={showWhenVisible}>
+      <div className="click-target" onClick={() => toggleVisibility()}>
+        <span className="heading">
+          {blog.title} - {blog.author} - {blog.likes} likes
+        </span>
+        <br />
+        <div className="more-details" style={showWhenVisible}>
           {blog.url}
           <hr />
           {blog.likes}
-          <button
+          <button className="add-like"
             onClick={() => addLike(blog)}
           >Likes</button>
           <br />
           Added by {user}
           {ownerLoggedIn &&
             <button
+              className="delete-blog"
               onClick={() => deleteBlog(blog)}>
               Delete
             </button>
