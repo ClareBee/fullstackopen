@@ -48,8 +48,8 @@ const App = () => {
       window.localStorage.setItem('name', JSON.stringify(user))
       blogService.setToken(user.token)
       setUser(user)
-      // setUsername('')
-      // setPassword('')
+      username.reset()
+      password.reset()
     } catch (exception) {
       setErrorMessage('Wrong credentials')
       setTimeout(() => {
