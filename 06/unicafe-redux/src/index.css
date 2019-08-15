@@ -1,0 +1,57 @@
+body, html {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+  padding: 15px;
+  border-radius: 5px;
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+}
+
+.good {
+  background-color: mediumaquamarine;
+}
+
+.bad {
+  background-color: mediumvioletred;
+}
+
+.neutral {
+  background-color: mediumorchid;
+}
+
+.reset {
+  background-color: mediumslateblue;
+}
+
+.container {
+  padding: 25px;
+  border: 1px solid mediumaquamarine;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons {
+  display: flex;
+  width: 60%;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 50px 0;
+}
+
+.results {
+  width: 20%;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+}
