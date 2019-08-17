@@ -3,6 +3,21 @@ import { addVote } from '../reducers/anecdoteReducer'
 import { votedSuccess, removeNotification } from '../reducers/notificationReducer'
 
 const AnecdoteList = ({store}) => {
+  const { anecdotes, filter } = store.getState()
+
+  const anecdotesToDisplay = () => {
+    if(filter.length < 1){
+      console.log('hi')
+      return anecdotes
+    } else {
+      const normalisedFilter = filter.toUpperCase()
+      return anecdotes.filter(anecdote => {
+        return anecdote.content
+                .toUpperCase()
+                .match(normalisedFilter)
+      })  
+    }
+  }
   const vote = (anecdote) => {
     console.log('vote', anecdote.id)
     store.dispatch(addVote(anecdote.id))
@@ -14,7 +29,7 @@ const AnecdoteList = ({store}) => {
 
   return (
     <div>
-      {store.getState().anecdotes.map(anecdote =>
+      {anecdotesToDisplay().map(anecdote =>
         <div key={anecdote.id}>
           <div>
             {anecdote.content}
