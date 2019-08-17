@@ -5,6 +5,8 @@ const reducer = (state = [], action) => {
     case 'FILTER':
       const input = action.data.content
       return input
+    case 'RESET':
+      return ''
     default:
       return state
   }
@@ -16,6 +18,12 @@ export const filterAnecdotes = (input) => {
     data: {
       content: input
     }
+  }
+}
+
+export const reset = () => {
+  return {
+    type: 'RESET'
   }
 }
 

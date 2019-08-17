@@ -1,9 +1,14 @@
 import React from 'react'
-import { filterAnecdotes } from '../reducers/filterReducer'
+import { filterAnecdotes, reset } from '../reducers/filterReducer'
 
 const Filter = ({ store }) => {
   const handleChange = (event) => {
     store.dispatch(filterAnecdotes(event.target.value))
+  }
+
+  const resetFilter = (event) => {
+    event.target.value = ''
+    store.dispatch(reset())
   }
   const style = {
     marginBottom: 10
@@ -11,7 +16,9 @@ const Filter = ({ store }) => {
 
   return (
     <div style={style}>
-      filter <input onChange={handleChange} />
+      filter <input
+        onChange={handleChange}
+        onBlur={resetFilter} />
     </div>
   )
 }
