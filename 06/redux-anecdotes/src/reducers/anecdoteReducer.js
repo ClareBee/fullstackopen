@@ -17,6 +17,11 @@ const asObject = (anecdote) => {
   }
 }
 
+const orderedByVote = (anecdotes) => {
+  console.log('sorted', anecdotes.sort((a, b) => a.votes - b.votes))
+  return anecdotes.sort((a, b) => b.votes - a.votes)
+}
+
 const initialState = anecdotesAtStart.map(asObject)
 
 const reducer = (state = initialState, action) => {
@@ -31,9 +36,11 @@ const reducer = (state = initialState, action) => {
         ...anecdote,
         votes: anecdote.votes + 1
       }
-      return state.map(anecdote =>
+
+      const updatedState = state.map(anecdote =>
         anecdote.id !== id ? anecdote : editedAnecdote
       )
+      return orderedByVote(updatedState)
     case 'CREATE_ANECDOTE':
       const newAnecdote = {
         content: action.data.anecdote,
@@ -41,7 +48,7 @@ const reducer = (state = initialState, action) => {
         id: getId()
       }
       const updatedAnecdotes = state.concat(newAnecdote)
-      return updatedAnecdotes
+      return orderedByVote(updatedAnecdotes)
     default:
       return state
   }

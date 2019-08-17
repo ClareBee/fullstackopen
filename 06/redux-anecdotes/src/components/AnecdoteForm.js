@@ -1,12 +1,12 @@
 import React from 'react'
 import { createAnecdote } from '../reducers/anecdoteReducer'
 
-const AnecdoteForm = (props) => {
+const AnecdoteForm = ({store}) => {
   const addAnecdote = (event) => {
     event.preventDefault()
     const content = event.target.anecdote.value
     event.target.anecdote.value = ''
-    props.store.dispatch(
+    store.dispatch(
       createAnecdote(content)
     )
   }
@@ -14,7 +14,6 @@ const AnecdoteForm = (props) => {
   return (
     <div>
       <h2>Create New Anecdote</h2>
-
       <form onSubmit={addAnecdote}>
         <input name="anecdote" />
         <button type="submit">add</button>
