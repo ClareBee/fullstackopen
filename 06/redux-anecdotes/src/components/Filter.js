@@ -1,14 +1,15 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { filterAnecdotes, reset } from '../reducers/filterReducer'
 
-const Filter = ({ store }) => {
+const Filter = (props) => {
   const handleChange = (event) => {
-    store.dispatch(filterAnecdotes(event.target.value))
+    props.filterAnecdotes(event.target.value)
   }
 
   const resetFilter = (event) => {
     event.target.value = ''
-    store.dispatch(reset())
+    props.reset()
   }
   const style = {
     marginBottom: 10
@@ -23,4 +24,13 @@ const Filter = ({ store }) => {
   )
 }
 
-export default Filter
+const matchDispatchToProps = dispatch => {
+  return {
+    reset: () => dispatch(reset()),
+    filterAnecdotes: value => {
+      dispatch(filterAnecdotes(value))
+    }
+  }
+}
+
+export default connect(null, matchDispatchToProps)(Filter)
