@@ -6,7 +6,6 @@ import { votedSuccess, removeNotification } from '../reducers/notificationReduce
 const AnecdoteList = (props) => {
 
   const vote = (anecdote) => {
-    console.log('vote', anecdote.id)
     props.addVote(anecdote.id)
     props.votedSuccess(anecdote.content)
     setTimeout(() => {
