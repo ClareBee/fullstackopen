@@ -5,8 +5,8 @@ import { votedSuccess, removeNotification } from '../reducers/notificationReduce
 
 const AnecdoteList = (props) => {
 
-  const vote = (anecdote) => {
-    props.addVote(anecdote.id)
+  const vote = anecdote => {
+    props.addVote(anecdote)
     props.votedSuccess(anecdote.content)
     setTimeout(() => {
       props.removeNotification()
