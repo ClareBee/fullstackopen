@@ -5,8 +5,6 @@ const orderedByVote = (anecdotes) => {
 }
 
 const reducer = (state = [], action) => {
-  console.log('state now: ', state)
-  console.log('action', action)
   switch(action.type) {
     case 'ADD_VOTE':
       const anecdote = action.data

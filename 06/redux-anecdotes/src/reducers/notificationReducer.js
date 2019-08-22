@@ -1,14 +1,7 @@
 const reducer = (state = '', action) => {
-  console.log('notification state now: ', state)
-  console.log('notification action', action)
-  let anecdote = state.notification
   switch(action.type) {
-    case 'ADDED_SUCCESS':
-      anecdote = action.data.anecdote
-      return `Successfully added: ${anecdote}`
-    case 'VOTED_SUCCESS':
-      anecdote = action.data.anecdote
-      return `You added your vote for ${anecdote}`
+    case 'NOTIFY_SUCCESS':
+      return action.data.anecdote
     case 'REMOVE':
       return ''
     default:
@@ -16,26 +9,24 @@ const reducer = (state = '', action) => {
   }
 }
 
-export const addedSuccess = (anecdote) => {
+export const notifySuccess = anecdote => {
   return {
-    type: 'ADDED_SUCCESS',
+    type: 'NOTIFY_SUCCESS',
     data: {
       anecdote: anecdote
     }
   }
 }
 
-export const removeNotification = () => {
-  return {
-    type: 'REMOVE'
-  }
-}
-
-export const votedSuccess = (anecdote) => {
-  return {
-    type: 'VOTED_SUCCESS',
-    data: {
-      anecdote: anecdote
+export const setNotification = (content, duration) => {
+  return async dispatch => {
+    let triggerRemoval = await dispatch(notifySuccess(content))
+    if(triggerRemoval){
+      setTimeout(() => {
+        dispatch({
+          type: 'REMOVE'
+        })
+      }, duration)
     }
   }
 }
