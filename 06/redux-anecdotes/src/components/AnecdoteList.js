@@ -13,14 +13,13 @@ const AnecdoteList = (props) => {
   return (
     <div>
       {props.visibleAnecdotes.map(anecdote =>
-        <div key={anecdote.id}>
+        <div className="anecdote" key={anecdote.id}>
           <div>
-            {anecdote.content}
+            "{anecdote.content}"
+            <p>...has {anecdote.votes} { anecdote.votes === 1 ? 'vote' : 'votes' }</p>
           </div>
-          <div>
-            has {anecdote.votes}
-            <button onClick={() => vote(anecdote)}>vote</button>
-          </div>
+
+          <button onClick={() => vote(anecdote)}>Vote</button>
         </div>
       )}
     </div>

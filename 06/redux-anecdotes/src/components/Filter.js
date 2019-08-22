@@ -12,12 +12,13 @@ const Filter = (props) => {
     props.reset()
   }
   const style = {
-    marginBottom: 10
+    marginBottom: '10px',
+    fontSize: '20px'
   }
 
   return (
     <div style={style}>
-      filter <input
+      <strong>Filter:</strong> <input
         onChange={handleChange}
         onBlur={resetFilter} />
     </div>

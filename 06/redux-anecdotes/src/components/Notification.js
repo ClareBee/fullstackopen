@@ -8,8 +8,10 @@ const Notification = (props) => {
     return notification ? 'inline-block' : 'none'
   }
   const style = {
-    border: 'solid',
+    border: 'solid 5px #5B8E7D',
+    borderRadius: '5px',
     padding: 10,
+    margin: 10,
     borderWidth: 1,
     display: checkNotification()
   }
