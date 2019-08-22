@@ -20,14 +20,13 @@ export const notifySuccess = anecdote => {
 
 export const setNotification = (content, duration) => {
   return async dispatch => {
-    let triggerRemoval = await dispatch(notifySuccess(content))
-    if(triggerRemoval){
-      setTimeout(() => {
-        dispatch({
-          type: 'REMOVE'
-        })
-      }, duration)
-    }
+    // not sure how to make this w async/await
+    dispatch(notifySuccess(content))
+    setTimeout(() => {
+      dispatch({
+        type: 'REMOVE'
+      })
+    }, duration)
   }
 }
 export default reducer
