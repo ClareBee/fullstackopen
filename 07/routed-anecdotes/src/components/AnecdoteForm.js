@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import { withRouter } from 'react-router-dom'
 
-export const AnecdoteForm = (props) => {
+const AnecdoteForm = (props) => {
   const [content, setContent] = useState('')
   const [author, setAuthor] = useState('')
   const [info, setInfo] = useState('')
@@ -14,6 +15,7 @@ export const AnecdoteForm = (props) => {
       info,
       votes: 0
     })
+    props.history.push('/')
   }
 
   return (
@@ -37,3 +39,5 @@ export const AnecdoteForm = (props) => {
     </div>
   )
 }
+
+export default withRouter(AnecdoteForm)

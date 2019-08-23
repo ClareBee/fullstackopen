@@ -1,11 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import {
-  BrowserRouter as Router,
-  Route, Link, Redirect
-} from 'react-router-dom'
-import { Anecdotes } from './components/Anecdotes'
-import { AnecdoteForm } from './components/AnecdoteForm'
-import { About } from './components/About'
+import React, { useState } from 'react'
 import { Footer } from './components/Footer'
 import { Menu } from './components/Menu'
 
@@ -34,6 +27,10 @@ const App = () => {
   const addNew = (anecdote) => {
     anecdote.id = (Math.random() * 10000).toFixed(0)
     setAnecdotes(anecdotes.concat(anecdote))
+    setNotification(`You just added: ${anecdote.content}`)
+    setTimeout(() => {
+      setNotification('')
+    }, 10000)
   }
 
   const anecdoteById = (id) =>
@@ -52,7 +49,10 @@ const App = () => {
   return (
     <div>
       <h1>Software anecdotes</h1>
-      <Menu anecdotes={anecdotes || []} />
+      { notification &&
+        <div>{notification}</div>
+      }
+      <Menu anecdotes={anecdotes || []} addNew={addNew}/>
       <Footer />
     </div>
   )
