@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import  { useField } from './hooks'
+import { connect } from 'react-redux'
+import { initialiseBlogs } from './reducers/blogReducer'
 
 import blogService from './services/blogs'
 import loginService from './services/login'
-import Blog from './components/Blog'
+import BlogList from './components/BlogList'
 import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
 import Notification from './components/Notification'
 import Toggleable from './components/Toggleable'
 import './index.css'
 
-const App = () => {
+const App = (props) => {
   const [blogs, setBlogs] = useState([])
   const [errorMessage, setErrorMessage] = useState(null)
   const [successMessage, setSuccessMessage] = useState(null)
@@ -18,18 +20,23 @@ const App = () => {
   const password = useField('password')
   const [user, setUser] = useState(null)
 
+  // useEffect(() => {
+  //   blogService
+  //     .getAll().then(initialBlogs => {
+  //       setBlogs(initialBlogs)
+  //     })
+  // }, [successMessage])
+
   useEffect(() => {
-    blogService
-      .getAll().then(initialBlogs => {
-        setBlogs(initialBlogs)
-      })
-  }, [successMessage])
+    props.initialiseBlogs()
+  },[])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('name')
     console.log(loggedUserJSON)
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
+      console.log(user)
       setUser(user)
       blogService.setToken(user.token)
     }
@@ -127,22 +134,6 @@ const App = () => {
     </React.Fragment>
   )
 
-  const orderByLikes = blogs => (
-    blogs.sort((a,b) => b.likes - a.likes)
-  )
-
-  const renderSortedBlogs = blogs => {
-    const sorted = orderByLikes(blogs)
-    return sorted.map(blog =>
-      <Blog
-        key={blog.title}
-        blog={blog}
-        addLike={addLike}
-        deleteBlog={deleteBlog}
-        currentUser={user}
-      />
-    )
-  }
 
   const blogDisplay = () => {
     return (
@@ -159,10 +150,10 @@ const App = () => {
           <h3>{ `Logged in as ${user.username}` }</h3>
         </div>
         <Toggleable buttonLabel="New Blog" className="success">
-          <BlogForm addBlog={addBlog} />
+          <BlogForm addBlog={addBlog} deleteBlog={deleteBlog} currentUser={user}/>
         </Toggleable>
         <h2>Blogs</h2>
-        {renderSortedBlogs(blogs)}
+        <BlogList currentUser={user} />
       </React.Fragment>
     )
   }
@@ -177,4 +168,13 @@ const App = () => {
   )
 }
 
-export default App
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+const mapDispatchToProps = {
+  initialiseBlogs,
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App)

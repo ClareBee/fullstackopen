@@ -9,6 +9,7 @@ const reducer = (state = [], action) => {
   case 'DESTROY_BLOG':
     return action.data
   case 'GET_ALL_BLOGS':
+    console.log(action)
     return action.data
   default:
     return state
