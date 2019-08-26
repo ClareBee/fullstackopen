@@ -20,16 +20,9 @@ const App = (props) => {
   const password = useField('password')
   const [user, setUser] = useState(null)
 
-  // useEffect(() => {
-  //   blogService
-  //     .getAll().then(initialBlogs => {
-  //       setBlogs(initialBlogs)
-  //     })
-  // }, [successMessage])
-
   useEffect(() => {
     props.initialiseBlogs()
-  },[])
+  },[successMessage])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('name')
@@ -123,18 +116,6 @@ const App = (props) => {
     }
   }
 
-  const loginForm = () => (
-    <React.Fragment>
-      <h2 className="login-header">Log in to application</h2>
-      <LoginForm
-        username={username}
-        password={password}
-        handleLogin={handleLogin}
-      />
-    </React.Fragment>
-  )
-
-
   const blogDisplay = () => {
     return (
       <React.Fragment>
@@ -162,13 +143,18 @@ const App = (props) => {
     <div className="container">
       <h1>FullStack BlogApp</h1>
       { user
-        ? blogDisplay()
-        : loginForm() }
+        ? blogDisplay(props.blogs)
+        : <LoginForm
+          username={username}
+          password={password}
+          handleLogin={handleLogin}
+        /> }
     </div>
   )
 }
 
 const mapStateToProps = (state) => {
+  console.log('state', state)
   return {
     user: state.user
   }
