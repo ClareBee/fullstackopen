@@ -3,13 +3,18 @@ import blogService from '../services/blogs'
 const reducer = (state = [], action) => {
   switch(action.type) {
   case 'CREATE_BLOG':
-    return state
-  case 'UPDATE_BLOG':
-    return state
-  case 'DESTROY_BLOG':
-    return action.data
+    return state.concat(action.data)
+  case 'UPDATE_BLOG': {
+    const blogs = [...state]
+    return blogs.map(blog => blog.id === action.data.id ? action.data : blog)
+  }
+  case 'DESTROY_BLOG': {
+    const blogs = [...state]
+    console.log('delete', action.data)
+    return blogs.filter(blog => blog.id !== action.data.blog.id)
+  }
   case 'GET_ALL_BLOGS':
-    console.log(action)
+    console.log()
     return action.data
   default:
     return state
@@ -26,22 +31,24 @@ export const createBlog = content => {
   }
 }
 
-export const updateBlog = content => {
+export const updateBlog = blog => {
+  let blogLikes = blog.likes
+  const editedBlog = { ...blog, likes: blogLikes += 1 }
   return async dispatch => {
-    const updatedBlog = await blogService.update(content)
+    const updatedBlog = await blogService.update(editedBlog)
     dispatch({
-      type: 'CREATE_BLOG',
+      type: 'UPDATE_BLOG',
       data: updatedBlog
     })
   }
 }
 
-export const destroyBlog = content => {
+export const destroyBlog = blog => {
   return async dispatch => {
-    const destroyed = await blogService.destroy(content)
+    const destroyed = await blogService.destroy(blog)
     dispatch({
       type: 'DESTROY_BLOG',
-      data: destroyed
+      data: { destroyed, blog }
     })
   }
 }

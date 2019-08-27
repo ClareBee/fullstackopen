@@ -1,8 +1,11 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { createBlog } from '../reducers/blogReducer'
+import { setNotification } from '../reducers/notificationReducer'
 import { useField } from '../hooks'
 import PropTypes from 'prop-types'
 
-const BlogForm = ({ addBlog }) => {
+const BlogForm = (props) => {
   const title = useField('text')
   const author = useField('text')
   const url = useField('text')
@@ -14,7 +17,12 @@ const BlogForm = ({ addBlog }) => {
       author: author.value,
       url: url.value
     }
-    addBlog(newBlog)
+    try {
+      props.createBlog(newBlog)
+      props.setNotification(`${newBlog.title} added successfully!`, 'success')
+    } catch(exception) {
+      props.setNotification(`${exception}`, 'error')
+    }
     title.reset()
     author.reset()
     url.reset()
@@ -46,8 +54,8 @@ const BlogForm = ({ addBlog }) => {
   )
 }
 
-BlogForm.propTypes = {
-  addBlog: PropTypes.func.isRequired
-}
+// BlogForm.propTypes = {
+//   addBlog: PropTypes.func.isRequired
+// }
 
-export default BlogForm
+export default connect(null, { createBlog, setNotification })(BlogForm)

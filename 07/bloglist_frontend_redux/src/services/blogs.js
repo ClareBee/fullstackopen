@@ -32,6 +32,7 @@ const destroy = async (blog) => {
     headers: { Authorization: token }
   }
   const response = await axios.delete(`${baseUrl}/${blog.id}`, config)
+  console.log(response)
   return response.data
 }
 
