@@ -14,7 +14,6 @@ const BlogList = (props) => {
 }
 
 const orderByLikes = blogs => {
-  console.log('blogs', blogs)
   return blogs.sort((a,b) => b.likes - a.likes)
 }
 

@@ -19,7 +19,7 @@ const BlogForm = (props) => {
     }
     try {
       props.createBlog(newBlog)
-      props.setNotification(`${newBlog.title} added successfully!`, 'success')
+      // props.setNotification(`${newBlog.title} added successfully!`, 'success')
     } catch(exception) {
       props.setNotification(`${exception}`, 'error')
     }

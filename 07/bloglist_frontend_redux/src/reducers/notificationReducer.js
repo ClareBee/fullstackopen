@@ -1,8 +1,7 @@
 const reducer = (state = '', action) => {
   switch(action.type) {
   case 'NOTIFY':
-    console.log('notify', action.data)
-    return { content: action.data.anecdote, style: action.data.cssStyle }
+    return { content: action.data.notification, style: action.data.cssStyle }
   case 'REMOVE':
     return ''
   default:
@@ -10,11 +9,11 @@ const reducer = (state = '', action) => {
   }
 }
 
-export const notify = (anecdote, cssStyle) => {
+export const notify = (notification, cssStyle) => {
   return {
     type: 'NOTIFY',
     data: {
-      anecdote,
+      notification,
       cssStyle
     }
   }

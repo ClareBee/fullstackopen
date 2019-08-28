@@ -10,11 +10,9 @@ const reducer = (state = [], action) => {
   }
   case 'DESTROY_BLOG': {
     const blogs = [...state]
-    console.log('delete', action.data)
     return blogs.filter(blog => blog.id !== action.data.blog.id)
   }
   case 'GET_ALL_BLOGS':
-    console.log()
     return action.data
   default:
     return state
@@ -24,10 +22,19 @@ const reducer = (state = [], action) => {
 export const createBlog = content => {
   return async dispatch => {
     const newBlog = await blogService.create(content)
-    dispatch({
-      type: 'CREATE_BLOG',
-      data: newBlog
-    })
+    console.log(newBlog)
+    if(newBlog.data){
+      dispatch({
+        type: 'CREATE_BLOG',
+        data: newBlog.data
+      })
+    }
+    if(newBlog.error){
+      dispatch({
+        type: 'NOTIFY',
+        data: { notification: `${newBlog.error}`, cssStyle: 'error' }
+      })
+    }
   }
 }
 
@@ -38,7 +45,7 @@ export const updateBlog = blog => {
     const updatedBlog = await blogService.update(editedBlog)
     dispatch({
       type: 'UPDATE_BLOG',
-      data: updatedBlog
+      data: updatedBlog.data
     })
   }
 }
@@ -48,7 +55,7 @@ export const destroyBlog = blog => {
     const destroyed = await blogService.destroy(blog)
     dispatch({
       type: 'DESTROY_BLOG',
-      data: { destroyed, blog }
+      data: { destroyed: destroyed.data, blog }
     })
   }
 }

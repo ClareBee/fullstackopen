@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import  { useField } from './hooks'
 import { connect } from 'react-redux'
 import { initialiseBlogs, destroyBlog, createBlog } from './reducers/blogReducer'
 import { setNotification } from './reducers/notificationReducer'
+import { addUser, removeUser } from './reducers/userReducer'
 
 import blogService from './services/blogs'
 import loginService from './services/login'
+
 import BlogList from './components/BlogList'
 import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
@@ -16,7 +18,6 @@ import './index.css'
 const App = (props) => {
   const username = useField('text')
   const password = useField('password')
-  const [user, setUser] = useState(null)
 
   useEffect(() => {
     props.initialiseBlogs()
@@ -26,7 +27,7 @@ const App = (props) => {
     const loggedUserJSON = window.localStorage.getItem('name')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
-      setUser(user)
+      props.addUser(user)
       blogService.setToken(user.token)
     }
   }, [])
@@ -40,7 +41,7 @@ const App = (props) => {
       // saved as DOMstring
       window.localStorage.setItem('name', JSON.stringify(user))
       blogService.setToken(user.token)
-      setUser(user)
+      props.addUser(user)
       username.reset()
       password.reset()
     } catch (exception) {
@@ -49,7 +50,7 @@ const App = (props) => {
   }
 
   const handleLogout = () => {
-    setUser(null)
+    props.removeUser()
     window.localStorage.removeItem('name')
   }
 
@@ -62,13 +63,13 @@ const App = (props) => {
             className="logout"
             onClick={() => handleLogout()}
             type="button">Logout</button>
-          <h3>{ `Logged in as ${user.username}` }</h3>
+          <h3>{ `Logged in as ${props.user.username}` }</h3>
         </div>
         <Toggleable buttonLabel="New Blog" className="success">
-          <BlogForm currentUser={user}/>
+          <BlogForm currentUser={props.user}/>
         </Toggleable>
         <h2>Blogs</h2>
-        <BlogList currentUser={user} />
+        <BlogList currentUser={props.user} />
       </React.Fragment>
     )
   }
@@ -76,7 +77,7 @@ const App = (props) => {
   return (
     <div className="container">
       <h1>FullStack BlogApp</h1>
-      { user
+      { props.user
         ? blogDisplay(props.blogs)
         : <LoginForm
           username={username}
@@ -98,6 +99,8 @@ const mapDispatchToProps = {
   initialiseBlogs,
   setNotification,
   destroyBlog,
-  createBlog
+  createBlog,
+  addUser,
+  removeUser
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App)
