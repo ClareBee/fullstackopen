@@ -3,7 +3,7 @@ const reducer = (state = '', action) => {
   case 'NOTIFY':
     return { content: action.data.notification, style: action.data.cssStyle }
   case 'REMOVE':
-    return ''
+    return null
   default:
     return state
   }
@@ -27,7 +27,7 @@ export const setNotification = (content, style) => {
         dispatch({
           type: 'REMOVE'
         })
-      }, 2000)
+      }, 5000)
     }
   }
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import Notification from './Notification'
 
 const LoginForm = ({
   handleLogin,
@@ -7,6 +8,7 @@ const LoginForm = ({
 }) => (
   <React.Fragment>
     <h2 className="login-header">Log in to application</h2>
+    <Notification />
 
     <form onSubmit={handleLogin}>
       <div>

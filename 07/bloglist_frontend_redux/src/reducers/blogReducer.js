@@ -28,6 +28,8 @@ export const createBlog = content => {
         type: 'CREATE_BLOG',
         data: newBlog.data
       })
+      // props.setNotification(`${newBlog.title} added successfully!`, 'success')
+
     }
     if(newBlog.error){
       dispatch({

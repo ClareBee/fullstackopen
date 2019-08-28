@@ -3,16 +3,14 @@ import  { useField } from './hooks'
 import { connect } from 'react-redux'
 import { initialiseBlogs, destroyBlog, createBlog } from './reducers/blogReducer'
 import { setNotification } from './reducers/notificationReducer'
-import { addUser, removeUser } from './reducers/userReducer'
+import { addUser, removeUser, initialiseUsers } from './reducers/userReducer'
 
 import blogService from './services/blogs'
 import loginService from './services/login'
 
-import BlogList from './components/BlogList'
-import BlogForm from './components/BlogForm'
+import { Navigation } from './components/Navigation'
 import LoginForm from './components/LoginForm'
 import Notification from './components/Notification'
-import Toggleable from './components/Toggleable'
 import './index.css'
 
 const App = (props) => {
@@ -21,6 +19,7 @@ const App = (props) => {
 
   useEffect(() => {
     props.initialiseBlogs()
+    props.initialiseUsers()
   },[])
 
   useEffect(() => {
@@ -55,21 +54,18 @@ const App = (props) => {
   }
 
   const blogDisplay = () => {
+    console.log('user', props.user)
     return (
       <React.Fragment>
+        <Navigation />
         <Notification />
         <div className="login-details">
           <button
             className="logout"
             onClick={() => handleLogout()}
             type="button">Logout</button>
-          <h3>{ `Logged in as ${props.user.username}` }</h3>
+          <h3>{ `Logged in as ${props.currentUser.username}` }</h3>
         </div>
-        <Toggleable buttonLabel="New Blog" className="success">
-          <BlogForm currentUser={props.user}/>
-        </Toggleable>
-        <h2>Blogs</h2>
-        <BlogList currentUser={props.user} />
       </React.Fragment>
     )
   }
@@ -77,7 +73,7 @@ const App = (props) => {
   return (
     <div className="container">
       <h1>FullStack BlogApp</h1>
-      { props.user
+      { props.currentUser
         ? blogDisplay(props.blogs)
         : <LoginForm
           username={username}
@@ -91,7 +87,8 @@ const App = (props) => {
 const mapStateToProps = (state) => {
   console.log('state', state)
   return {
-    user: state.user
+    notification: state.notification,
+    currentUser: state.user.currentUser
   }
 }
 
@@ -101,6 +98,7 @@ const mapDispatchToProps = {
   destroyBlog,
   createBlog,
   addUser,
-  removeUser
+  removeUser,
+  initialiseUsers
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App)

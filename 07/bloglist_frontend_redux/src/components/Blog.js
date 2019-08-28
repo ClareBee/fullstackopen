@@ -39,7 +39,6 @@ const Blog = (props) => {
     borderWidth: 1,
     marginBottom: 5
   }
-  console.log(props.blog.user)
   const user = props.blog.user ? props.blog.user.username : 'Anon'
   const ownerLoggedIn = props.blog.user && (props.blog.user.name === props.currentUser.name)
   return (
@@ -76,9 +75,15 @@ const Blog = (props) => {
   )
 }
 
+const mapStateToProps = state => {
+  return {
+    currentUser: state.user
+  }
+}
+
 const mapDispatchToProps = {
   setNotification,
   destroyBlog,
   updateBlog
 }
-export default connect(null, mapDispatchToProps)(Blog)
+export default connect(mapStateToProps, mapDispatchToProps)(Blog)

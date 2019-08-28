@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { createBlog } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
 import { useField } from '../hooks'
-import PropTypes from 'prop-types'
 
 const BlogForm = (props) => {
   const title = useField('text')
@@ -19,7 +18,6 @@ const BlogForm = (props) => {
     }
     try {
       props.createBlog(newBlog)
-      // props.setNotification(`${newBlog.title} added successfully!`, 'success')
     } catch(exception) {
       props.setNotification(`${exception}`, 'error')
     }
