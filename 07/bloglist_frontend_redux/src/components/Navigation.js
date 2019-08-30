@@ -1,7 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import BlogList from './BlogList'
 import UserList from './UserList'
+import User from './User'
 
 export const Navigation = ({ users }) => {
   const padding = {
@@ -20,8 +22,13 @@ export const Navigation = ({ users }) => {
           </div>
           <Route exact path="/" render={() => <BlogList />} />
           <Route exact path="/users" render={() => <UserList />} />
+          <Route path="/users/:id" render={({ match }) => <User user={userById(match.params.id)} />} />
         </div>
       </Router>
     </div>
   )
+}
+
+Navigation.propTypes = {
+  users: PropTypes.array.isRequired
 }
