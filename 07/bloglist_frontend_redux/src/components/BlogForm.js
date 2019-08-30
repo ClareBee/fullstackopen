@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createBlog } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
@@ -52,8 +53,9 @@ const BlogForm = (props) => {
   )
 }
 
-// BlogForm.propTypes = {
-//   addBlog: PropTypes.func.isRequired
-// }
+BlogForm.propTypes = {
+  addBlog: PropTypes.func.isRequired,
+  setNotification: PropTypes.func.isRequired
+}
 
 export default connect(null, { createBlog, setNotification })(BlogForm)

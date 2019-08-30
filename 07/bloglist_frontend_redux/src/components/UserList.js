@@ -1,24 +1,30 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import User from './User'
 
-const UserList = (props) => {
-  console.log('list', props.users)
+const UserList = ({ users, currentUser }) => {
+  console.log('list', users)
   return (
-    props.users && props.users.map(user =>
+    users && users.map(user =>
       <User
         key={user.id}
         name={user.name}
-        currentUser={props.currentUser}
+        currentUser={currentUser}
       />)
   )
 }
 
+UserList.propTypes = {
+  users: PropTypes.array.isRequired,
+  //  check naming
+  currentUser: PropTypes.object.isRequired
+}
+
 const mapStateToProps = (state) => {
-  console.log('liststate', state)
   return {
     users: state.user.users,
-    user: state.user.currentUser
+    currentUser: state.user.currentUser
   }
 }
 

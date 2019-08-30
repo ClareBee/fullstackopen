@@ -54,7 +54,6 @@ const App = (props) => {
   }
 
   const blogDisplay = () => {
-    console.log('user', props.user)
     return (
       <React.Fragment>
         <Navigation />
@@ -85,7 +84,6 @@ const App = (props) => {
 }
 
 const mapStateToProps = (state) => {
-  console.log('state', state)
   return {
     notification: state.notification,
     currentUser: state.user.currentUser

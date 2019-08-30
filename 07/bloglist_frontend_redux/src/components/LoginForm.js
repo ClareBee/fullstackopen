@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Notification from './Notification'
 
 const LoginForm = ({
@@ -27,5 +28,11 @@ const LoginForm = ({
     </form>
   </React.Fragment>
 )
+
+LoginForm.propTypes = {
+  handleLogin: PropTypes.func.isRequired,
+  username: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired
+}
 
 export default LoginForm

@@ -1,21 +1,29 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import { updateBlog, destroyBlog } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
 
-const Blog = (props) => {
+const Blog = ({
+  blog,
+  currentUser,
+  updateBlog,
+  destroyBlog,
+  setNotification
+}) => {
   const [visible, setVisible] = useState(false)
   const showWhenVisible = { display: visible ? '' : 'none' }
   const toggleVisibility = () => {
     setVisible(!visible)
   }
 
+  // check it's not shadowed
   const addLike = async (blog) => {
     try {
-      props.updateBlog(blog)
-      props.setNotification(`Blog ${blog.title} now has ${blog.likes + 1} likes!`, 'success')
+      updateBlog(blog)
+      setNotification(`Blog ${blog.title} now has ${blog.likes + 1} likes!`, 'success')
     } catch(exception) {
-      props.setNotification(`${exception}`, 'error')
+      setNotification(`${exception}`, 'error')
     }
   }
 
@@ -23,12 +31,12 @@ const Blog = (props) => {
     try {
       const title = blog.title
       if(window.confirm(`Do you want to delete ${title}?`)){
-        props.destroyBlog(blog)
-        props.setNotification(`${title} deleted successfully!`, 'success')
+        destroyBlog(blog)
+        setNotification(`${title} deleted successfully!`, 'success')
       }
       return
     } catch(exception) {
-      props.setNotification(`${exception}`, 'error')
+      setNotification(`${exception}`, 'error')
     }
   }
 
@@ -39,30 +47,30 @@ const Blog = (props) => {
     borderWidth: 1,
     marginBottom: 5
   }
-  const user = props.blog.user ? props.blog.user.username : 'Anon'
-  const ownerLoggedIn = props.blog.user && (props.blog.user.name === props.currentUser.name)
+  const user = blog.user ? blog.user.username : 'Anon'
+  const ownerLoggedIn = blog.user && (blog.user.name === currentUser.name)
   return (
     <div style={blogStyle} className="blog">
       <div className="click-target" onClick={() => toggleVisibility()}>
         <h3 className="heading">
-          <span>{props.blog.title} - {props.blog.author}</span> <span>{props.blog.likes} likes</span>
+          <span>{blog.title} - {blog.author}</span> <span>{blog.likes} likes</span>
         </h3>
         <br />
         <div className="more-details" style={showWhenVisible}>
-          URL: {props.blog.url}
+          URL: {blog.url}
           <hr />
           <div className="user">
             <div>
-              <span className="likes">{props.blog.likes} likes</span>
+              <span className="likes">{blog.likes} likes</span>
               <button className="add-like"
-                onClick={() => addLike(props.blog)}
+                onClick={() => addLike(blog)}
               >Add Like 🖤</button>
             </div>
             <div>
               {ownerLoggedIn &&
                 <button
                   className="cancel delete-blog"
-                  onClick={() => deleteBlog(props.blog)}>
+                  onClick={() => deleteBlog(blog)}>
                   Delete
                 </button>
               }
@@ -75,8 +83,15 @@ const Blog = (props) => {
   )
 }
 
+Blog.propTypes = {
+  setNotification: PropTypes.func.isRequired,
+  destroyBlog: PropTypes.func.isRequired,
+  updateBlog: PropTypes.func.isRequired
+}
+
 const mapStateToProps = state => {
   return {
+    // can blog go here?
     currentUser: state.user
   }
 }

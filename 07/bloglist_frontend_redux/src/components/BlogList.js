@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import Blog from './Blog'
 import Toggleable from './Toggleable'
 import BlogForm from './BlogForm'
@@ -28,10 +29,17 @@ const orderByLikes = blogs => {
   return blogs.sort((a,b) => b.likes - a.likes)
 }
 
+BlogForm.propTypes = {
+  blogs: PropTypes.array.isRequired,
+  user: PropTypes.object.isRequired
+}
+
 const mapStateToProps = (state) => {
   return {
     blogs: orderByLikes(state.blogs),
-    user: state.user
+    user: state.user,
+    // check this works and make naming consistent
+    currentUser: state.currentUser
   }
 }
 
