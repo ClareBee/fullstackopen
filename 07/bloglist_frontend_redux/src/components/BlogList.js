@@ -30,8 +30,8 @@ const orderByLikes = blogs => {
 }
 
 BlogForm.propTypes = {
-  blogs: PropTypes.array.isRequired,
-  user: PropTypes.object.isRequired
+  blogs: PropTypes.array,
+  user: PropTypes.object
 }
 
 const mapStateToProps = (state) => {

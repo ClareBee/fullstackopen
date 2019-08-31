@@ -4,20 +4,21 @@ import { connect } from 'react-redux'
 import User from './User'
 
 const UserList = ({ users, currentUser }) => {
-  console.log('list', users)
+  if ( users === undefined) {
+    return null
+  }
   return (
-    users && users.map(user =>
+    users.map(user =>
       <User
         key={user.id}
-        name={user.name}
+        user={user}
         currentUser={currentUser}
       />)
   )
 }
 
 UserList.propTypes = {
-  users: PropTypes.array.isRequired,
-  //  check naming
+  users: PropTypes.array,
   currentUser: PropTypes.object.isRequired
 }
 

@@ -6,6 +6,7 @@ const Notification = ({ notification }) => {
   if (notification === null) {
     return null
   }
+  console.log('notifi', notification)
   return (
     <div className={notification.style}>
       {notification.content}
@@ -20,7 +21,9 @@ const mapStateToProps = state => {
 }
 
 Notification.propTypes = {
-  // check this syntax
-  notification: PropTypes.object.isRequired
+  notification: PropTypes.shape({
+    content: PropTypes.string,
+    style: PropTypes.string
+  })
 }
 export default connect(mapStateToProps, null)(Notification)

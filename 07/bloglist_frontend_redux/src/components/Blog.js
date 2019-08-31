@@ -64,7 +64,7 @@ const Blog = ({
               <span className="likes">{blog.likes} likes</span>
               <button className="add-like"
                 onClick={() => addLike(blog)}
-              >Add Like 🖤</button>
+              >Add Like <span role="img" aria-label="heart">🖤</span></button>
             </div>
             <div>
               {ownerLoggedIn &&

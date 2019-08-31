@@ -5,7 +5,7 @@ import BlogList from './BlogList'
 import UserList from './UserList'
 import User from './User'
 
-export const Navigation = ({ users }) => {
+const Navigation = ({ users }) => {
   const padding = {
     paddingRight: 5
   }
@@ -30,5 +30,8 @@ export const Navigation = ({ users }) => {
 }
 
 Navigation.propTypes = {
-  users: PropTypes.array.isRequired
+  users: PropTypes.array
 }
+
+
+export default Navigation

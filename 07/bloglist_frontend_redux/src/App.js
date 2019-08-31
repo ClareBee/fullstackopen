@@ -8,7 +8,7 @@ import { addUser, removeUser, initialiseUsers } from './reducers/userReducer'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
-import { Navigation } from './components/Navigation'
+import Navigation from './components/Navigation'
 import LoginForm from './components/LoginForm'
 import Notification from './components/Notification'
 import './index.css'
@@ -16,20 +16,21 @@ import './index.css'
 const App = (props) => {
   const username = useField('text')
   const password = useField('password')
+  const { initialiseBlogs, initialiseUsers, addUser } = props
 
   useEffect(() => {
-    props.initialiseBlogs()
-    props.initialiseUsers()
-  },[])
+    initialiseBlogs()
+    initialiseUsers()
+  },[initialiseBlogs, initialiseUsers])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('name')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
-      props.addUser(user)
+      addUser(user)
       blogService.setToken(user.token)
     }
-  }, [])
+  }, [addUser])
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -56,7 +57,7 @@ const App = (props) => {
   const blogDisplay = () => {
     return (
       <React.Fragment>
-        <Navigation />
+        <Navigation users={props.users} />
         <Notification />
         <div className="login-details">
           <button
@@ -86,7 +87,8 @@ const App = (props) => {
 const mapStateToProps = (state) => {
   return {
     notification: state.notification,
-    currentUser: state.user.currentUser
+    currentUser: state.user.currentUser,
+    users: state.user.users
   }
 }
 
