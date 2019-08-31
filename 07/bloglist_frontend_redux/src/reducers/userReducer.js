@@ -1,14 +1,14 @@
 import userService from '../services/users'
 
-const reducer = (state = '', action) => {
+const reducer = (state = { users: [], currentUser: null }, action) => {
   console.log('state', state)
   switch(action.type) {
   case 'ADD_CURRENT_USER':
-    return { ...state, currentUser: action.data }
+    return { users: [...state.users], currentUser: action.data }
   case 'REMOVE_CURRENT_USER':
-    return { ...state, currentUser: null }
+    return { users: [...state.users], currentUser: null }
   case 'INITIALISE_USERS':
-    return { ...state, users: action.data }
+    return { currentUser: { ...state.currentUser }, users: action.data }
   default:
     return state
   }

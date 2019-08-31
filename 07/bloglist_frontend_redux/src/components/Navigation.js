@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import BlogList from './BlogList'
@@ -33,5 +34,10 @@ Navigation.propTypes = {
   users: PropTypes.array
 }
 
+const mapStateToProps = state => {
+  return {
+    users: state.user.users
+  }
+}
 
-export default Navigation
+export default connect(mapStateToProps, null)(Navigation)

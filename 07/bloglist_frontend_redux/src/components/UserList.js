@@ -1,31 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import User from './User'
 
-const UserList = ({ users, currentUser }) => {
+const UserList = ({ users }) => {
   if ( users === undefined) {
     return null
   }
   return (
     users.map(user =>
-      <User
-        key={user.id}
-        user={user}
-        currentUser={currentUser}
-      />)
+      <li key={user.id}>
+        <Link to={`/users/${user.id}`}>{user.name}</Link>
+      </li>)
   )
 }
 
 UserList.propTypes = {
-  users: PropTypes.array,
-  currentUser: PropTypes.object.isRequired
+  users: PropTypes.array
 }
 
 const mapStateToProps = (state) => {
   return {
     users: state.user.users,
-    currentUser: state.user.currentUser
   }
 }
 

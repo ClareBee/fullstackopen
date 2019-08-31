@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 const User = ({ user }) => {
   if ( user === undefined) {
-    console.log('wtf')
     return null
   }
 
@@ -22,8 +21,7 @@ const User = ({ user }) => {
 }
 
 User.propTypes = {
-  // check syntax
-  user: PropTypes.object.isRequired
+  user: PropTypes.object
 }
 
 export default User
