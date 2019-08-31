@@ -5,13 +5,17 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import BlogList from './BlogList'
 import UserList from './UserList'
 import User from './User'
+import Blog from './Blog'
 
-const Navigation = ({ users }) => {
+const Navigation = ({ users, blogs }) => {
   const padding = {
     paddingRight: 5
   }
   const userById = (id) =>
     users.find(a => a.id === id)
+
+  const blogById = (id) =>
+    blogs.find(a => a.id === id)
 
   return (
     <div>
@@ -24,6 +28,7 @@ const Navigation = ({ users }) => {
           <Route exact path="/" render={() => <BlogList />} />
           <Route exact path="/users" render={() => <UserList />} />
           <Route path="/users/:id" render={({ match }) => <User user={userById(match.params.id)} />} />
+          <Route path="/blogs/:id" render={({ match }) => <Blog blog={blogById(match.params.id)} />} />
         </div>
       </Router>
     </div>
@@ -31,12 +36,14 @@ const Navigation = ({ users }) => {
 }
 
 Navigation.propTypes = {
-  users: PropTypes.array
+  users: PropTypes.array,
+  blogs: PropTypes.array
 }
 
 const mapStateToProps = state => {
   return {
-    users: state.user.users
+    users: state.user.users,
+    blogs: state.blogs
   }
 }
 

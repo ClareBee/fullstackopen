@@ -8,11 +8,13 @@ const UserList = ({ users }) => {
     return null
   }
   return (
-    users.map(user =>
-      <li key={user.id}>
-        <Link to={`/users/${user.id}`}>{user.name}</Link>
-      </li>)
-  )
+    <ul>
+      {  users.map(user =>
+        <li key={user.id}>
+          <Link to={`/users/${user.id}`}>{user.name}</Link>
+        </li>)
+      }
+    </ul>)
 }
 
 UserList.propTypes = {

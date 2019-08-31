@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import Blog from './Blog'
 import Toggleable from './Toggleable'
 import BlogForm from './BlogForm'
 import Notification from './Notification'
@@ -14,13 +14,13 @@ const BlogList = (props) => {
         <BlogForm />
       </Toggleable>
       <h2>Blogs</h2>
-      { props.blogs.map(blog =>
-        <Blog
-          key={blog.title}
-          blog={blog}
-          currentUser={props.currentUser}
-        />)
-      }
+      <ul>
+        {  props.blogs.map(blog =>
+          <li key={blog.id}>
+            <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
+          </li>)
+        }
+      </ul>
     </React.Fragment>
   )
 }
