@@ -1,18 +1,21 @@
 const jwt = require('jsonwebtoken')
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
+const Comment = require('../models/comment')
 const User = require('../models/user')
 
 blogsRouter.get('/', async (req, res) => {
   const blogs = await Blog
-    .find({}).populate('user', { name: 1, username: 1 })
-
+    .find({})
+    .populate('user', { name: 1, username: 1 })
+    .populate('comments', { comment: 1 })
+  console.log('bloggy', blogs)
   res.json(blogs.map(blog => blog.toJSON()))
 })
 
 blogsRouter.get('/:id', async (req, res, next) => {
   try {
-    const blog = await Blog.findById(req.params.id)
+    const blog = await Blog.findById(req.params.id).populate('comments', { comment: 1 })
     if (blog) {
       res.json(blog.toJSON())
     } else {
@@ -72,7 +75,6 @@ blogsRouter.delete('/:id', async (req, res, next) => {
 
 blogsRouter.put('/:id', async (req, res, next) => {
   const body = req.body
-  console.log('body', body)
   const blog = {
     title: body.title,
     author: body.author,
@@ -83,6 +85,23 @@ blogsRouter.put('/:id', async (req, res, next) => {
   try {
     const updatedBlog = await Blog.findByIdAndUpdate(req.params.id, blog, { new: true })
     res.json(updatedBlog.toJSON())
+  } catch(error) {
+    next(error)
+  }
+})
+
+blogsRouter.post('/:id/comments', async (req, res, next) => {
+  const body = req.body
+  try {
+    const blog = await Blog.findById(req.params.id).populate('comments', { comment: 1 })
+    const comment = new Comment({
+      comment: body.comment,
+      blog:   blog._id
+    })
+    const savedComment = await comment.save()
+    blog.comments = blog.comments.concat(savedComment)
+    await blog.save()
+    res.json(blog)
   } catch(error) {
     next(error)
   }
