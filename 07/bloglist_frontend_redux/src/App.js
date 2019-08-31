@@ -54,20 +54,11 @@ const App = (props) => {
     window.localStorage.removeItem('name')
   }
 
-  const blogDisplay = () => {
-    return (
-      <React.Fragment>
-        <Navigation handleLogout={handleLogout} />
-      </React.Fragment>
-    )
-  }
-
   return (
     <div className="container">
-      <h1>FullStack BlogApp</h1>
       <Notification />
       { props.currentUser
-        ? blogDisplay(props.blogs)
+        ? <Navigation handleLogout={handleLogout} />
         : <LoginForm
           username={username}
           password={password}
