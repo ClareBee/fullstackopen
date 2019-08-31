@@ -57,15 +57,8 @@ const App = (props) => {
   const blogDisplay = () => {
     return (
       <React.Fragment>
-        <Navigation users={props.users} />
+        <Navigation handleLogout={handleLogout} />
         <Notification />
-        <div className="login-details">
-          <button
-            className="logout"
-            onClick={() => handleLogout()}
-            type="button">Logout</button>
-          <h3>{ `Logged in as ${props.currentUser.username}` }</h3>
-        </div>
       </React.Fragment>
     )
   }

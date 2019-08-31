@@ -16,6 +16,9 @@ const Blog = ({
   const toggleVisibility = () => {
     setVisible(!visible)
   }
+  if ( blog === undefined) {
+    return null
+  }
 
   // check it's not shadowed
   const addLike = async (blog) => {
@@ -86,13 +89,13 @@ const Blog = ({
 Blog.propTypes = {
   setNotification: PropTypes.func.isRequired,
   destroyBlog: PropTypes.func.isRequired,
-  updateBlog: PropTypes.func.isRequired
+  updateBlog: PropTypes.func.isRequired,
+  blog: PropTypes.object
 }
 
 const mapStateToProps = state => {
   return {
-    // can blog go here?
-    currentUser: state.user
+    currentUser: state.user.currentUser
   }
 }
 

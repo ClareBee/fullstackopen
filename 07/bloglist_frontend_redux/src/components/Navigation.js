@@ -7,7 +7,7 @@ import UserList from './UserList'
 import User from './User'
 import Blog from './Blog'
 
-const Navigation = ({ users, blogs }) => {
+const Navigation = ({ users, blogs, currentUser, handleLogout }) => {
   const padding = {
     paddingRight: 5
   }
@@ -19,11 +19,20 @@ const Navigation = ({ users, blogs }) => {
 
   return (
     <div>
+      {currentUser ?
+        <div className="login-details">
+          <button
+            className="logout"
+            onClick={() => handleLogout()}
+            type="button">Logout</button>
+          <h3>{ `Logged in as ${currentUser.username}` }</h3>
+        </div>
+        : null }
       <Router>
         <div>
           <div>
-            <Link to='/' style={padding}>blogs</Link>
-            <Link to='/users' style={padding}>users</Link>
+            <Link to='/' style={padding}>Blogs</Link>
+            <Link to='/users' style={padding}>Users</Link>
           </div>
           <Route exact path="/" render={() => <BlogList />} />
           <Route exact path="/users" render={() => <UserList />} />
@@ -37,13 +46,15 @@ const Navigation = ({ users, blogs }) => {
 
 Navigation.propTypes = {
   users: PropTypes.array,
+  currentUser: PropTypes.object,
   blogs: PropTypes.array
 }
 
 const mapStateToProps = state => {
   return {
     users: state.user.users,
-    blogs: state.blogs
+    blogs: state.blogs,
+    currentUser: state.user.currentUser
   }
 }
 
