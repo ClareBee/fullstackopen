@@ -1,6 +1,7 @@
 import blogService from '../services/blogs'
 
 const reducer = (state = [], action) => {
+  console.log('blog state', state)
   switch(action.type) {
   case 'CREATE_BLOG':
     return state.concat(action.data)
@@ -68,6 +69,17 @@ export const initialiseBlogs = () => {
     dispatch({
       type: 'GET_ALL_BLOGS',
       data: blogs,
+    })
+  }
+}
+
+export const commentOnBlog = (blog, comment) => {
+  return async dispatch => {
+    const updatedBlog = await blogService.addComment(blog, comment)
+    console.log('edited', updatedBlog.data)
+    dispatch({
+      type: 'UPDATE_BLOG',
+      data: updatedBlog.data
     })
   }
 }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { updateBlog, destroyBlog } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
+import CommentForm from './CommentForm'
 
 const Blog = ({
   blog,
@@ -11,10 +12,10 @@ const Blog = ({
   destroyBlog,
   setNotification
 }) => {
-  if ( blog === undefined) {
+  if (blog === undefined) {
     return null
   }
-
+  console.log('blog', blog)
   // check it's not shadowed
   const addLike = async (blog) => {
     try {
@@ -74,6 +75,14 @@ const Blog = ({
             <p>Added by {user}</p>
           </div>
         </div>
+      </div>
+      <div>
+      Comments:
+        <ul>
+          {blog.comments.map(comment =>
+            <li key={comment.id}>{comment.comment}</li>)}
+        </ul>
+        <CommentForm blog={blog}/>
       </div>
     </div>
   )
