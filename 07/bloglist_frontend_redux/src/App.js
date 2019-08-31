@@ -58,7 +58,6 @@ const App = (props) => {
     return (
       <React.Fragment>
         <Navigation handleLogout={handleLogout} />
-        <Notification />
       </React.Fragment>
     )
   }
@@ -66,6 +65,7 @@ const App = (props) => {
   return (
     <div className="container">
       <h1>FullStack BlogApp</h1>
+      <Notification />
       { props.currentUser
         ? blogDisplay(props.blogs)
         : <LoginForm

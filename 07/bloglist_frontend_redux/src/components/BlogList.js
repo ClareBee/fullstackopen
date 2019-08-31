@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import Toggleable from './Toggleable'
 import BlogForm from './BlogForm'
 import Notification from './Notification'
 
@@ -10,9 +9,7 @@ const BlogList = (props) => {
   return (
     <React.Fragment>
       <Notification />
-      <Toggleable buttonLabel="New Blog" className="success">
-        <BlogForm />
-      </Toggleable>
+      <BlogForm />
       <h2>Blogs</h2>
       <ul>
         {  props.blogs.map(blog =>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { updateBlog, destroyBlog } from '../reducers/blogReducer'
@@ -11,11 +11,6 @@ const Blog = ({
   destroyBlog,
   setNotification
 }) => {
-  const [visible, setVisible] = useState(false)
-  const showWhenVisible = { display: visible ? '' : 'none' }
-  const toggleVisibility = () => {
-    setVisible(!visible)
-  }
   if ( blog === undefined) {
     return null
   }
@@ -54,31 +49,29 @@ const Blog = ({
   const ownerLoggedIn = blog.user && (blog.user.name === currentUser.name)
   return (
     <div style={blogStyle} className="blog">
-      <div className="click-target" onClick={() => toggleVisibility()}>
-        <h3 className="heading">
-          <span>{blog.title} - {blog.author}</span> <span>{blog.likes} likes</span>
-        </h3>
-        <br />
-        <div className="more-details" style={showWhenVisible}>
-          URL: {blog.url}
-          <hr />
-          <div className="user">
-            <div>
-              <span className="likes">{blog.likes} likes</span>
-              <button className="add-like"
-                onClick={() => addLike(blog)}
-              >Add Like <span role="img" aria-label="heart">🖤</span></button>
-            </div>
-            <div>
-              {ownerLoggedIn &&
-                <button
-                  className="cancel delete-blog"
-                  onClick={() => deleteBlog(blog)}>
-                  Delete
-                </button>
-              }
-              <p>Added by {user}</p>
-            </div>
+      <h3 className="heading">
+        <span>{blog.title} - {blog.author}</span> <span>{blog.likes} likes</span>
+      </h3>
+      <br />
+      <div className="more-details">
+        URL: {blog.url}
+        <hr />
+        <div className="user">
+          <div>
+            <span className="likes">{blog.likes} likes</span>
+            <button className="add-like"
+              onClick={() => addLike(blog)}
+            >Add Like <span role="img" aria-label="heart">🖤</span></button>
+          </div>
+          <div>
+            {ownerLoggedIn &&
+              <button
+                className="cancel delete-blog"
+                onClick={() => deleteBlog(blog)}>
+                Delete
+              </button>
+            }
+            <p>Added by {user}</p>
           </div>
         </div>
       </div>
