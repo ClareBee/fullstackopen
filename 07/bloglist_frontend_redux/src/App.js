@@ -11,7 +11,6 @@ import loginService from './services/login'
 import Navigation from './components/Navigation'
 import LoginForm from './components/LoginForm'
 import Notification from './components/Notification'
-import './index.css'
 
 const App = (props) => {
   const username = useField('text')
@@ -55,7 +54,7 @@ const App = (props) => {
   }
 
   return (
-    <div className="container">
+    <div>
       <Notification />
       { props.currentUser
         ? <Navigation handleLogout={handleLogout} />

@@ -8,7 +8,7 @@ const LoginForm = ({
   password
 }) => (
   <React.Fragment>
-    <h2 className="login-header">Log in to application</h2>
+    <h2>Log in to application</h2>
     <Notification />
 
     <form onSubmit={handleLogin}>
@@ -24,7 +24,7 @@ const LoginForm = ({
           {...password.inputValues()}
         />
       </div>
-      <button className="success" type="submit">Login</button>
+      <button type="submit">Login</button>
     </form>
   </React.Fragment>
 )

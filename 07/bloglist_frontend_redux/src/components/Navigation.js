@@ -9,9 +9,7 @@ import User from './User'
 import Blog from './Blog'
 
 const Navigation = ({ users, blogs, currentUser, handleLogout }) => {
-  const padding = {
-    paddingRight: 5
-  }
+
   const userById = (id) =>
     users.find(a => a.id === id)
 
@@ -21,9 +19,8 @@ const Navigation = ({ users, blogs, currentUser, handleLogout }) => {
   return (
     <div>
       {currentUser ?
-        <div className="login-details">
+        <div>
           <button
-            className="logout"
             onClick={() => handleLogout()}
             type="button">Logout</button>
           <h3>{ `Logged in as ${currentUser.username}` }</h3>
@@ -32,8 +29,8 @@ const Navigation = ({ users, blogs, currentUser, handleLogout }) => {
       <Router>
         <div>
           <div>
-            <Link to='/' style={padding}>Blogs</Link>
-            <Link to='/users' style={padding}>Users</Link>
+            <Link to='/'>Blogs</Link>
+            <Link to='/users'>Users</Link>
           </div>
           <Header />
           <Route exact path="/" render={() => <BlogList />} />

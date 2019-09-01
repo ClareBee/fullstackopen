@@ -6,7 +6,6 @@ const Notification = ({ notification }) => {
   if (notification === null) {
     return null
   }
-  console.log('notifi', notification)
   return (
     <div className={notification.style}>
       {notification.content}
