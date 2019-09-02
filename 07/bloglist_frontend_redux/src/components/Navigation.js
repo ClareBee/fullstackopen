@@ -7,6 +7,9 @@ import BlogList from './BlogList'
 import UserList from './UserList'
 import User from './User'
 import Blog from './Blog'
+import Button from '@material-ui/core/Button'
+import Toolbar from '@material-ui/core/Toolbar'
+
 
 const Navigation = ({ users, blogs, currentUser, handleLogout }) => {
 
@@ -18,20 +21,31 @@ const Navigation = ({ users, blogs, currentUser, handleLogout }) => {
 
   return (
     <div>
-      {currentUser ?
-        <div>
-          <button
-            onClick={() => handleLogout()}
-            type="button">Logout</button>
-          <h3>{ `Logged in as ${currentUser.username}` }</h3>
-        </div>
-        : null }
+
       <Router>
         <div>
-          <div>
-            <Link to='/'>Blogs</Link>
-            <Link to='/users'>Users</Link>
-          </div>
+          <Toolbar component="nav" variant="dense" style={{ borderBottom: '1px solid grey', justifyContent: 'space-between', overflowX: 'auto',
+          }}>
+            {currentUser ?
+              <div>
+                <Button
+                  onClick={() => handleLogout()}
+                  type="button"
+                  variant="outlined">Logout</Button>
+                <h3>{ `Logged in as ${currentUser.username}` }</h3>
+              </div>
+              : null }
+            <Link
+              color="inherit"
+              style={{ flexShrink: '0', padding: '10px' }}
+              variant="body2"
+              to='/'>Blogs</Link>
+            <Link
+              color="inherit"
+              style={{ flexShrink: '0', padding: '10px' }}
+              variant="body2"
+              to='/users'>Users</Link>
+          </Toolbar>
           <Header />
           <Route exact path="/" render={() => <BlogList />} />
           <Route exact path="/users" render={() => <UserList />} />

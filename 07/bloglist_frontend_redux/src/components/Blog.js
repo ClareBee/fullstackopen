@@ -4,6 +4,9 @@ import PropTypes from 'prop-types'
 import { updateBlog, destroyBlog } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
 import CommentForm from './CommentForm'
+import CommentList from './CommentList'
+import Button from '@material-ui/core/Button'
+
 
 const Blog = ({
   blog,
@@ -53,28 +56,24 @@ const Blog = ({
         <div>
           <div>
             <span>{blog.likes} likes</span>
-            <button
+            <Button
               onClick={() => addLike(blog)}
-            >Add Like <span role="img" aria-label="heart">🖤</span></button>
+            >Add Like <span role="img" aria-label="heart">🖤</span></Button>
           </div>
           <div>
             {ownerLoggedIn &&
-              <button
+              <Button
                 onClick={() => deleteBlog(blog)}>
                 Delete
-              </button>
+              </Button>
             }
             <p>Added by {user}</p>
           </div>
         </div>
       </div>
       <div>
-      Comments:
-        <ul>
-          {blog.comments.map(comment =>
-            <li key={comment.id}>{comment.comment}</li>)}
-        </ul>
-        <CommentForm blog={blog}/>
+        <CommentForm blog={blog} />
+        <CommentList blog={blog} />
       </div>
     </div>
   )

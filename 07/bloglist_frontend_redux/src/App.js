@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react'
+import CssBaseline from '@material-ui/core/CssBaseline'
+
 import  { useField } from './hooks'
 import { connect } from 'react-redux'
 import { initialiseBlogs, destroyBlog, createBlog } from './reducers/blogReducer'
@@ -10,8 +12,23 @@ import loginService from './services/login'
 
 import Navigation from './components/Navigation'
 import LoginForm from './components/LoginForm'
+import Footer from './components/Footer'
 import Notification from './components/Notification'
+import Container from '@material-ui/core/Container'
+import { makeStyles } from '@material-ui/core/styles'
 
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100vh',
+  },
+  main: {
+    marginTop: theme.spacing(8),
+    marginBottom: theme.spacing(2),
+  }
+}))
 const App = (props) => {
   const username = useField('text')
   const password = useField('password')
@@ -53,16 +70,22 @@ const App = (props) => {
     window.localStorage.removeItem('name')
   }
 
+  const classes = useStyles()
+
   return (
-    <div>
-      <Notification />
-      { props.currentUser
-        ? <Navigation handleLogout={handleLogout} />
-        : <LoginForm
-          username={username}
-          password={password}
-          handleLogin={handleLogin}
-        /> }
+    <div className={classes.root}>
+      <CssBaseline />
+      <Container component="main" className={classes.main} maxWidth="sm"gat>
+        <Notification />
+        { props.currentUser
+          ? <Navigation handleLogout={handleLogout} />
+          : <LoginForm
+            username={username}
+            password={password}
+            handleLogin={handleLogin}
+          /> }
+      </Container>
+      <Footer />
     </div>
   )
 }

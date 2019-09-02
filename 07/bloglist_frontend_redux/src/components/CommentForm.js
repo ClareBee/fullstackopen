@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { commentOnBlog } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
 import { useField } from '../hooks'
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
 
 const CommentForm = (props) => {
   const comment = useField('text')
@@ -25,12 +27,11 @@ const CommentForm = (props) => {
     <form onSubmit={(e) => handleAddingComment(e)}>
       <h2>New Comment</h2>
       <div>
-        <label>Comment</label>
-        <input
-          {...comment.inputValues()}
+        <TextField label="Comment"
+          InputProps={{ ...comment.inputValues() }}
         />
       </div>
-      <button type="submit">Create</button>
+      <Button type="submit" variant="outlined">Create</Button>
     </form>
   )
 }

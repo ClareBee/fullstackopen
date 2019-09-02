@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { createBlog } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
 import { useField } from '../hooks'
+import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
 
 const BlogForm = (props) => {
   const title = useField('text')
@@ -31,24 +33,21 @@ const BlogForm = (props) => {
     <form onSubmit={(e) => handleAddingBlog(e)}>
       <h2>New Blog</h2>
       <div>
-        <label>Title</label>
-        <input
-          {...title.inputValues()}
+        <TextField label="Title"
+          InputProps={{ ...title.inputValues() }}
         />
       </div>
       <div>
-        <label>Author</label>
-        <input
-          {...author.inputValues()}
+        <TextField label="Author"
+          InputProps={{ ...author.inputValues() }}
         />
       </div>
       <div>
-        <label>URL</label>
-        <input
-          {...url.inputValues()}
+        <TextField label="URL"
+          InputProps={{ ...url.inputValues() }}
         />
       </div>
-      <button type="submit">Create</button>
+      <Button variant="outlined" type="submit">Create</Button>
     </form>
   )
 }
