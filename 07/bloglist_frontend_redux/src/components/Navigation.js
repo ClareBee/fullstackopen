@@ -7,9 +7,32 @@ import BlogList from './BlogList'
 import UserList from './UserList'
 import User from './User'
 import Blog from './Blog'
+import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
+import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
+import UILink from '@material-ui/core/Link'
+import Typography from '@material-ui/core/Typography'
 
+const useStyles = makeStyles(theme => ({
+  appBar: {
+    borderBottom: `1px solid ${theme.palette.divider}`,
+  },
+  toolbar: {
+    marginTop: '25px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start'
+  },
+  link: {
+    margin: theme.spacing(1, 1.5),
+  },
+  logout: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  }
+}))
 
 const Navigation = ({ users, blogs, currentUser, handleLogout }) => {
 
@@ -19,41 +42,40 @@ const Navigation = ({ users, blogs, currentUser, handleLogout }) => {
   const blogById = (id) =>
     blogs.find(a => a.id === id)
 
-  return (
-    <div>
+  const classes = useStyles()
 
-      <Router>
-        <div>
-          <Toolbar component="nav" variant="dense" style={{ borderBottom: '1px solid grey', justifyContent: 'space-between', overflowX: 'auto',
-          }}>
-            {currentUser ?
-              <div>
-                <Button
-                  onClick={() => handleLogout()}
-                  type="button"
-                  variant="outlined">Logout</Button>
-                <h3>{ `Logged in as ${currentUser.username}` }</h3>
-              </div>
-              : null }
-            <Link
-              color="inherit"
-              style={{ flexShrink: '0', padding: '10px' }}
-              variant="body2"
-              to='/'>Blogs</Link>
-            <Link
-              color="inherit"
-              style={{ flexShrink: '0', padding: '10px' }}
-              variant="body2"
-              to='/users'>Users</Link>
-          </Toolbar>
-          <Header />
-          <Route exact path="/" render={() => <BlogList />} />
-          <Route exact path="/users" render={() => <UserList />} />
-          <Route path="/users/:id" render={({ match }) => <User user={userById(match.params.id)} />} />
-          <Route path="/blogs/:id" render={({ match }) => <Blog blog={blogById(match.params.id)} />} />
-        </div>
-      </Router>
-    </div>
+  return (
+    <Router>
+      <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
+        <Toolbar className={classes.toolbar}>
+          <Typography variant="h6" color="inherit">
+            BlogApp
+          </Typography>
+          <nav>
+            <UILink variant="button" color="textPrimary" className={classes.link}>
+              <Link to='/'>Blogs</Link>
+            </UILink>
+            <UILink variant="button" color="textPrimary" href="#" className={classes.link}>
+              <Link to='/users'>Users</Link>
+            </UILink>
+          </nav>
+          {currentUser ?
+            <div className={classes.logout}>
+              <Button
+                onClick={() => handleLogout()}
+                type="button"
+                variant="outlined">Logout</Button>
+              <h3>{ `Logged in as ${currentUser.username}` }</h3>
+            </div>
+            : null }
+        </Toolbar>
+      </AppBar>
+      <Header />
+      <Route exact path="/" render={() => <BlogList />} />
+      <Route exact path="/users" render={() => <UserList />} />
+      <Route path="/users/:id" render={({ match }) => <User user={userById(match.params.id)} />} />
+      <Route path="/blogs/:id" render={({ match }) => <Blog blog={blogById(match.params.id)} />} />
+    </Router>
   )
 }
 

@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
 const BlogList = (props) => {
   const classes = useStyles()
   return (
-    <React.Fragment>
+    <div>
       <Notification />
       <BlogForm />
       <h2>Blogs</h2>
@@ -76,7 +76,7 @@ const BlogList = (props) => {
           ))}
         </Grid>
       </Container>
-    </React.Fragment>
+    </div>
   )
 }
 

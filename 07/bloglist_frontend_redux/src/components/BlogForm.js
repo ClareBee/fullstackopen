@@ -6,8 +6,37 @@ import { setNotification } from '../reducers/notificationReducer'
 import { useField } from '../hooks'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
+import Paper from '@material-ui/core/Paper'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles(theme => ({
+  paper: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
+    padding: theme.spacing(2),
+    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+      marginTop: theme.spacing(6),
+      marginBottom: theme.spacing(6),
+      padding: theme.spacing(3),
+    },
+  },
+  form: {
+    width: '50%'
+  },
+  input: {
+    width: '100%'
+  },
+  button: {
+    float: 'right',
+    marginTop: theme.spacing(2)
+  }
+}))
 
 const BlogForm = (props) => {
+  const classes = useStyles()
   const title = useField('text')
   const author = useField('text')
   const url = useField('text')
@@ -30,25 +59,33 @@ const BlogForm = (props) => {
   }
 
   return (
-    <form onSubmit={(e) => handleAddingBlog(e)}>
-      <h2>New Blog</h2>
-      <div>
-        <TextField label="Title"
-          InputProps={{ ...title.inputValues() }}
-        />
-      </div>
-      <div>
-        <TextField label="Author"
-          InputProps={{ ...author.inputValues() }}
-        />
-      </div>
-      <div>
-        <TextField label="URL"
-          InputProps={{ ...url.inputValues() }}
-        />
-      </div>
-      <Button variant="outlined" type="submit">Create</Button>
-    </form>
+    <Paper className={classes.paper}>
+      <form onSubmit={(e) => handleAddingBlog(e)} className={classes.form}>
+        <h2>New Blog</h2>
+        <div>
+          <TextField
+            label="Title"
+            className={classes.input}
+            InputProps={{ ...title.inputValues() }}
+          />
+        </div>
+        <div>
+          <TextField
+            label="Author"
+            className={classes.input}
+            InputProps={{ ...author.inputValues() }}
+          />
+        </div>
+        <div>
+          <TextField
+            label="URL"
+            className={classes.input}
+            InputProps={{ ...url.inputValues() }}
+          />
+        </div>
+        <Button className={classes.button} variant="outlined" type="submit">Create</Button>
+      </form>
+    </Paper>
   )
 }
 

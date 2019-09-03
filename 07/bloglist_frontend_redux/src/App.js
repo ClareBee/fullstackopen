@@ -75,7 +75,7 @@ const App = (props) => {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <Container component="main" className={classes.main} maxWidth="sm"gat>
+      <Container component="main" className={classes.main} maxWidth="md" >
         <Notification />
         { props.currentUser
           ? <Navigation handleLogout={handleLogout} />
