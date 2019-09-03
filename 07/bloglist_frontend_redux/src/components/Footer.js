@@ -8,10 +8,10 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://github.com/clarebee">
-        FullStackOpen Final Project
+        ClareBee
       </Link>{' '}
       {new Date().getFullYear()}
-      {'. Built with '}
+      {'. Styled with '}
       <Link color="inherit" href="https://material-ui.com/">
         Material-UI.
       </Link>
@@ -23,6 +23,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
     marginTop: 'auto',
     backgroundColor: 'white',
+    borderTop: '3px solid cyan'
   },
 }))
 
@@ -33,10 +34,12 @@ const Footer = () => {
     <footer className={classes.footer}>
       <Container maxWidth="lg">
         <Typography variant="h6" align="center" gutterBottom>
-          Footer
+          <Link color="inherit" href="https://fullstackopen.com">
+            FullStackOpen 2019 - University of Helsinki
+          </Link>
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Something here to give the footer a purpose!
+          Made using React, MaterialUI, ExpressJS, MongoDB & tested with Cypress
         </Typography>
         <Copyright />
       </Container>

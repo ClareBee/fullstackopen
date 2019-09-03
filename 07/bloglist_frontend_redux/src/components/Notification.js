@@ -7,9 +7,9 @@ const Notification = ({ notification }) => {
     return null
   }
   return (
-    <div className={notification.style}>
+    <span className={notification.style}>
       {notification.content}
-    </div>
+    </span>
   )
 }
 

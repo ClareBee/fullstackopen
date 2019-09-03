@@ -27,7 +27,8 @@ const useStyles = makeStyles(theme => ({
     width: '50%'
   },
   input: {
-    width: '100%'
+    width: '100%',
+    marginTop: theme.spacing(2)
   },
   button: {
     float: 'right',
