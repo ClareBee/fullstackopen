@@ -1,12 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { browserHistory } from 'react-router'
 import PropTypes from 'prop-types'
 import { updateBlog, destroyBlog } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
 import CommentForm from './CommentForm'
 import CommentList from './CommentList'
 import Button from '@material-ui/core/Button'
-
+import Paper from '@material-ui/core/Paper'
+import Box from '@material-ui/core/Box'
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+import CardActions from '@material-ui/core/CardActions'
+import Typography from '@material-ui/core/Typography'
+import Divider from '@material-ui/core/Divider'
 
 const Blog = ({
   blog,
@@ -46,35 +53,50 @@ const Blog = ({
   const ownerLoggedIn = blog.user && (blog.user.name === currentUser.name)
   return (
     <div>
-      <h3>
-        <span>{blog.title} - {blog.author}</span> <span>{blog.likes} likes</span>
-      </h3>
-      <br />
-      <div>
-        URL: {blog.url}
-        <hr />
-        <div>
-          <div>
-            <span>{blog.likes} likes</span>
+      <Card>
+        <CardContent>
+          <Box m={2}>
+            <Typography component="h4" variant="h4">
+              {blog.title} - by {blog.author}
+            </Typography>
+            <Typography color="textSecondary" gutterBottom>
+              {blog.likes} likes
+            </Typography>
+          </Box>
+          <Divider variant="middle" />
+          <Box m={2}>
+            <Typography>
+              URL: {blog.url}
+            </Typography>
+          </Box>
+          <Divider variant="middle" />
+        </CardContent>
+        <CardActions>
+          <Box width="50%" display="flex" justifyContent="center">
             <Button
+              color="primary"
+              variant="contained"
               onClick={() => addLike(blog)}
-            >Add Like <span role="img" aria-label="heart">🖤</span></Button>
-          </div>
-          <div>
+            >Add Like <span role="img" aria-label="heart"> 🖤</span></Button>
+          </Box>
+          <Box width="50%" display="flex" justifyContent="center" alignItems="center">
             {ownerLoggedIn &&
               <Button
+                variant="contained"
                 onClick={() => deleteBlog(blog)}>
                 Delete
               </Button>
             }
-            <p>Added by {user}</p>
-          </div>
-        </div>
-      </div>
-      <div>
+            <Typography color="textSecondary">
+              Added by {user}
+            </Typography>
+          </Box>
+        </CardActions>
+      </Card>
+      <Paper>
         <CommentForm blog={blog} />
         <CommentList blog={blog} />
-      </div>
+      </Paper>
     </div>
   )
 }

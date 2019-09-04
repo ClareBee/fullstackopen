@@ -6,15 +6,20 @@ import { setNotification } from '../reducers/notificationReducer'
 import { useField } from '../hooks'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
+import Box from '@material-ui/core/Box'
 
 const CommentForm = (props) => {
   const comment = useField('text')
 
   const handleAddingComment = (e) => {
     e.preventDefault()
+    if(comment.value === ''){
+      return null
+    }
     const blogComment = {
       comment: comment.value
     }
+
     try {
       props.commentOnBlog(props.blog, blogComment)
     } catch(exception) {
@@ -24,15 +29,19 @@ const CommentForm = (props) => {
   }
 
   return (
-    <form onSubmit={(e) => handleAddingComment(e)}>
-      <h2>New Comment</h2>
-      <div>
-        <TextField label="Comment"
-          InputProps={{ ...comment.inputValues() }}
-        />
-      </div>
-      <Button type="submit" variant="outlined">Create</Button>
-    </form>
+    <Box m={2} p={1}>
+      <form onSubmit={(e) => handleAddingComment(e)}>
+        <h2>New Comment</h2>
+        <Box m={2}>
+          <TextField label="Comment" fullWidth
+            InputProps={{ ...comment.inputValues() }}
+          />
+        </Box>
+        <Box m={2}>
+          <Button color="secondary" type="submit" variant="contained">Add</Button>
+        </Box>
+      </form>
+    </Box>
   )
 }
 

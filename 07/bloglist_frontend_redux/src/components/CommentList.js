@@ -9,8 +9,8 @@ import Icon from '@material-ui/core/Icon'
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '100%',
-    maxWidth: 360,
+    width: '50%',
+    margin: '0 auto',
     backgroundColor: theme.palette.background.paper,
   },
   inline: {
@@ -18,13 +18,16 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const CommentList = (props) => {
+const CommentList = ({ blog }) => {
   const classes = useStyles()
-
+  if(!blog.comments){
+    return null
+  }
+  const comments = blog.comments.reverse()
   return (
     <List className={classes.root}>
-      {props.blog.comments.map(comment =>
-        <React.Fragment key={comment.id}>
+      {comments.map((comment, index) =>
+        <div key={index}>
           <ListItem alignItems="flex-start">
             <ListItemAvatar>
               <Icon>person</Icon>
@@ -34,8 +37,8 @@ const CommentList = (props) => {
               secondary={comment.comment}
             />
           </ListItem>
-          <Divider variant="inset" component="li" />
-        </React.Fragment>
+          <Divider component="li" />
+        </div>
       )}
     </List>
   )

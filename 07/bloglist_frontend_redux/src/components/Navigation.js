@@ -11,12 +11,11 @@ import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import UILink from '@material-ui/core/Link'
 import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles(theme => ({
   appBar: {
-    borderBottom: `1px solid ${theme.palette.divider}`,
+    borderBottom: `1px solid ${theme.palette.accent}`,
   },
   toolbar: {
     marginTop: '25px',
@@ -26,6 +25,13 @@ const useStyles = makeStyles(theme => ({
   },
   link: {
     margin: theme.spacing(1, 1.5),
+    fontSize: '1.5rem'
+  },
+  'link:hover': {
+    color: theme.palette.accent
+  },
+  'link:active':{
+    color: theme.palette.accent
   },
   logout: {
     display: 'flex',
@@ -52,12 +58,8 @@ const Navigation = ({ users, blogs, currentUser, handleLogout }) => {
             BlogApp
           </Typography>
           <nav>
-            <UILink variant="button" color="textPrimary" className={classes.link}>
-              <Link to='/'>Blogs</Link>
-            </UILink>
-            <UILink variant="button" color="textPrimary" href="#" className={classes.link}>
-              <Link to='/users'>Users</Link>
-            </UILink>
+            <Link className={classes.link} to='/'>Blogs</Link>
+            <Link className={classes.link} to='/users'>Users</Link>
           </nav>
           {currentUser ?
             <div className={classes.logout}>

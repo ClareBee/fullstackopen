@@ -17,13 +17,14 @@ const theme = createMuiTheme({
       main: cyan[300]
     },
     secondary: {
-      main: cyan[300]
+      main: pink[300]
     },
     error: {
       main: red[300]
     },
     accent: pink[500]
   },
+  spacing: 8,
   typography: {
     fontFamily: [
       '-apple-system',

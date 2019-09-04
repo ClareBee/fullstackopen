@@ -84,7 +84,7 @@ const BlogForm = (props) => {
             InputProps={{ ...url.inputValues() }}
           />
         </div>
-        <Button className={classes.button} variant="outlined" type="submit">Create</Button>
+        <Button className={classes.button} variant="contained" color="secondary" type="submit">Create</Button>
       </form>
     </Paper>
   )
