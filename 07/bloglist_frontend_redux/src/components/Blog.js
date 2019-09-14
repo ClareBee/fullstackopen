@@ -48,7 +48,7 @@ const Blog = ({
       setNotification(`${exception}`, 'error')
     }
   }
-
+  console.log('blog', blog.user.username)
   const user = blog.user ? blog.user.username : 'Anon'
   const ownerLoggedIn = blog.user && (blog.user.name === currentUser.name)
   return (

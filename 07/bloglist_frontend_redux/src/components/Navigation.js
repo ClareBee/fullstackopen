@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import Header from './Header'
+import Notification from './Notification'
 import BlogList from './BlogList'
 import UserList from './UserList'
 import User from './User'
@@ -73,6 +74,7 @@ const Navigation = ({ users, blogs, currentUser, handleLogout }) => {
         </Toolbar>
       </AppBar>
       <Header />
+      <Notification />
       <Route exact path="/" render={() => <BlogList />} />
       <Route exact path="/users" render={() => <UserList />} />
       <Route path="/users/:id" render={({ match }) => <User user={userById(match.params.id)} />} />

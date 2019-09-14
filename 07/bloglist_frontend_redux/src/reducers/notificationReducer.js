@@ -1,7 +1,7 @@
 const reducer = (state = null, action) => {
   switch(action.type) {
   case 'NOTIFY':
-    return { content: action.data.notification, style: action.data.cssStyle }
+    return { ...state, content: action.data.notification, style: action.data.cssStyle }
   case 'REMOVE':
     return null
   default:

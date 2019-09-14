@@ -7,7 +7,10 @@ const reducer = (state = [], action) => {
     return state.concat(action.data)
   case 'UPDATE_BLOG': {
     const blogs = [...state]
-    return blogs.map(blog => blog.id === action.data.id ? action.data : blog)
+    console.log('action', action.data)
+    const updatedBlog = { ...action.data }
+    console.log('updated', updatedBlog)
+    return  blogs.map(blog => blog.id === action.data.id ? updatedBlog : blog )
   }
   case 'DESTROY_BLOG': {
     const blogs = [...state]
@@ -43,7 +46,8 @@ export const createBlog = content => {
 
 export const updateBlog = blog => {
   let blogLikes = blog.likes
-  const editedBlog = { ...blog, likes: blogLikes += 1 }
+  const { id, title, author, url } = blog
+  const editedBlog = { id, title, author, url, likes: blogLikes += 1 }
   return async dispatch => {
     const updatedBlog = await blogService.update(editedBlog)
     dispatch({
