@@ -15,7 +15,10 @@ blogsRouter.get('/', async (req, res) => {
 
 blogsRouter.get('/:id', async (req, res, next) => {
   try {
-    const blog = await Blog.findById(req.params.id).populate('comments', { comment: 1 })
+    const blog = await Blog
+      .findById(req.params.id)
+      .populate('user', { name: 1, username: 1 })
+      .populate('comments', { comment: 1 })
     if (blog) {
       res.json(blog.toJSON())
     } else {
@@ -75,15 +78,15 @@ blogsRouter.delete('/:id', async (req, res, next) => {
 
 blogsRouter.put('/:id', async (req, res, next) => {
   const body = req.body
-  const blog = {
-    title: body.title,
-    author: body.author,
-    url: body.url,
-    likes: body.likes
-  }
+  console.log('body', body)
+  const blog = { ...req.body }
 
   try {
-    const updatedBlog = await Blog.findByIdAndUpdate(req.params.id, blog, { new: true })
+    const updatedBlog = await Blog
+      .findByIdAndUpdate(req.params.id, blog, { new: true })
+      .populate('user', { name: 1, username: 1 })
+      .populate('comments', { comment: 1 })
+    console.log('oop', updatedBlog)
     res.json(updatedBlog.toJSON())
   } catch(error) {
     next(error)
@@ -93,15 +96,17 @@ blogsRouter.put('/:id', async (req, res, next) => {
 blogsRouter.post('/:id/comments', async (req, res, next) => {
   const body = req.body
   try {
-    const blog = await Blog.findById(req.params.id).populate('comments', { comment: 1 })
+    const blog = await Blog.findById(req.params.id)
+      .populate('user', { name: 1, username: 1 })
+      .populate('comments', { comment: 1 })
     const comment = new Comment({
       comment: body.comment,
       blog:   blog._id
     })
     const savedComment = await comment.save()
     blog.comments = blog.comments.concat(savedComment)
-    await blog.save()
-    res.json(blog)
+    const savedBlog = await blog.save()
+    res.json(savedBlog)
   } catch(error) {
     next(error)
   }
