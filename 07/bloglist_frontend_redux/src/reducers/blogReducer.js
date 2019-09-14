@@ -3,8 +3,11 @@ import blogService from '../services/blogs'
 const reducer = (state = [], action) => {
   console.log('blog state', state)
   switch(action.type) {
-  case 'CREATE_BLOG':
-    return state.concat(action.data)
+  case 'CREATE_BLOG': {
+    const blogs = [...state]
+    console.log(action.data)
+    return blogs.concat(action.data)
+  }
   case 'UPDATE_BLOG': {
     const blogs = [...state]
     console.log('action', action.data)

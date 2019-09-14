@@ -1,10 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const User = ({ user }) => {
+const User = ({ user, blogs }) => {
   if ( user === undefined) {
     return null
   }
+
+  const userBlogs = blogs.filter(blog => blog === user.id)
+  console.log(blogs)
 
   return (
     <div>
@@ -12,7 +15,7 @@ const User = ({ user }) => {
 
       <h3>Added blogs</h3>
       <ul>
-        { user.blogs.map(blog =>
+        { blogs.map(blog =>
           <li key={blog.id}>{blog.title}</li>
         )}
       </ul>

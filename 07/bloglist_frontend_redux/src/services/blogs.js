@@ -29,7 +29,6 @@ const update = async (blog) => {
   }
   try {
     const { data } = await axios.put(`${baseUrl}/${blog.id}`, blog, config)
-    console.log('data', data)
     return { data }
   } catch(err){
     return  { error: err.response.data.error }
@@ -42,7 +41,6 @@ const addComment = async (blog, comment) => {
   }
   try {
     const { data } = await axios.post(`${baseUrl}/${blog.id}/comments`, comment, config)
-    console.log('data', data)
     return { data }
   } catch(err){
     return  { error: err.response.data.error }

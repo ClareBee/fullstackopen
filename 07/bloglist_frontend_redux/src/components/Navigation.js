@@ -77,7 +77,7 @@ const Navigation = ({ users, blogs, currentUser, handleLogout }) => {
       <Notification />
       <Route exact path="/" render={() => <BlogList />} />
       <Route exact path="/users" render={() => <UserList />} />
-      <Route path="/users/:id" render={({ match }) => <User user={userById(match.params.id)} />} />
+      <Route path="/users/:id" render={({ match }) => <User user={userById(match.params.id)} blogs={blogs}/>} />
       <Route path="/blogs/:id" render={({ match }) => <Blog blog={blogById(match.params.id)} />} />
     </Router>
   )
