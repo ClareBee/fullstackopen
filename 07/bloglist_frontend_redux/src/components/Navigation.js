@@ -67,6 +67,7 @@ const Navigation = ({ users, blogs, currentUser, handleLogout }) => {
               <Button
                 onClick={() => handleLogout()}
                 type="button"
+                id="logout"
                 variant="outlined">Logout</Button>
               <h3>{ `Logged in as ${currentUser.username}` }</h3>
             </div>

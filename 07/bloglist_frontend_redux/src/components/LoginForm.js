@@ -51,6 +51,7 @@ const LoginForm = ({
           <div>
             <TextField
               label="Username"
+              id="username"
               className={classes.input}
               InputProps={{ ...username.inputValues() }}
             />
@@ -58,6 +59,7 @@ const LoginForm = ({
           <div>
             <TextField
               label="Password"
+              id="password"
               type="password"
               className={classes.input}
               InputProps={{ ...password.inputValues() }}
@@ -65,6 +67,7 @@ const LoginForm = ({
           </div>
           <Button
             className={classes.button}
+            id="login"
             color="primary"
             variant="contained"
             type="submit">Login</Button>

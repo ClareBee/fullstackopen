@@ -66,12 +66,14 @@ const BlogForm = (props) => {
         <div>
           <TextField
             label="Title"
+            id="title"
             className={classes.input}
             InputProps={{ ...title.inputValues() }}
           />
         </div>
         <div>
           <TextField
+            id="author"
             label="Author"
             className={classes.input}
             InputProps={{ ...author.inputValues() }}
@@ -79,12 +81,18 @@ const BlogForm = (props) => {
         </div>
         <div>
           <TextField
+            id="url"
             label="URL"
             className={classes.input}
             InputProps={{ ...url.inputValues() }}
           />
         </div>
-        <Button className={classes.button} variant="contained" color="secondary" type="submit">Create</Button>
+        <Button
+          className={classes.button}
+          variant="contained"
+          color="secondary"
+          id="create"
+          type="submit">Create</Button>
       </form>
     </Paper>
   )
