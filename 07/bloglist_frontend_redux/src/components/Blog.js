@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
 import PropTypes from 'prop-types'
 import { updateBlog, destroyBlog } from '../reducers/blogReducer'
 import { setNotification } from '../reducers/notificationReducer'
@@ -25,8 +24,6 @@ const Blog = ({
   if (blog === undefined) {
     return null
   }
-  console.log('blog', blog)
-  // check it's not shadowed
   const addLike = async (blog) => {
     try {
       updateBlog(blog)
@@ -48,7 +45,6 @@ const Blog = ({
       setNotification(`${exception}`, 'error')
     }
   }
-  console.log('blog', blog.user.username)
   const user = blog.user ? blog.user.username : 'Anon'
   const ownerLoggedIn = blog.user && (blog.user.name === currentUser.name)
   return (
