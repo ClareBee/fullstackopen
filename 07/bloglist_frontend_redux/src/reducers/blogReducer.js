@@ -5,19 +5,20 @@ const reducer = (state = [], action) => {
   switch(action.type) {
   case 'CREATE_BLOG': {
     const blogs = [...state]
-    console.log(action.data)
     return blogs.concat(action.data)
   }
   case 'UPDATE_BLOG': {
     const blogs = [...state]
-    console.log('action', action.data)
     const updatedBlog = { ...action.data }
-    console.log('updated', updatedBlog)
     return  blogs.map(blog => blog.id === action.data.id ? updatedBlog : blog )
   }
   case 'DESTROY_BLOG': {
     const blogs = [...state]
-    return blogs.filter(blog => blog.id !== action.data.blog.id)
+    console.log('action', action.data)
+    console.log('before', blogs)
+    const destroyed =  blogs.filter(blog => blog.id !== action.data.blog.id)
+    console.log('after', destroyed)
+    return destroyed
   }
   case 'GET_ALL_BLOGS':
     return action.data

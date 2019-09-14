@@ -13,7 +13,6 @@ import loginService from './services/login'
 import Navigation from './components/Navigation'
 import LoginForm from './components/LoginForm'
 import Footer from './components/Footer'
-import Notification from './components/Notification'
 import Container from '@material-ui/core/Container'
 import { makeStyles } from '@material-ui/core/styles'
 

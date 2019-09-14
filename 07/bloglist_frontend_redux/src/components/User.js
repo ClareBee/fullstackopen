@@ -6,8 +6,7 @@ const User = ({ user, blogs }) => {
     return null
   }
 
-  const userBlogs = blogs.filter(blog => blog === user.id)
-  console.log(blogs)
+  const userBlogs = blogs.filter(blog => blog.user && (blog.user.id === user.id))
 
   return (
     <div>
@@ -15,7 +14,7 @@ const User = ({ user, blogs }) => {
 
       <h3>Added blogs</h3>
       <ul>
-        { blogs.map(blog =>
+        { userBlogs && userBlogs.map(blog =>
           <li key={blog.id}>{blog.title}</li>
         )}
       </ul>
@@ -24,7 +23,8 @@ const User = ({ user, blogs }) => {
 }
 
 User.propTypes = {
-  user: PropTypes.object
+  user: PropTypes.object,
+  blogs: PropTypes.array
 }
 
 export default User
