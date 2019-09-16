@@ -50,6 +50,7 @@ const LoginForm = ({
 
           <div>
             <TextField
+              data-cy="username"
               label="Username"
               id="username"
               className={classes.input}
@@ -59,6 +60,7 @@ const LoginForm = ({
           <div>
             <TextField
               label="Password"
+              data-cy="password"
               id="password"
               type="password"
               className={classes.input}
@@ -67,7 +69,7 @@ const LoginForm = ({
           </div>
           <Button
             className={classes.button}
-            id="login"
+            data-cy="login"
             color="primary"
             variant="contained"
             type="submit">Login</Button>

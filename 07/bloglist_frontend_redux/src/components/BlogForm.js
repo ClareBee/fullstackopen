@@ -65,8 +65,8 @@ const BlogForm = (props) => {
         <h2>New Blog</h2>
         <div>
           <TextField
-            label="Title"
             id="title"
+            label="Title"
             className={classes.input}
             InputProps={{ ...title.inputValues() }}
           />
@@ -91,7 +91,7 @@ const BlogForm = (props) => {
           className={classes.button}
           variant="contained"
           color="secondary"
-          id="create"
+          data-cy="create"
           type="submit">Create</Button>
       </form>
     </Paper>

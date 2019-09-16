@@ -33,12 +33,20 @@ const CommentForm = (props) => {
       <form onSubmit={(e) => handleAddingComment(e)}>
         <h2>New Comment</h2>
         <Box m={2}>
-          <TextField label="Comment" fullWidth
+          <TextField
+            id="comment"
+            label="Comment"
+            fullWidth
             InputProps={{ ...comment.inputValues() }}
           />
         </Box>
         <Box m={2}>
-          <Button color="secondary" type="submit" variant="contained">Add</Button>
+          <Button
+            data-cy="add-comment"
+            color="secondary"
+            type="submit"
+            variant="contained"
+          >Add</Button>
         </Box>
       </form>
     </Box>

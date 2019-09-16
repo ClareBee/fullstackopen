@@ -13,6 +13,7 @@ import CardContent from '@material-ui/core/CardContent'
 import CardActions from '@material-ui/core/CardActions'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
+import { capitalize } from '../utils/format'
 
 const Blog = ({
   blog,
@@ -35,7 +36,7 @@ const Blog = ({
 
   const deleteBlog = async (blog) => {
     try {
-      const title = blog.title
+      const title = capitalize(blog.title)
       if(window.confirm(`Do you want to delete ${title}?`)){
         destroyBlog(blog)
         setNotification(`${title} deleted successfully!`, 'success')
@@ -45,7 +46,7 @@ const Blog = ({
       setNotification(`${exception}`, 'error')
     }
   }
-  const user = blog.user ? blog.user.username : 'Anon'
+  const user = blog.user ? capitalize(blog.user.username) : 'Anon'
   const ownerLoggedIn = blog.user && (blog.user.name === currentUser.name)
   return (
     <div>
@@ -53,9 +54,9 @@ const Blog = ({
         <CardContent>
           <Box m={2}>
             <Typography component="h4" variant="h4">
-              {blog.title} - by {blog.author}
+              {capitalize(blog.title)} - by {capitalize(blog.author)}
             </Typography>
-            <Typography color="textSecondary" gutterBottom>
+            <Typography color="textSecondary" gutterBottom id="likes">
               {blog.likes} likes
             </Typography>
           </Box>
@@ -68,14 +69,15 @@ const Blog = ({
           <Divider variant="middle" />
         </CardContent>
         <CardActions>
-          <Box width="50%" display="flex" justifyContent="center">
+          <Box width="50%" m={2}>
             <Button
+              data-cy="add-like"
               color="primary"
               variant="contained"
               onClick={() => addLike(blog)}
             >Add Like <span role="img" aria-label="heart"> 🖤</span></Button>
           </Box>
-          <Box width="50%" display="flex" justifyContent="center" alignItems="center">
+          <Box width="50%" display="flex" flexDirection="row-reverse" m={2}>
             {ownerLoggedIn &&
               <Button
                 variant="contained"
@@ -83,9 +85,11 @@ const Blog = ({
                 Delete
               </Button>
             }
-            <Typography color="textSecondary">
-              Added by {user}
-            </Typography>
+            <Box mx={2}>
+              <Typography color="textSecondary">
+                Added by {user}
+              </Typography>
+            </Box>
           </Box>
         </CardActions>
       </Card>

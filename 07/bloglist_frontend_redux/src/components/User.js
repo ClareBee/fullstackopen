@@ -6,7 +6,9 @@ const User = ({ user, blogs }) => {
     return null
   }
 
-  const userBlogs = blogs.filter(blog => blog.user && (blog.user.id === user.id))
+  const userBlogs = blogs.filter(
+    blog => blog.user && (blog.user.id === user.id)
+  )
 
   return (
     <div>

@@ -46,6 +46,14 @@ const useStyles = makeStyles(theme => ({
 
 const BlogList = (props) => {
   const classes = useStyles()
+  if(props.blogs.length === 0) {
+    return (
+      <div>
+        <div>No Blogs added yet. Add one to get started!</div>
+        <BlogForm />
+      </div>
+    )
+  }
   return (
     <div>
       <BlogForm />
@@ -65,8 +73,8 @@ const BlogList = (props) => {
                     {blog.title}
                   </Typography>
                 </CardContent>
-                <CardActions>
-                  <Link to={`/blogs/${blog.id}`}>View</Link>
+                <CardActions >
+                  <Link data-cy="blog" to={`/blogs/${blog.id}`}>View</Link>
                 </CardActions>
               </Card>
             </Grid>

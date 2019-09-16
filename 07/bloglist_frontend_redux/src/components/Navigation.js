@@ -55,19 +55,21 @@ const Navigation = ({ users, blogs, currentUser, handleLogout }) => {
     <Router>
       <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
-          <Typography variant="h6" color="inherit">
-            BlogApp
-          </Typography>
+          <Link className={classes.link} to="/">
+            <Typography variant="h4">
+              BlogApp
+            </Typography>
+          </Link>
           <nav>
-            <Link className={classes.link} to='/'>Blogs</Link>
-            <Link className={classes.link} to='/users'>Users</Link>
+            <Link className={classes.link} to="/">Blogs</Link>
+            <Link className={classes.link} to="/users">Users</Link>
           </nav>
           {currentUser ?
             <div className={classes.logout}>
               <Button
                 onClick={() => handleLogout()}
                 type="button"
-                id="logout"
+                data-cy="logout"
                 variant="outlined">Logout</Button>
               <h3>{ `Logged in as ${currentUser.username}` }</h3>
             </div>

@@ -38,8 +38,8 @@ const Footer = () => {
             FullStackOpen 2019 - University of Helsinki
           </Link>
         </Typography>
-        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Made using React, MaterialUI, ExpressJS, MongoDB & tested with Cypress
+        <Typography variant="subtitle1" align="center" color="textSecondary">
+          Made using React, Redux, ExpressJS, MongoDB & tested with Cypress
         </Typography>
         <Copyright />
       </Container>

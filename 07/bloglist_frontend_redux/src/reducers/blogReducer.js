@@ -1,7 +1,6 @@
 import blogService from '../services/blogs'
 
 const reducer = (state = [], action) => {
-  console.log('blog state', state)
   switch(action.type) {
   case 'CREATE_BLOG': {
     const blogs = [...state]
@@ -14,10 +13,7 @@ const reducer = (state = [], action) => {
   }
   case 'DESTROY_BLOG': {
     const blogs = [...state]
-    console.log('action', action.data)
-    console.log('before', blogs)
     const destroyed =  blogs.filter(blog => blog.id !== action.data.blog.id)
-    console.log('after', destroyed)
     return destroyed
   }
   case 'GET_ALL_BLOGS':
@@ -30,20 +26,23 @@ const reducer = (state = [], action) => {
 export const createBlog = content => {
   return async dispatch => {
     const newBlog = await blogService.create(content)
-    console.log(newBlog)
     if(newBlog.data){
       dispatch({
         type: 'CREATE_BLOG',
         data: newBlog.data
       })
-      // props.setNotification(`${newBlog.title} added successfully!`, 'success')
-
     }
+    // why doesn't importing and calling setNotification work here?
     if(newBlog.error){
       dispatch({
         type: 'NOTIFY',
         data: { notification: `${newBlog.error}`, cssStyle: 'error' }
       })
+      setTimeout(() => {
+        dispatch({
+          type: 'REMOVE'
+        })
+      }, 5000)
     }
   }
 }
@@ -84,7 +83,6 @@ export const initialiseBlogs = () => {
 export const commentOnBlog = (blog, comment) => {
   return async dispatch => {
     const updatedBlog = await blogService.addComment(blog, comment)
-    console.log('edited', updatedBlog.data)
     dispatch({
       type: 'UPDATE_BLOG',
       data: updatedBlog.data

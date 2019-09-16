@@ -53,7 +53,6 @@ const App = (props) => {
       const user = await loginService.login({
         username: username.value, password: password.value,
       })
-      // saved as DOMstring
       window.localStorage.setItem('name', JSON.stringify(user))
       blogService.setToken(user.token)
       props.addUser(user)
