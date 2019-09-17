@@ -20,11 +20,13 @@ const Blog = ({
   currentUser,
   updateBlog,
   destroyBlog,
-  setNotification
+  setNotification,
+  history
 }) => {
   if (blog === undefined) {
     return null
   }
+
   const addLike = async (blog) => {
     try {
       updateBlog(blog)
@@ -40,6 +42,7 @@ const Blog = ({
       if(window.confirm(`Do you want to delete ${title}?`)){
         destroyBlog(blog)
         setNotification(`${title} deleted successfully!`, 'success')
+        history.push('/')
       }
       return
     } catch(exception) {
@@ -105,7 +108,8 @@ Blog.propTypes = {
   setNotification: PropTypes.func.isRequired,
   destroyBlog: PropTypes.func.isRequired,
   updateBlog: PropTypes.func.isRequired,
-  blog: PropTypes.object
+  blog: PropTypes.object,
+  history: PropTypes.object
 }
 
 const mapStateToProps = state => {

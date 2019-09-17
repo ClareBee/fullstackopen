@@ -1,4 +1,5 @@
 import blogService from '../services/blogs'
+import { setNotification } from './notificationReducer'
 
 const reducer = (state = [], action) => {
   switch(action.type) {
@@ -32,17 +33,8 @@ export const createBlog = content => {
         data: newBlog.data
       })
     }
-    // why doesn't importing and calling setNotification work here?
     if(newBlog.error){
-      dispatch({
-        type: 'NOTIFY',
-        data: { notification: `${newBlog.error}`, cssStyle: 'error' }
-      })
-      setTimeout(() => {
-        dispatch({
-          type: 'REMOVE'
-        })
-      }, 5000)
+      dispatch(setNotification(`${newBlog.error}`, 'error'))
     }
   }
 }
