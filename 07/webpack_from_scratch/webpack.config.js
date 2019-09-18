@@ -1,6 +1,13 @@
 const path = require('path')
+const webpack = require('webpack')
+
 
 const config = (env, argv) => {
+  console.log('argv', argv.mode)
+  const backend_url = argv.mode === 'production'
+      ? 'https://radiant-plateau-25399.herokuapp.com/api/notes'
+      : 'http://localhost:3004/notes'
+
   return {
     entry: ['@babel/polyfill', './src/index.js'],
     output: {
@@ -27,7 +34,12 @@ const config = (env, argv) => {
           loaders: ['style-loader', 'css-loader'],
         },
       ],
-    }
+    },
+    plugins: [
+      new webpack.DefinePlugin({
+        BACKEND_URL: JSON.stringify(backend_url)
+      })
+    ]
   }
 }
 module.exports = config
