@@ -9,7 +9,6 @@ describe('Blog ', function() {
       password: 'Clare'
     }
     cy.request('POST', 'http://localhost:3003/api/users/', user)
-
     cy.visit('http://localhost:3000')
     cy.get('[data-cy=logout]')
       .click()
@@ -46,7 +45,7 @@ describe('Blog ', function() {
         .click()
     })
 
-    it('show page can be seen and likes added', function() {
+    it('show page can be navigated to and likes added', function() {
       cy.get('[data-cy=blog]')
         .click()
       cy.contains('Add Like')
@@ -54,8 +53,16 @@ describe('Blog ', function() {
         .click()
       cy.contains('1 likes')
     })
+  })
 
-    it('comments can be added to blog', function() {
+  describe('when on a blog show page', function() {
+    beforeEach(function() {
+      cy.get('#username')
+        .type('Clare')
+      cy.get('#password')
+        .type('Clare')
+      cy.get('[data-cy=login]')
+        .click()
       cy.contains('New Blog')
         .click()
       cy.get('#title')
@@ -68,6 +75,9 @@ describe('Blog ', function() {
         .click()
       cy.get('[data-cy=blog]')
         .click()
+    })
+
+    it('should be able to add a comment', function(){
       cy.get('#comment')
         .type('test comment')
       cy.get('[data-cy=add-comment]')
@@ -76,17 +86,7 @@ describe('Blog ', function() {
       cy.contains('test comment')
     })
 
-    it('should be able to delete a blog', function(){
-      cy.get('#title')
-        .type('new cypress test title')
-      cy.get('#author')
-        .type('new cypress test author')
-      cy.get('#url')
-        .type('www.example.com/cypress')
-      cy.get('[data-cy=create]')
-        .click()
-      cy.get('[data-cy=blog]')
-        .click()
+    it('should be able to delete blog', function(){
       cy.get('[data-cy=delete]')
         .click()
       cy.contains('deleted successfully')

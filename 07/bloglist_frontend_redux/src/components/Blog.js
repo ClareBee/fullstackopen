@@ -26,7 +26,6 @@ const Blog = ({
   if (blog === undefined) {
     return null
   }
-
   const addLike = async (blog) => {
     try {
       updateBlog(blog)
@@ -83,6 +82,7 @@ const Blog = ({
           <Box width="50%" display="flex" flexDirection="row-reverse" m={2}>
             {ownerLoggedIn &&
               <Button
+                data-cy="delete"
                 variant="contained"
                 onClick={() => deleteBlog(blog)}>
                 Delete
