@@ -1,38 +1,51 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import PromisePolyfill from 'promise-polyfill'
+import ToDoList from './components/ToDoList'
+import ToDoForm from './components/ToDoForm'
+import { Container, Divider, Segment, Reveal, Image } from 'semantic-ui-react'
 
 if (!window.Promise) {
   window.Promise = PromisePolyfill
 }
-const useNotes = (url) => {
-  const [notes, setNotes] = useState([])
-  useEffect(() => {
-    axios.get(url).then(response => {
-      setNotes(response.data)
-    })
-  }, [url])
-  return notes
-}
 
 const App = () => {
   const [counter, setCounter] = useState(0)
-  const [values, setValues] = useState([])
+  const [todos, setTodos] = useState([])
 
-  const url = 'http://localhost:3001/notes'
-  const notes = useNotes(BACKEND_URL)
+  const todosUrl = 'http://localhost:3004/todos'
 
-  const handleClick = () => {
-    setCounter(counter + 1)
-    setValues(values.concat(counter))
+  useEffect(() => {
+    axios.get(todosUrl).then(response => {
+      setTodos(response.data)
+    })
+  }, [])
+
+  const addToDo = (toDo) => {
+    console.log(toDo)
+    axios
+      .post('http://localhost:3004/todos', toDo)
+      .then(response => {
+        console.log(response)
+      })
   }
 
   return (
-    <div className="container">
-      hello webpack {counter} clicks
-      <button onClick={handleClick} >press</button>
-      <div>{notes.length} notes on server {BACKEND_URL}</div>
-    </div>
+    <Container>
+      <h1 className="ui header">Webpack-From-Scratch</h1>
+      <Divider />
+      <Segment>Small app to explore setting up Webpack</Segment>
+      <Reveal animated='fade'>
+        <Reveal.Content visible>
+          <Image src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' />
+        </Reveal.Content>
+        <Reveal.Content hidden>
+          <Image src='https://react.semantic-ui.com/images/avatar/large/ade.jpg' size='small' />
+        </Reveal.Content>
+      </Reveal>
+      <ToDoForm addToDo={addToDo} />
+      <ToDoList todos={todos}/>
+    </Container>
   )
 }
 

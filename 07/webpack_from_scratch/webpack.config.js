@@ -4,9 +4,10 @@ const webpack = require('webpack')
 
 const config = (env, argv) => {
   console.log('argv', argv.mode)
+
   const backend_url = argv.mode === 'production'
-      ? 'https://radiant-plateau-25399.herokuapp.com/api/notes'
-      : 'http://localhost:3004/notes'
+      ? 'https://example.com/fictional-production-todos-endpoint'
+      : 'http://localhost:3004/todos'
 
   return {
     entry: ['@babel/polyfill', './src/index.js'],
