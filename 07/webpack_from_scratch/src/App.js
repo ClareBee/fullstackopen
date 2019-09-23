@@ -18,7 +18,7 @@ const App = () => {
       .then(initialToDos => setToDos(initialToDos))
   }, [])
 
-  const addToDo = (toDo) => {
+  const addToDo = toDo => {
    event.preventDefault()
    const toDoObject = {
      content: toDo.content,
@@ -33,14 +33,14 @@ const App = () => {
      .catch(err => console.log(err))
   }
 
-  const removeToDo = (toDoId) => {
+  const removeToDo = toDoId => {
     toDoService.destroy(toDoId)
       .then(response => {
         setToDos(toDos.filter(savedToDo => savedToDo.id !== toDoId))
       })
   }
 
-  const toggleToDo = (toDoId) => {
+  const toggleToDo = toDoId => {
     const toDo = toDos.find(toDo => toDo.id === toDoId)
     const updatedToDo = {
       ...toDo,
