@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PromisePolyfill from 'promise-polyfill'
-import toDoservice from './services/toDoservice'
+import toDoService from './services/toDoService'
 import ToDoList from './components/ToDoList'
 import ToDoForm from './components/ToDoForm'
 import { Container, Divider, Segment, Reveal, Image } from 'semantic-ui-react'
@@ -10,13 +10,12 @@ if (!window.Promise) {
 }
 
 const App = () => {
-  const [counter, setCounter] = useState(0)
-  const [toDos, settoDos] = useState([])
+  const [toDos, setToDos] = useState([])
 
   useEffect(() => {
-    toDoservice
+    toDoService
       .getAll()
-      .then(initialtoDos => settoDos(initialtoDos))
+      .then(initialToDos => setToDos(initialToDos))
   }, [])
 
   const addToDo = (toDo) => {
@@ -26,31 +25,31 @@ const App = () => {
      id: toDos.length + 1,
      done: false
    }
-   toDoservice
+   toDoService
      .create(toDoObject)
      .then(data => {
-       console.log('data', data)
-       settoDos(toDos.concat(data))
+       setToDos(toDos.concat(data))
      })
      .catch(err => console.log(err))
   }
 
   const removeToDo = (toDoId) => {
-    toDoservice.destroy(toDoId)
+    toDoService.destroy(toDoId)
       .then(response => {
-        settoDos(toDos.filter(savedToDo => savedToDo.id !== toDoId))
+        setToDos(toDos.filter(savedToDo => savedToDo.id !== toDoId))
       })
   }
 
-  const toggleDone = (toDo) => {
+  const toggleToDo = (toDoId) => {
+    const toDo = toDos.find(toDo => toDo.id === toDoId)
     const updatedToDo = {
       ...toDo,
       done: !toDo.done
     }
-    toDoservice.update(toDo.id, updatedToDo)
+    toDoService.update(toDo.id, updatedToDo)
       .then(returnedToDo => {
         const updated = toDos.map(savedToDo => savedToDo.id === toDo.id ? savedToDo : returnedToDo)
-        settoDos(updated)
+        setToDos(updated)
       })
   }
 
@@ -68,7 +67,7 @@ const App = () => {
         </Reveal.Content>
       </Reveal>
       <ToDoForm addToDo={addToDo} />
-      <ToDoList toDos={toDos} removeToDo={removeToDo} />
+      <ToDoList toDos={toDos} removeToDo={removeToDo} toggleToDo={toggleToDo} />
     </Container>
   )
 }
