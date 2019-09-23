@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { Form, Button } from 'semantic-ui-react'
 
-const ToDoForm = (props) => {
+const ToDoForm = ({ addToDo }) => {
   const [newToDo, setNewToDo] = useState({})
 
   const onChange = event => {
@@ -12,7 +13,7 @@ const ToDoForm = (props) => {
   }
 
   const onSubmit = () => {
-    props.addToDo(newToDo);
+    addToDo(newToDo);
   }
 
   return (
@@ -26,4 +27,7 @@ const ToDoForm = (props) => {
   )
 }
 
-export default ToDoForm;
+ToDoForm.propTypes = {
+  addToDo: PropTypes.function.isRequired
+}
+export default ToDoForm

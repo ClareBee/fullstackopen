@@ -1,6 +1,7 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import ToDoItem from './ToDoItem'
-import { Image, List } from 'semantic-ui-react'
+import { List } from 'semantic-ui-react'
 
 const ToDoList = ({ toDos, removeToDo, toggleToDo }) => (
   <List divided verticalAlign='middle'>
@@ -14,5 +15,11 @@ const ToDoList = ({ toDos, removeToDo, toggleToDo }) => (
   ))}
   </List>
 );
+
+ToDoList.propTypes = {
+  toDos: PropTypes.array,
+  removeToDo: PropTypes.function,
+  toggleToDo: PropTypes.function
+}
 
 export default ToDoList;

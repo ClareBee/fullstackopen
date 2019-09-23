@@ -36,6 +36,7 @@ const App = () => {
   const removeToDo = toDoId => {
     toDoService.destroy(toDoId)
       .then(response => {
+        console.log(response)
         setToDos(toDos.filter(savedToDo => savedToDo.id !== toDoId))
       })
   }

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Icon, List, Segment, Button, Checkbox } from 'semantic-ui-react'
 
 const ToDoItem = ({ toDo, removeToDo, toggleToDo }) => (
@@ -14,5 +15,14 @@ const ToDoItem = ({ toDo, removeToDo, toggleToDo }) => (
   </List.Item>
 );
 
+ToDoItem.propTypes = {
+  toDo: PropTypes.shape({
+    content: PropTypes.string,
+    id: PropTypes.string,
+    done: PropTypes.boolean
+  }),
+  removeToDo: PropTypes.function.isRequired,
+  toggleToDo: PropTypes.function.isRequired
+}
 
-export default ToDoItem;
+export default ToDoItem
