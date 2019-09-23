@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import PromisePolyfill from 'promise-polyfill'
+import toDoservice from './services/toDoservice'
 import ToDoList from './components/ToDoList'
 import ToDoForm from './components/ToDoForm'
 import { Container, Divider, Segment, Reveal, Image } from 'semantic-ui-react'
@@ -11,22 +11,46 @@ if (!window.Promise) {
 
 const App = () => {
   const [counter, setCounter] = useState(0)
-  const [todos, setTodos] = useState([])
-
-  const todosUrl = 'http://localhost:3004/todos'
+  const [toDos, settoDos] = useState([])
 
   useEffect(() => {
-    axios.get(todosUrl).then(response => {
-      setTodos(response.data)
-    })
+    toDoservice
+      .getAll()
+      .then(initialtoDos => settoDos(initialtoDos))
   }, [])
 
   const addToDo = (toDo) => {
-    console.log(toDo)
-    axios
-      .post('http://localhost:3004/todos', toDo)
+   event.preventDefault()
+   const toDoObject = {
+     content: toDo.content,
+     id: toDos.length + 1,
+     done: false
+   }
+   toDoservice
+     .create(toDoObject)
+     .then(data => {
+       console.log('data', data)
+       settoDos(toDos.concat(data))
+     })
+     .catch(err => console.log(err))
+  }
+
+  const removeToDo = (toDoId) => {
+    toDoservice.destroy(toDoId)
       .then(response => {
-        console.log(response)
+        settoDos(toDos.filter(savedToDo => savedToDo.id !== toDoId))
+      })
+  }
+
+  const toggleDone = (toDo) => {
+    const updatedToDo = {
+      ...toDo,
+      done: !toDo.done
+    }
+    toDoservice.update(toDo.id, updatedToDo)
+      .then(returnedToDo => {
+        const updated = toDos.map(savedToDo => savedToDo.id === toDo.id ? savedToDo : returnedToDo)
+        settoDos(updated)
       })
   }
 
@@ -44,7 +68,7 @@ const App = () => {
         </Reveal.Content>
       </Reveal>
       <ToDoForm addToDo={addToDo} />
-      <ToDoList todos={todos}/>
+      <ToDoList toDos={toDos} removeToDo={removeToDo} />
     </Container>
   )
 }

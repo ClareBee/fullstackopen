@@ -6,8 +6,8 @@ const config = (env, argv) => {
   console.log('argv', argv.mode)
 
   const backend_url = argv.mode === 'production'
-      ? 'https://example.com/fictional-production-todos-endpoint'
-      : 'http://localhost:3004/todos'
+      ? 'https://example.com/fictional-production-toDos-endpoint'
+      : 'http://localhost:3004/toDos'
 
   return {
     entry: ['@babel/polyfill', './src/index.js'],
