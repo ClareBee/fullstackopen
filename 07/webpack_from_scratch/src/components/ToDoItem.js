@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Icon, List, Segment, Button, Checkbox, Confirm } from 'semantic-ui-react'
+import { Icon, List, Segment, Grid, Button, Checkbox, Confirm, Divider } from 'semantic-ui-react'
 
 const ToDoItem = ({ toDo, removeToDo, toggleToDo }) => {
   const [confirm, setConfirm] = useState(false);
@@ -19,17 +19,26 @@ const ToDoItem = ({ toDo, removeToDo, toggleToDo }) => {
   return (
     <List.Item>
       <Segment>
-        <Icon name="pencil" />
-        <List.Content>
-          <List.Header>{toDo.content}</List.Header>
-        </List.Content>
-        <Checkbox label="done?" onChange={() => toggleToDo(toDo.id)} checked={toDo.done}/>
-        <Button onClick={open}>Delete</Button>
-        <Confirm
-          open={confirm}
-          onCancel={close}
-          onConfirm={() => handleDelete(toDo.id)}
-        />
+      <Grid celled>
+        <Grid.Row>
+          <Grid.Column width={10}>
+            <List.Header>
+              <Icon name="pencil" />
+              <h4 style={{textDecoration: toDo.done ? 'line-through' : ''}}>{toDo.content}</h4>
+            </List.Header>
+            <Divider />
+            <Checkbox label="done?" onChange={() => toggleToDo(toDo.id)} checked={toDo.done}/>
+          </Grid.Column>
+          <Grid.Column floated="right" width={3}>
+            <Button circular negative onClick={open}>Delete</Button>
+            <Confirm
+              open={confirm}
+              onCancel={close}
+              onConfirm={() => handleDelete(toDo.id)}
+            />
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
       </Segment>
     </List.Item>
   )

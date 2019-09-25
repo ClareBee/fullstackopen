@@ -1,9 +1,19 @@
 {
   "toDos": [
     {
-      "content": "new to do",
-      "id": 1,
-      "done": false
+      "content": "whatever",
+      "id": 2,
+      "done": true
+    },
+    {
+      "content": "something new",
+      "id": 3,
+      "done": true
+    },
+    {
+      "content": "ffs",
+      "id": 1569441151010,
+      "done": true
     }
   ]
 }

@@ -3,7 +3,8 @@ import PromisePolyfill from 'promise-polyfill'
 import toDoService from './services/toDoService'
 import ToDoList from './components/ToDoList'
 import ToDoForm from './components/ToDoForm'
-import { Container, Divider, Segment, Reveal, Image, Statistic } from 'semantic-ui-react'
+import { Header, Container, Divider, Grid, Reveal, Image, Statistic } from 'semantic-ui-react'
+import image from './assets/getitdone.jpg'
 
 if (!window.Promise) {
   window.Promise = PromisePolyfill
@@ -22,7 +23,7 @@ const App = () => {
    event.preventDefault()
    const toDoObject = {
      content: toDo.content,
-     id: toDos.length + 1,
+     id: Date.now(),
      done: false
    }
    toDoService
@@ -55,25 +56,40 @@ const App = () => {
   }
 
   return (
-    <Container>
-      <h1 className="ui header">Webpack-From-Scratch</h1>
+    <Container text>
       <Divider />
-      <Segment>Small app to explore setting up React with Webpack, Babel & ESLint</Segment>
-      <Reveal animated='fade'>
-        <Reveal.Content visible>
-          <Image src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' />
-        </Reveal.Content>
-        <Reveal.Content hidden>
-          <Image src='https://react.semantic-ui.com/images/avatar/large/ade.jpg' size='small' />
-        </Reveal.Content>
-      </Reveal>
-      <Statistic.Group>
-        <Statistic>
-          <Statistic.Value>{toDos.length}</Statistic.Value>
-          <Statistic.Label>ToDos</Statistic.Label>
-        </Statistic>
-      </Statistic.Group>
+      <Header as="h2">
+        Webpack-From-Scratch
+        <Header.Subheader>
+          Small app to explore setting up React with Webpack, Babel & ESLint
+        </Header.Subheader>
+      </Header>
+      <Divider />
+      <Grid celled>
+        <Grid.Row>
+          <Grid.Column width={3}>
+            <Reveal animated='fade'>
+              <Reveal.Content visible>
+                <Image src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' />
+              </Reveal.Content>
+              <Reveal.Content hidden>
+                <Image src={image} size='small' />
+              </Reveal.Content>
+            </Reveal>
+          </Grid.Column>
+          <Grid.Column floated="right" width={3}>
+            <Statistic.Group>
+              <Statistic>
+                <Statistic.Value>{toDos.length}</Statistic.Value>
+                <Statistic.Label>ToDos</Statistic.Label>
+              </Statistic>
+            </Statistic.Group>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+      <Divider />
       <ToDoForm addToDo={addToDo} />
+      <Divider />
       <ToDoList toDos={toDos} removeToDo={removeToDo} toggleToDo={toggleToDo} />
     </Container>
   )

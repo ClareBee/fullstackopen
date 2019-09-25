@@ -34,6 +34,12 @@ const config = (env, argv) => {
           test: /\.css$/,
           loaders: ['style-loader', 'css-loader'],
         },
+        {
+          test: /\.(png|svg|jpg|gif)$/,
+          use: [
+           'file-loader'
+          ]
+        }
       ],
     },
     plugins: [

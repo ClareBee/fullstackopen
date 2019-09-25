@@ -4,7 +4,7 @@ import ToDoItem from './ToDoItem'
 import { List } from 'semantic-ui-react'
 
 const ToDoList = ({ toDos, removeToDo, toggleToDo }) => (
-  <List divided verticalAlign='middle'>
+  <List>
   {toDos.map(toDo => (
     <ToDoItem
       key={toDo.id}
