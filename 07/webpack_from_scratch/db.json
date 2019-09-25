@@ -1,3 +1,9 @@
 {
-  "toDos": []
+  "toDos": [
+    {
+      "content": "new to do",
+      "id": 1,
+      "done": false
+    }
+  ]
 }

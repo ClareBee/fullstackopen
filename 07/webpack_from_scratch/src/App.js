@@ -3,7 +3,7 @@ import PromisePolyfill from 'promise-polyfill'
 import toDoService from './services/toDoService'
 import ToDoList from './components/ToDoList'
 import ToDoForm from './components/ToDoForm'
-import { Container, Divider, Segment, Reveal, Image } from 'semantic-ui-react'
+import { Container, Divider, Segment, Reveal, Image, Statistic } from 'semantic-ui-react'
 
 if (!window.Promise) {
   window.Promise = PromisePolyfill
@@ -67,6 +67,12 @@ const App = () => {
           <Image src='https://react.semantic-ui.com/images/avatar/large/ade.jpg' size='small' />
         </Reveal.Content>
       </Reveal>
+      <Statistic.Group>
+        <Statistic>
+          <Statistic.Value>{toDos.length}</Statistic.Value>
+          <Statistic.Label>ToDos</Statistic.Label>
+        </Statistic>
+      </Statistic.Group>
       <ToDoForm addToDo={addToDo} />
       <ToDoList toDos={toDos} removeToDo={removeToDo} toggleToDo={toggleToDo} />
     </Container>
