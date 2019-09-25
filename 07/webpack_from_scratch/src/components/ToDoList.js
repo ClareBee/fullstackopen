@@ -18,8 +18,8 @@ const ToDoList = ({ toDos, removeToDo, toggleToDo }) => (
 
 ToDoList.propTypes = {
   toDos: PropTypes.array,
-  removeToDo: PropTypes.function,
-  toggleToDo: PropTypes.function
+  removeToDo: PropTypes.func.isRequired,
+  toggleToDo: PropTypes.func.isRequired
 }
 
 export default ToDoList;

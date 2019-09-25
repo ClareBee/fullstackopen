@@ -49,7 +49,7 @@ const App = () => {
     }
     toDoService.update(toDo.id, updatedToDo)
       .then(returnedToDo => {
-        const updated = toDos.map(savedToDo => savedToDo.id === toDo.id ? savedToDo : returnedToDo)
+        const updated = toDos.map(savedToDo => savedToDo.id !== toDo.id ? savedToDo : returnedToDo)
         setToDos(updated)
       })
   }
@@ -58,7 +58,7 @@ const App = () => {
     <Container>
       <h1 className="ui header">Webpack-From-Scratch</h1>
       <Divider />
-      <Segment>Small app to explore setting up Webpack</Segment>
+      <Segment>Small app to explore setting up React with Webpack, Babel & ESLint</Segment>
       <Reveal animated='fade'>
         <Reveal.Content visible>
           <Image src='https://react.semantic-ui.com/images/wireframe/square-image.png' size='small' />

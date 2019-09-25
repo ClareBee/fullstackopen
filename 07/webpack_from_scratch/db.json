@@ -1,14 +1,3 @@
 {
-  "toDos": [
-    {
-      "content": "what the fuck",
-      "id": 4,
-      "done": true
-    },
-    {
-      "content": "deleted too much",
-      "id": 2,
-      "done": false
-    }
-  ]
+  "toDos": []
 }

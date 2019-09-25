@@ -130,10 +130,10 @@ e.g. db.json
 
 ```json
 {
-  "notes": [
+  "todos": [
     {
-      "important": true,
-      "content": "HTML is easy",
+      "done": true,
+      "content": "study javascript",
       "id": "5a3b8481bb01f9cb00ccb4a9"
     },
     {

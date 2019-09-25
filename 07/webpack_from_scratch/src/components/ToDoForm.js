@@ -28,6 +28,6 @@ const ToDoForm = ({ addToDo }) => {
 }
 
 ToDoForm.propTypes = {
-  addToDo: PropTypes.function.isRequired
+  addToDo: PropTypes.func
 }
 export default ToDoForm
