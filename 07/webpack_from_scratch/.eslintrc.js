@@ -3,6 +3,11 @@ module.exports = {
         "browser": true,
         "es6": true
     },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
     "parser": "babel-eslint",
     "extends": [
       "eslint:recommended",
