@@ -5,15 +5,8 @@ Basic ToDo App using React 16.9, Webpack 4 & Semantic UI React: https://react.se
 ---
 ## Learning Notes - setting up React with Webpack
 1. **File structure**
-
-├── build
-|   └── index.html
-├── package.json
-├── src
-│   └── index.js
-│   └── index.css
-│   └── App.js
-└── webpack.config.js
+Basic for starters (incl index.html, App.js etc.) - *from FullstackOpen*
+![filetree](filestructure.jpg)
 
 2. Install **webpack**: `npm install --save-dev webpack webpack-cli`
 3. Install **React**: `npm install --save react react-dom`
