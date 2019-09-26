@@ -1,4 +1,8 @@
-1. File structure
+Basic ToDo App using React 16.9, Webpack 4 & Semantic UI React: https://react.semantic-ui.com/
+
+---
+## Learning Notes - setting up React with Webpack
+1. **File structure**
 
 ├── build
 |   └── index.html
@@ -9,9 +13,9 @@
 │   └── App.js
 └── webpack.config.js
 
-2. Install webpack: `npm install --save-dev webpack webpack-cli`
-3. Install React: `npm install --save react react-dom`
-4. Install loaders:
+2. Install **webpack**: `npm install --save-dev webpack webpack-cli`
+3. Install **React**: `npm install --save react react-dom`
+4. Install **loaders**:
 
 ```javascript
 // for jsx
@@ -21,9 +25,11 @@
 `npm install @babel/preset-env --save-dev`
 // to load css files and inject style element (in main.js)
 `npm install style-loader css-loader --save-dev`
+// images
+`npm install --save-dev file-loader`
 ```
 
-5. Install webpack-dev-server
+5. Install **webpack-dev-server**
 `npm install --save-dev webpack-dev-server`
 
 6. Config in `webpack.config.js`
@@ -62,6 +68,12 @@ const config = (env, argv) => {
           test: /\.css$/,
           loaders: ['style-loader', 'css-loader'],
         },
+        {
+          test: /\.(png|svg|jpg|gif)$/,
+          use: [
+            'file-loader'
+          ]
+        }
       ],
     },
     plugins: [
@@ -75,7 +87,7 @@ const config = (env, argv) => {
 module.exports = config
 ```
 
-7. Scripts in `package.json`:
+7. **Scripts** in `package.json`:
 ```javascript
 "scripts": {
   "build": "webpack --mode=production",
@@ -121,7 +133,7 @@ const App = () => {
 }
 ```
 
-11. Json-server for dev, real url for prod:
+11. **Json-server** for dev, real url for prod:
 https://github.com/typicode/json-server#getting-started
 `npm i -g json-server`
 `json-server --watch db.json --port 3004`
