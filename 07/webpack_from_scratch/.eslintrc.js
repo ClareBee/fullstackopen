@@ -6,7 +6,7 @@ module.exports = {
     "settings": {
       "react": {
         "version": "detect"
-      }
+      },
     },
     "parser": "babel-eslint",
     "extends": [

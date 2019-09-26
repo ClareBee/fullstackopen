@@ -1,18 +1,13 @@
 {
   "toDos": [
     {
-      "content": "whatever",
-      "id": 2,
-      "done": true
+      "content": "Tidy the kitchen",
+      "id": 1569515767753,
+      "done": false
     },
     {
-      "content": "something new",
-      "id": 3,
-      "done": true
-    },
-    {
-      "content": "ffs",
-      "id": 1569441151010,
+      "content": "Learn Spanish",
+      "id": 1569515795992,
       "done": true
     }
   ]

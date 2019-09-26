@@ -1,5 +1,7 @@
 Basic ToDo App using React 16.9, Webpack 4 & Semantic UI React: https://react.semantic-ui.com/
 
+![errors](src/assets/errors.jpg)
+![list](src/assets/list.jpg)
 ---
 ## Learning Notes - setting up React with Webpack
 1. **File structure**
