@@ -1,21 +1,100 @@
 ## Learning Notes
-**ExpressJS**
+
+- [ExpressJS Backend](#expressjs-backend)
+  * [Node and ExpressJS](#node-and-expressjs)
+  * [REST](#rest)
+  * [MongoDB and Mongoose](#mongodb-and-mongoose)
+  * [Deployment](#deployment)
+  * [Jest](#jest)
+- [React Frontend](#react-frontend)
+  * [LocalStorage](#localstorage)
+  * [React Hooks](#react-hooks)
+  * [React Router](#react-router)
+  * [Redux](#redux)
+  * [React Testing](#react-testing)
+  * [Cypress](#cypress)
+- [Dev Links](#dev-links)
+  * [Axios](#axios)
+  * [JsonServer](#jsonserver)
+  * [Linting](#linting)
+  * [Webpack](#webpack)
+  * [MaterialUI](#materialui)
+
+
+## ExpressJS Backend
+
+**Node & ExpressJS**
+- Node's built-in webserver:
+
+```javascript
+const http = require('http')
+
+const app = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' })
+  res.end('Hello World')
+})
+
+const port = 3001
+app.listen(port)
+console.log(`Server running on port ${port}`)
+```
+- Add ExpressJS
+https://expressjs.com/
+
+`npm install express --save`
+
+```javascript
+const express = require('express')
+const app = express()
+```
+
+- Automatic restart with nodemon
+https://nodemon.io/
+
+`npm install --save-dev nodemon`
+
+- Add script:
+```json
+"start": "node index.js",
+"watch": "nodemon index.js",
+```
+
+`npm run watch`
+
+- Add body-parser
+`npm install body-parser`
+
+>takes the JSON data of a request, transforms it into a JavaScript object and then attaches it to the body property of the request object before the route handler is called.
+- FullStackOpen
+
+```javascript
+const bodyParser = require('body-parser')
+app.use(bodyParser.json())
+```
+- Middleware
+
+**REST**
+TBC
 
 **MongoDB & mongoose**
+TBC
 
 **Deployment**
+TBC
 
-**REST & axios**
+**Jest**
+`npm install --save-dev jest`
 
-**JS functions - filter, map, reduce**
-
-**back end testing with Jest**
-npm install --save-dev jest
-"test": "jest --verbose"
+Add to package.json:
+```
+"test": "NODE_ENV=test jest --verbose --runInBand",
 "jest": {
   "testEnvironment": "node"
 }
-eslint
+```
+
+Add to ESLint config:
+```
 module.exports = {
   "env": {
     "commonjs": true
@@ -28,15 +107,18 @@ module.exports = {
     // ...
   },
 };
-"test": "NODE_ENV=test jest --verbose --runInBand"
-windows compatibility
-npm install --save-dev cross-env
+```
+Windows compatibility:
+`npm install --save-dev cross-env`
+```
 "scripts": {
   "start": "cross-env NODE_ENV=production node index.js",
   "watch": "cross-env NODE_ENV=development nodemon index.js",
   // ...
   "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
 },
+```
+
 require('dotenv').config()
 
 let PORT = process.env.PORT
@@ -50,15 +132,16 @@ module.exports = {
   MONGODB_URI,
   PORT
 }
-npm install --save-dev supertest
-npm install -g jest
-npx jest tests/note_api.test.js --runInBand
-npx jest -t 'a specific note is within the returned notes'
+`npm install --save-dev supertest`
+`npm install -g jest`
+`npx jest tests/note_api.test.js --runInBand`
+`npx jest -t` 'a specific note is within the returned notes'
 
-The test imports the Express application from the app.js module and wraps it with the supertest function into a so-called superagent object. This object is assigned to the api variable and tests can use it for making HTTP requests to the backend.
+>The test imports the Express application from the app.js module and wraps it with the supertest function into a so-called superagent object. This object is assigned to the api variable and tests can use it for making HTTP requests to the backend.
 https://fullstackopen.com/en/part4/testing_the_backend
 
-**localStorage & JWT**
+**localStorage for JWT**
+```javascript
 useEffect(() => {
   const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
   if (loggedUserJSON) {
@@ -70,6 +153,9 @@ useEffect(() => {
 window.localStorage.removeItem('loggedNoteappUser')
 
 window.localStorage.clear()
+```
+
+## React Frontend
 
 **Refs**
 https://reactjs.org/docs/refs-and-the-dom.html
@@ -77,66 +163,37 @@ https://reactjs.org/docs/refs-and-the-dom.html
 
 **Effect Hooks**
 The Effect Hook lets you perform side effects in function components. Data fetching, setting up a subscription, and manually changing the DOM in React components are all examples of side effects.
+
 **PropTypes**
-npm install --save prop-types
+`npm install --save prop-types`
+
+```jsx
 LoginForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  handleUsernameChange: PropTypes.func.isRequired,
   handlePasswordChange: PropTypes.func.isRequired,
-  username: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired
 }
+```
 
 **JsonServer**
 
-npm install json-server --save
+`npm install json-server --save`
+```
 "scripts": {
   "server": "json-server -p3001 db.json",
   // ...
 }
-npm run server
-npm install axios --save
+```
+`npm run server`
 
-import axios from 'axios'
 
-const baseUrl = 'http://localhost:3001/notes'
-
-const getAll = async () => {
-  const response = await axios.get(baseUrl)
-  return response.data
-}
-
-export default { getAll }
-
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-import NewNote from './components/NewNote'
-import Notes from './components/Notes'
-import VisibilityFilter from './components/VisibilityFilter'
-import noteService from './services/notes'
-import { initializeNotes } from './reducers/noteReducer'
-
-const App = (props) => {
-  useEffect(() => {
-    noteService
-      .getAll().then(notes => props.initializeNotes(notes))
-  },[])
-
-  return (
-    <div>
-      <NewNote />
-      <VisibilityFilter />
-      <Notes />
-    </div>
-  )
-}
-
-export default connect(null, { initializeNotes })(App)
 **Redux**
-npm install redux --save
+`npm install redux --save`
 
-immutability
-npm install --save-dev deep-freeze
+Immutability:
+`npm install --save-dev deep-freeze`
+
+```jsx
 import noteReducer from './noteReducer'
 import deepFreeze from 'deep-freeze'
 
@@ -159,7 +216,10 @@ describe('noteReducer', () => {
     expect(newState).toContainEqual(action.data)
   })
 })
-combineReducers
+```
+
+CombineReducers:
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, combineReducers } from 'redux'
@@ -174,53 +234,59 @@ const reducer = combineReducers({
 
 const store = createStore(reducer)
 
-console.log(store.getState())
-
 ReactDOM.render(
   <App store={store} />,
   document.getElementById('root')
 )
-**ReactRouter**
 
-npm install --save react-router-dom
+
+**ReactRouter**
+`npm install --save react-router-dom`
+
 import {
   BrowserRouter as Router,
   Route, Link, Redirect, withRouter
 } from 'react-router-dom'
 
 const App = () => {
-
-  const padding = { padding: 5 }
+  const noteById = (id) =>
+    notes.find(note => note.id === Number(id))
 
   return (
     <div>
       <Router>
         <div>
           <div>
-            <Link style={padding} to="/">home</Link>
-            <Link style={padding} to="/notes">notes</Link>
-            <Link style={padding} to="/users">users</Link>
+            <Link to="/">home</Link>
+            <Link to="/notes">notes</Link>
           </div>
-          <Route exact path="/" render={() => <Home />} />
-          <Route path="/notes" render={() => <Notes />} />
-          <Route path="/users" render={() => <Users />} />
 
-<Route exact path="/notes" render={() =>
-  <Notes notes={notes} />
-} />
-<Route exact path="/notes/:id" render={({ match }) =>
-  <Note note={noteById(match.params.id)} />
-} />
-</div>
+          <Route exact path="/" render={() => <Home />} />
+          <Route exact path="/notes" render={() =>
+            <Notes notes={notes} />
+          } />
+          <Route exact path="/notes/:id" render={({ match }) =>
+            <Note note={noteById(match.params.id)} />
+          } />
         </div>
-      </Router>
-    </div>
+      </div>
+    </Router>
+  </div>
   )
 }
-BrowserRouter is a Router that uses the HTML5 history API (pushState, replaceState and the popState event) to keep your UI in sync with the URL.
+
+---
+https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/withRouter.md
+
+>BrowserRouter is a Router that uses the HTML5 history API (pushState, replaceState and the popState event) to keep your UI in sync with the URL.
+
 
 **ReactTestingLibrary**
-npm install --save-dev @testing-library/react @testing-library/jest-dom
+https://testing-library.com/docs/react-testing-library/api#debug
+
+`npm install --save-dev @testing-library/react @testing-library/jest-dom`
+
+
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render, cleanup } from '@testing-library/react'
@@ -243,6 +309,9 @@ test('renders content', () => {
   )
 })
 component.debug()
+```
+
+```javascript
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render, cleanup } from '@testing-library/react'
@@ -262,12 +331,14 @@ test('renders content', () => {
 
   console.log(prettyDOM(li))
 })
-https://testing-library.com/docs/react-testing-library/api#debug
+```
+
 **Cypress**
-```
+
 npm install --save-dev cypress
-```
-add to `package.json` script block: `"cypress:open": "cypress open"`
+
+
+Add to `package.json` script block: `"cypress:open": "cypress open"`
 
 To backend `package.json` script block: `"start:test": "cross-env NODE_ENV=test node index.js"`
 
@@ -284,6 +355,7 @@ if (process.env.NODE_ENV === 'test') {
 ```
 
 Example testing controller:
+
 ```javascript
 const router = require('express').Router()
 const User = require('../models/user')
@@ -308,10 +380,16 @@ beforeEach(function() {
   cy.request('POST', 'http://localhost:3001/api/users/', user)
   cy.visit('http://localhost:3000')
 })
+```
 
+**axios**
 
 **ESLint**
-npm add --save-dev eslint-plugin-jest
+`npm install eslint --save-dev`
+`node_modules/.bin/eslint --init`
+With Jest:
+`npm add --save-dev eslint-plugin-jest`
+
 .eslintrc.js
 module.exports = {
   "env": {
@@ -364,22 +442,29 @@ module.exports = {
 };
 
 .eslintignore
+
 node_modules
 build
 
-package.json
-"eslint": "eslint ."
+Add script to package.json:
+`"eslint": "eslint ."`
 
 **Webpack**
+See webpack-from-scratch repo (LINK)
 
 **MaterialUI**
-
 https://material-ui.com/
+
 `npm i @material-ui/core`
-Roboto Font:
+
+Add Roboto Font:
+```html
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-Font Icons:
+```
+Add Font Icons:
+```
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+```
 
 Handy Blog Post:
 https://alligator.io/react/material-ui/
