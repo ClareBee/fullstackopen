@@ -10,9 +10,9 @@ import { addUser, removeUser, initialiseUsers } from './reducers/userReducer'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
-import Navigation from './components/Navigation'
+import Navigation from './components/Layout/Navigation'
 import LoginForm from './components/LoginForm'
-import Footer from './components/Footer'
+import Footer from './components/Layout/Footer'
 import Container from '@material-ui/core/Container'
 import { makeStyles } from '@material-ui/core/styles'
 

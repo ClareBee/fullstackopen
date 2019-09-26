@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { updateBlog, destroyBlog } from '../reducers/blogReducer'
-import { setNotification } from '../reducers/notificationReducer'
-import CommentForm from './CommentForm'
-import CommentList from './CommentList'
+import { updateBlog, destroyBlog } from '../../reducers/blogReducer'
+import { setNotification } from '../../reducers/notificationReducer'
+import CommentForm from '../Comment/CommentForm'
+import CommentList from '../Comment/CommentList'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Box from '@material-ui/core/Box'
@@ -13,7 +13,7 @@ import CardContent from '@material-ui/core/CardContent'
 import CardActions from '@material-ui/core/CardActions'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
-import { capitalize } from '../utils/format'
+import { capitalize } from '../../utils/format'
 
 const Blog = ({
   blog,
