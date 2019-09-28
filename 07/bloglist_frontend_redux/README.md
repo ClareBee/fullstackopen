@@ -16,7 +16,9 @@ App will start on port 3000
 App will start on port 3003
 
 ---
-![login](images/errors.jpg)
+<img src="images/login.jpg" alt="login" width="400"/>
+
+![login](images/login.jpg)
 ![newform](images/newform.jpg)
 ![errors](images/errors.jpg)
 ![index](images/index.jpg)
