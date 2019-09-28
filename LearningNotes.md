@@ -23,8 +23,8 @@
 
 
 ## Express.js Backend
-
-**Node.js & Express.js**
+---
+**#Node.js and Express.js**
 - Node's built-in webserver:
 
 ```javascript
@@ -66,9 +66,9 @@ https://nodemon.io/
 
 - Middleware
 
-E.g. https://github.com/expressjs/morgan for logging . 
+E.g. https://github.com/expressjs/morgan for logging .
 
-Add body-parser
+E.g. Add body-parser
 
 `npm install body-parser`
 
@@ -78,26 +78,27 @@ Add body-parser
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 ```
-
+---
 **REST**
 
 https://restfulapi.net/
-
+---
 **MongoDB & mongoose**
 
 - https://docs.mongodb.com/
 - https://mongoosejs.com/
 
+---
 **Deployment**
 
 TBC
-
+---
 **Jest & Supertest**
 
 `npm install --save-dev jest`
 `npm install --save-dev supertest`
 
-In `.test.js` file: 
+In `.test.js` file:
 `const api = supertest(app)`
 
 Add to package.json:
@@ -162,6 +163,7 @@ module.exports = {
 >The test imports the Express application from the app.js module and wraps it with the supertest function into a so-called superagent object. This object is assigned to the api variable and tests can use it for making HTTP requests to the backend.
 https://fullstackopen.com/en/part4/testing_the_backend
 
+---
 
 ## React Frontend
 
@@ -169,17 +171,19 @@ https://fullstackopen.com/en/part4/testing_the_backend
 
 https://reactjs.org/docs/refs-and-the-dom.html
 
+---
 **useState Hook**
 
 - at top level of component
 ```jsx
 const [plan, setPlan] = useState({content: ""});
 ```
-
+---
 **useEffect Hook**
 
 - for side effects in function components. e.g. Data fetching, setting up a subscription, & manually changing DOM
 
+---
 **PropTypes**
 
 `npm install --save prop-types`
@@ -191,8 +195,8 @@ LoginForm.propTypes = {
   password: PropTypes.string.isRequired
 }
 ```
-
-**JsonServer** . 
+---
+**JsonServer** .
 
 `npm install json-server --save`
 ```
@@ -203,7 +207,7 @@ LoginForm.propTypes = {
 ```
 `npm run server`
 
-
+---
 **Redux**
 
 `npm install redux --save`
@@ -235,9 +239,8 @@ describe('noteReducer', () => {
   })
 })
 ```
-
-**CombineReducers & Middleware** 
-
+---
+**CombineReducers & Middleware**
 
 ```javascript
 import React from 'react'
@@ -272,7 +275,7 @@ import rootReducer from './reducers/index';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 ```
-
+---
 **React Router**
 
 `npm install --save react-router-dom`
@@ -316,7 +319,7 @@ https://github.com/ReactTraining/react-router/blob/master/packages/react-router/
 
 >BrowserRouter is a Router that uses the HTML5 history API (pushState, replaceState and the popState event) to keep your UI in sync with the URL.
 
-
+---
 **ReactTestingLibrary**
 
 https://testing-library.com/docs/react-testing-library/api#debug
@@ -369,9 +372,9 @@ test('renders content', () => {
   console.log(prettyDOM(li))
 })
 ```
-
+---
 ### Cypress
-
+E2E testing:
 `npm install --save-dev cypress`
 
 - Add to `package.json` script block: `"cypress:open": "cypress open"`
@@ -417,7 +420,7 @@ beforeEach(function() {
   cy.visit('http://localhost:3000')
 })
 ```
-
+---
 ## Dev Links
 
 **axios**
@@ -444,7 +447,7 @@ axios.get('/user?ID=12345')
     // always executed
   });
 ```
-
+---
 **localStorage for JWT**
 
 ```javascript
@@ -460,7 +463,7 @@ window.localStorage.removeItem('loggedNoteappUser')
 
 window.localStorage.clear()
 ```
-
+---
 **ESLint**
 
 `npm install eslint --save-dev`
@@ -521,6 +524,7 @@ module.exports = {
   }
 };
 ```
+---
 **.eslintignore**
 
 E.g.  
@@ -533,10 +537,12 @@ build
 Add script to package.json:
 `"eslint": "eslint ."`
 
+---
 **Webpack**
 
 See [webpack-from-scratch](https://github.com/ClareBee/fullstackopen/tree/master/07/webpack_from_scratch)
 
+---
 **MaterialUI**
 
 https://material-ui.com/
@@ -554,11 +560,12 @@ https://material-ui.com/
 
 Handy Blog Post:  
 
-https://alligator.io/react/material-ui/ 
+https://alligator.io/react/material-ui/
 
+---
 **SemanticUI**
 
-https://react.semantic-ui.com/ 
+https://react.semantic-ui.com/
 ` yarn add semantic-ui-react`
 e.g.
 ```javascript

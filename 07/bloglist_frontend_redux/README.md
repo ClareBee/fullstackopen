@@ -7,7 +7,6 @@
   * [Deployment](#deployment)
   * [Jest](#jest)
 - [React Frontend](#react-frontend)
-  * [LocalStorage](#localstorage)
   * [React Hooks](#react-hooks)
   * [React Router](#react-router)
   * [Redux](#redux)
@@ -16,9 +15,12 @@
 - [Dev Links](#dev-links)
   * [Axios](#axios)
   * [JsonServer](#jsonserver)
+  * [LocalStorage](#localstorage)
   * [Linting](#linting)
   * [Webpack](#webpack)
+  * [Babel](#babel)
   * [MaterialUI](#materialui)
+  * [SemanticUI](#semanticui)
 
 
 ## ExpressJS Backend
@@ -92,6 +94,8 @@ Add to package.json:
   "testEnvironment": "node"
 }
 ```
+Run individual test:
+[WIP]
 
 Add to ESLint config:
 ```
@@ -140,29 +144,20 @@ module.exports = {
 >The test imports the Express application from the app.js module and wraps it with the supertest function into a so-called superagent object. This object is assigned to the api variable and tests can use it for making HTTP requests to the backend.
 https://fullstackopen.com/en/part4/testing_the_backend
 
-**localStorage for JWT**
-```javascript
-useEffect(() => {
-  const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
-  if (loggedUserJSON) {
-    const user = JSON.parse(loggedUserJSON)
-    setUser(user)
-    noteService.setToken(user.token)
-  }
-}, [])
-window.localStorage.removeItem('loggedNoteappUser')
-
-window.localStorage.clear()
-```
 
 ## React Frontend
 
 **Refs**
 https://reactjs.org/docs/refs-and-the-dom.html
-**useState**
 
-**Effect Hooks**
-The Effect Hook lets you perform side effects in function components. Data fetching, setting up a subscription, and manually changing the DOM in React components are all examples of side effects.
+**useState Hook**
+- at top level of component
+```jsx
+const [plan, setPlan] = useState({content: ""});
+```
+
+**useEffect Hook**
+- for side effects in function components. e.g. Data fetching, setting up a subscription, & manually changing DOM
 
 **PropTypes**
 `npm install --save prop-types`
@@ -218,8 +213,9 @@ describe('noteReducer', () => {
 })
 ```
 
-CombineReducers:
+**CombineReducers & Middleware:**
 
+```javascript
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, combineReducers } from 'redux'
@@ -238,11 +234,12 @@ ReactDOM.render(
   <App store={store} />,
   document.getElementById('root')
 )
-
+```
 
 **ReactRouter**
 `npm install --save react-router-dom`
 
+```javascript
 import {
   BrowserRouter as Router,
   Route, Link, Redirect, withRouter
@@ -274,6 +271,7 @@ const App = () => {
   </div>
   )
 }
+```
 
 ---
 https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/withRouter.md
@@ -286,7 +284,7 @@ https://testing-library.com/docs/react-testing-library/api#debug
 
 `npm install --save-dev @testing-library/react @testing-library/jest-dom`
 
-
+```javascript
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render, cleanup } from '@testing-library/react'
@@ -309,6 +307,7 @@ test('renders content', () => {
   )
 })
 component.debug()
+
 ```
 
 ```javascript
@@ -335,12 +334,11 @@ test('renders content', () => {
 
 **Cypress**
 
-npm install --save-dev cypress
+`npm install --save-dev cypress`
 
-
-Add to `package.json` script block: `"cypress:open": "cypress open"`
-
-To backend `package.json` script block: `"start:test": "cross-env NODE_ENV=test node index.js"`
+- Add to `package.json` script block: `"cypress:open": "cypress open"`
+- To run headlessly: `"cypress:run": "cypress run"`
+- To backend `package.json` script block: `"start:test": "cross-env NODE_ENV=test node index.js"`
 
 Run FE & BE:
 `npm run cypress:open`
@@ -384,13 +382,30 @@ beforeEach(function() {
 
 **axios**
 
+**localStorage for JWT**
+```javascript
+useEffect(() => {
+  const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
+  if (loggedUserJSON) {
+    const user = JSON.parse(loggedUserJSON)
+    setUser(user)
+    noteService.setToken(user.token)
+  }
+}, [])
+window.localStorage.removeItem('loggedNoteappUser')
+
+window.localStorage.clear()
+```
+
 **ESLint**
 `npm install eslint --save-dev`
 `node_modules/.bin/eslint --init`
+
 With Jest:
 `npm add --save-dev eslint-plugin-jest`
 
-.eslintrc.js
+```javascript
+//.eslintrc.js
 module.exports = {
   "env": {
       "browser": true,
@@ -440,11 +455,14 @@ module.exports = {
       "react/prop-types": 0
   }
 };
+```
 
-.eslintignore
-
+**.eslintignore**
+```
+cypress
 node_modules
 build
+```
 
 Add script to package.json:
 `"eslint": "eslint ."`
@@ -457,14 +475,14 @@ https://material-ui.com/
 
 `npm i @material-ui/core`
 
-Add Roboto Font:
+- Add Roboto Font:
 ```html
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
 ```
-Add Font Icons:
+- Add Font Icons:
 ```
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 ```
 
-Handy Blog Post:
+**Handy Blog Post**:
 https://alligator.io/react/material-ui/
