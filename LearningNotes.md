@@ -39,7 +39,8 @@ const port = 3001
 app.listen(port)
 console.log(`Server running on port ${port}`)
 ```
-- Add ExpressJS . 
+- Add ExpressJS
+
 https://expressjs.com/
 
 `npm install express --save`
@@ -49,7 +50,8 @@ const express = require('express')
 const app = express()
 ```
 
-- Automatic restart with nodemon . 
+- Automatic restart with nodemon
+
 https://nodemon.io/
 
 `npm install --save-dev nodemon`
@@ -62,10 +64,12 @@ https://nodemon.io/
 
 `npm run watch`
 
-- Middleware . 
+- Middleware
+
 E.g. https://github.com/expressjs/morgan for logging . 
 
-Add body-parser . 
+Add body-parser
+
 `npm install body-parser`
 
 >takes the JSON data of a request, transforms it into a JavaScript object and then attaches it to the body property of the request object before the route handler is called.
@@ -75,17 +79,21 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 ```
 
-**REST** . 
+**REST**
+
 https://restfulapi.net/
 
-**MongoDB & mongoose** . 
+**MongoDB & mongoose**
+
 - https://docs.mongodb.com/
 - https://mongoosejs.com/
 
-**Deployment** . 
+**Deployment**
+
 TBC
 
-**Jest & Supertest** . 
+**Jest & Supertest**
+
 `npm install --save-dev jest`
 `npm install --save-dev supertest`
 
@@ -101,7 +109,9 @@ Add to package.json:
 ```
 Run individual test:    
 `jest -t name-of-spec`
-https://jestjs.io/docs/en/cli . 
+
+https://jestjs.io/docs/en/cli
+
 
 Add to ESLint config:  
 ```
@@ -153,21 +163,25 @@ module.exports = {
 https://fullstackopen.com/en/part4/testing_the_backend
 
 
-## React Frontend . 
+## React Frontend
 
-**Refs** . 
+**Refs**
+
 https://reactjs.org/docs/refs-and-the-dom.html
 
-**useState Hook** . 
+**useState Hook**
+
 - at top level of component
 ```jsx
 const [plan, setPlan] = useState({content: ""});
 ```
 
-**useEffect Hook** . 
+**useEffect Hook**
+
 - for side effects in function components. e.g. Data fetching, setting up a subscription, & manually changing DOM
 
-**PropTypes** . 
+**PropTypes**
+
 `npm install --save prop-types`
 
 ```jsx
@@ -190,7 +204,8 @@ LoginForm.propTypes = {
 `npm run server`
 
 
-**Redux** . 
+**Redux**
+
 `npm install redux --save`
 
 Immutability:  
@@ -221,7 +236,8 @@ describe('noteReducer', () => {
 })
 ```
 
-**CombineReducers & Middleware:** . 
+**CombineReducers & Middleware** 
+
 
 ```javascript
 import React from 'react'
@@ -243,8 +259,9 @@ ReactDOM.render(
   document.getElementById('root')
 )
 ```
-Redux Thunk for async actions:   
-https://github.com/reduxjs/redux-thunk . 
+Redux Thunk for async actions:
+
+https://github.com/reduxjs/redux-thunk
 
 `npm install redux-thunk`
 
@@ -256,7 +273,8 @@ import rootReducer from './reducers/index';
 const store = createStore(rootReducer, applyMiddleware(thunk));
 ```
 
-**React Router**  
+**React Router**
+
 `npm install --save react-router-dom`
 
 ```javascript
@@ -299,7 +317,8 @@ https://github.com/ReactTraining/react-router/blob/master/packages/react-router/
 >BrowserRouter is a Router that uses the HTML5 history API (pushState, replaceState and the popState event) to keep your UI in sync with the URL.
 
 
-**ReactTestingLibrary** . 
+**ReactTestingLibrary**
+
 https://testing-library.com/docs/react-testing-library/api#debug
 
 `npm install --save-dev @testing-library/react @testing-library/jest-dom`
@@ -351,7 +370,7 @@ test('renders content', () => {
 })
 ```
 
-### Cypress . 
+### Cypress
 
 `npm install --save-dev cypress`
 
@@ -399,11 +418,14 @@ beforeEach(function() {
 })
 ```
 
-## Dev Links . 
+## Dev Links
 
-**axios** . 
+**axios**
+
 https://github.com/axios/axios
+
 `npm install axios`
+
 E.g. from docs:
 ```javascript
 const axios = require('axios');
@@ -423,7 +445,8 @@ axios.get('/user?ID=12345')
   });
 ```
 
-**localStorage for JWT** . 
+**localStorage for JWT**
+
 ```javascript
 useEffect(() => {
   const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
@@ -438,7 +461,8 @@ window.localStorage.removeItem('loggedNoteappUser')
 window.localStorage.clear()
 ```
 
-**ESLint** . 
+**ESLint**
+
 `npm install eslint --save-dev`
 `node_modules/.bin/eslint --init`
 
@@ -497,7 +521,8 @@ module.exports = {
   }
 };
 ```
-**.eslintignore** . 
+**.eslintignore**
+
 E.g.  
 ```
 cypress
@@ -508,10 +533,12 @@ build
 Add script to package.json:
 `"eslint": "eslint ."`
 
-**Webpack** . 
+**Webpack**
+
 See [webpack-from-scratch](https://github.com/ClareBee/fullstackopen/tree/master/07/webpack_from_scratch)
 
-**MaterialUI** . 
+**MaterialUI**
+
 https://material-ui.com/
 
 `npm i @material-ui/core`
@@ -525,11 +552,13 @@ https://material-ui.com/
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 ```
 
-**Handy Blog Post**:  
-https://alligator.io/react/material-ui/ . 
+Handy Blog Post:  
 
-**SemanticUI** . 
-https://react.semantic-ui.com/ . 
+https://alligator.io/react/material-ui/ 
+
+**SemanticUI**
+
+https://react.semantic-ui.com/ 
 ` yarn add semantic-ui-react`
 e.g.
 ```javascript
