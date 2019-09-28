@@ -6,10 +6,12 @@
 ___
 
 #### Final Project: Bloglist
-React/Redux FrontEnd with Custom Hooks:
-- [FrontEnd](https://github.com/ClareBee/fullstackopen/tree/master/07/bloglist_frontend_redux)
-Express.js & MongoDB BackEnd
-- [BackEnd](https://github.com/ClareBee/fullstackopen/tree/master/07/blog_list_backend)
+- React/Redux FrontEnd with Custom Hooks:
+[FrontEnd](https://github.com/ClareBee/fullstackopen/tree/master/07/bloglist_frontend_redux)
+
+- Express.js & MongoDB BackEnd
+[BackEnd](https://github.com/ClareBee/fullstackopen/tree/master/07/blog_list_backend)
+
 *Styled with MaterialUI, tested with Cypress & supertest*
 ___
 
