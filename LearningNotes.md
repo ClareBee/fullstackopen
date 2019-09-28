@@ -24,7 +24,7 @@
 
 ## Express.js Backend
 ---
-**#Node.js and Express.js**
+### Node.js and Express.js
 - Node's built-in webserver:
 
 ```javascript
@@ -81,7 +81,7 @@ app.use(bodyParser.json())
 ---
 **REST**
 
-https://restfulapi.net/
+- https://restfulapi.net/
 ---
 **MongoDB & mongoose**
 
@@ -91,7 +91,7 @@ https://restfulapi.net/
 ---
 **Deployment**
 
-TBC
+- TBC
 ---
 **Jest & Supertest**
 
