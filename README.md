@@ -18,6 +18,7 @@ Bloglist:
 <img src="assets/bloglist.jpg" alt="bloglist" width="450"/>
 
 Webpack:
+
 <img src="assets/webpack.jpg" alt="login" width="450"/>
 
 
