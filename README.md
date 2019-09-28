@@ -5,22 +5,30 @@
 
 ___
 
-#### Final Project: Bloglist
+### Final Project: Bloglist
 - React/Redux FrontEnd with Custom Hooks:
+
 [FrontEnd](https://github.com/ClareBee/fullstackopen/tree/master/07/bloglist_frontend_redux)
 
-- Express.js & MongoDB BackEnd
+- Express.js & MongoDB BackEnd:
+
 [BackEnd](https://github.com/ClareBee/fullstackopen/tree/master/07/blog_list_backend)
 
 *Styled with MaterialUI, tested with Cypress & supertest*
+
+### Learning Notes
+
+- https://github.com/ClareBee/fullstackopen/blob/master/LearningNotes.md
 ___
+
+## Syllabus & Coursework
 
 - [Part 0](https://github.com/ClareBee/fullstackopen/tree/master/00_Fundamentals_of_Web_Apps)
   * **Fundamentals of Web Apps**
   * Coursework: [Notes](https://github.com/ClareBee/fullstackopen/tree/master/00_Fundamentals_of_Web_Apps)
 
 - [Part 1](https://github.com/ClareBee/fullstackopen/tree/master/01)
-  * **Intro to React - jsx, props**
+  * **Intro to React**
   * JavaScript
   * Coursework: [Course Information](https://github.com/ClareBee/fullstackopen/tree/master/01/courseinfo/newcourseinfo)
   * Coursework: [Anecdotes](https://github.com/ClareBee/fullstackopen/tree/master/01/anecdotes)
