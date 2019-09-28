@@ -1,11 +1,16 @@
 ## FullStackOpen 2019 - Deep Dive into Modern Web Development
 - https://fullstackopen.com/en
 
-> The content is the same as in the Full stack course held at the Department of Computer Science at the University of Helsinki in Spring 2019. - https://fullstackopen.com/en/about
+> The content is the same as in the Full stack course held at the Department of Computer Science at the University of Helsinki in Spring 2019.
 
 ___
 
-#### Final Project: [Bloglist]()
+#### Final Project: Bloglist
+React/Redux FrontEnd with Custom Hooks:
+- [FrontEnd](https://github.com/ClareBee/fullstackopen/tree/master/07/bloglist_frontend_redux)
+Express.js & MongoDB BackEnd
+- [BackEnd](https://github.com/ClareBee/fullstackopen/tree/master/07/blog_list_backend)
+*Styled with MaterialUI, tested with Cypress & supertest*
 ___
 
 - [Part 0](https://github.com/ClareBee/fullstackopen/tree/master/00_Fundamentals_of_Web_Apps)
