@@ -1,22 +1,22 @@
 ## Learning Notes
 
 - [ExpressJS Backend](#expressjs-backend)
-  * [Node and ExpressJS](#node-and-expressjs)
+  * [Node.js and Express.js](#nodejs-and-expressjs)
   * [REST](#rest)
   * [MongoDB and Mongoose](#mongodb-and-mongoose)
   * [Deployment](#deployment)
-  * [Jest & Supertest](#jest)
+  * [Jest and Supertest](#jest-and-supertest)
 - [React Frontend](#react-frontend)
   * [React Hooks](#react-hooks)
-  * [React Router](#react-router)
   * [Redux](#redux)
-  * [React Testing Library](#react-testing)
+  * [React Router](#react-router)
+  * [React Testing Library](#react-testing-library)
   * [Cypress](#cypress)
 - [Dev Links](#dev-links)
   * [Axios](#axios)
   * [JsonServer](#jsonserver)
-  * [LocalStorage](#localstorage)
-  * [Linting](#linting)
+  * [Local-Storage](#local-storage)
+  * [ESLint](#eslint)
   * [Webpack](#webpack)
   * [MaterialUI](#materialui)
   * [SemanticUI](#semanticui)
@@ -79,21 +79,21 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 ```
 ---
-**REST**
+### REST
 
 - https://restfulapi.net/
 ---
-**MongoDB & mongoose**
+### MongoDB and Mongoose
 
 - https://docs.mongodb.com/
 - https://mongoosejs.com/
 
 ---
-**Deployment**
+### Deployment
 
 - TBC
 ---
-**Jest & Supertest**
+### Jest and Supertest
 
 `npm install --save-dev jest`
 `npm install --save-dev supertest`
@@ -112,7 +112,6 @@ Run individual test:
 `jest -t name-of-spec`
 
 https://jestjs.io/docs/en/cli
-
 
 Add to ESLint config:  
 ```
@@ -167,7 +166,7 @@ https://fullstackopen.com/en/part4/testing_the_backend
 
 ## React Frontend
 
-**Refs**
+### React Hooks
 
 https://reactjs.org/docs/refs-and-the-dom.html
 
@@ -195,20 +194,9 @@ LoginForm.propTypes = {
   password: PropTypes.string.isRequired
 }
 ```
----
-**JsonServer** .
-
-`npm install json-server --save`
-```
-"scripts": {
-  "server": "json-server -p3001 db.json",
-  // ...
-}
-```
-`npm run server`
 
 ---
-**Redux**
+### Redux
 
 `npm install redux --save`
 
@@ -276,7 +264,7 @@ import rootReducer from './reducers/index';
 const store = createStore(rootReducer, applyMiddleware(thunk));
 ```
 ---
-**React Router**
+### React Router
 
 `npm install --save react-router-dom`
 
@@ -320,7 +308,7 @@ https://github.com/ReactTraining/react-router/blob/master/packages/react-router/
 >BrowserRouter is a Router that uses the HTML5 history API (pushState, replaceState and the popState event) to keep your UI in sync with the URL.
 
 ---
-**ReactTestingLibrary**
+### React Testing Library
 
 https://testing-library.com/docs/react-testing-library/api#debug
 
@@ -423,7 +411,7 @@ beforeEach(function() {
 ---
 ## Dev Links
 
-**axios**
+### axios
 
 https://github.com/axios/axios
 
@@ -447,8 +435,22 @@ axios.get('/user?ID=12345')
     // always executed
   });
 ```
+
 ---
-**localStorage for JWT**
+### JsonServer
+
+`npm install json-server --save`
+```
+"scripts": {
+  "server": "json-server -p3001 db.json",
+  // ...
+}
+```
+`npm run server`
+
+---
+
+### Local Storage
 
 ```javascript
 useEffect(() => {
@@ -464,7 +466,7 @@ window.localStorage.removeItem('loggedNoteappUser')
 window.localStorage.clear()
 ```
 ---
-**ESLint**
+### ESLint
 
 `npm install eslint --save-dev`
 `node_modules/.bin/eslint --init`
@@ -538,12 +540,12 @@ Add script to package.json:
 `"eslint": "eslint ."`
 
 ---
-**Webpack**
+### Webpack
 
 See [webpack-from-scratch](https://github.com/ClareBee/fullstackopen/tree/master/07/webpack_from_scratch)
 
 ---
-**MaterialUI**
+### MaterialUI
 
 https://material-ui.com/
 
@@ -563,7 +565,7 @@ Handy Blog Post:
 https://alligator.io/react/material-ui/
 
 ---
-**SemanticUI**
+### SemanticUI
 
 https://react.semantic-ui.com/
 ` yarn add semantic-ui-react`
