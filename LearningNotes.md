@@ -10,7 +10,7 @@
   * [React Hooks](#react-hooks)
   * [React Router](#react-router)
   * [Redux](#redux)
-  * [React Testing](#react-testing)
+  * [React Testing Library](#react-testing)
   * [Cypress](#cypress)
 - [Dev Links](#dev-links)
   * [Axios](#axios)
@@ -18,14 +18,13 @@
   * [LocalStorage](#localstorage)
   * [Linting](#linting)
   * [Webpack](#webpack)
-  * [Babel](#babel)
   * [MaterialUI](#materialui)
   * [SemanticUI](#semanticui)
 
 
-## ExpressJS Backend
+## Express.js Backend
 
-**Node & ExpressJS**
+**Node.js & Express.js**
 - Node's built-in webserver:
 
 ```javascript
@@ -40,7 +39,7 @@ const port = 3001
 app.listen(port)
 console.log(`Server running on port ${port}`)
 ```
-- Add ExpressJS
+- Add ExpressJS . 
 https://expressjs.com/
 
 `npm install express --save`
@@ -50,12 +49,12 @@ const express = require('express')
 const app = express()
 ```
 
-- Automatic restart with nodemon
+- Automatic restart with nodemon . 
 https://nodemon.io/
 
 `npm install --save-dev nodemon`
 
-- Add script:
+- Add script:  
 ```json
 "start": "node index.js",
 "watch": "nodemon index.js",
@@ -63,29 +62,35 @@ https://nodemon.io/
 
 `npm run watch`
 
-- Add body-parser
+- Middleware . 
+E.g. https://github.com/expressjs/morgan for logging . 
+
+Add body-parser . 
 `npm install body-parser`
 
 >takes the JSON data of a request, transforms it into a JavaScript object and then attaches it to the body property of the request object before the route handler is called.
-- FullStackOpen
 
 ```javascript
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 ```
-- Middleware
 
-**REST**
+**REST** . 
+https://restfulapi.net/
+
+**MongoDB & mongoose** . 
+- https://docs.mongodb.com/
+- https://mongoosejs.com/
+
+**Deployment** . 
 TBC
 
-**MongoDB & mongoose**
-TBC
-
-**Deployment**
-TBC
-
-**Jest**
+**Jest & Supertest** . 
 `npm install --save-dev jest`
+`npm install --save-dev supertest`
+
+In `.test.js` file: 
+`const api = supertest(app)`
 
 Add to package.json:
 ```
@@ -94,10 +99,11 @@ Add to package.json:
   "testEnvironment": "node"
 }
 ```
-Run individual test:
-[WIP]
+Run individual test:    
+`jest -t name-of-spec`
+https://jestjs.io/docs/en/cli . 
 
-Add to ESLint config:
+Add to ESLint config:  
 ```
 module.exports = {
   "env": {
@@ -112,7 +118,7 @@ module.exports = {
   },
 };
 ```
-Windows compatibility:
+Windows compatibility:  
 `npm install --save-dev cross-env`
 ```
 "scripts": {
@@ -123,6 +129,7 @@ Windows compatibility:
 },
 ```
 
+```javascript
 require('dotenv').config()
 
 let PORT = process.env.PORT
@@ -140,26 +147,27 @@ module.exports = {
 `npm install -g jest`
 `npx jest tests/note_api.test.js --runInBand`
 `npx jest -t` 'a specific note is within the returned notes'
+```
 
 >The test imports the Express application from the app.js module and wraps it with the supertest function into a so-called superagent object. This object is assigned to the api variable and tests can use it for making HTTP requests to the backend.
 https://fullstackopen.com/en/part4/testing_the_backend
 
 
-## React Frontend
+## React Frontend . 
 
-**Refs**
+**Refs** . 
 https://reactjs.org/docs/refs-and-the-dom.html
 
-**useState Hook**
+**useState Hook** . 
 - at top level of component
 ```jsx
 const [plan, setPlan] = useState({content: ""});
 ```
 
-**useEffect Hook**
+**useEffect Hook** . 
 - for side effects in function components. e.g. Data fetching, setting up a subscription, & manually changing DOM
 
-**PropTypes**
+**PropTypes** . 
 `npm install --save prop-types`
 
 ```jsx
@@ -170,7 +178,7 @@ LoginForm.propTypes = {
 }
 ```
 
-**JsonServer**
+**JsonServer** . 
 
 `npm install json-server --save`
 ```
@@ -182,10 +190,10 @@ LoginForm.propTypes = {
 `npm run server`
 
 
-**Redux**
+**Redux** . 
 `npm install redux --save`
 
-Immutability:
+Immutability:  
 `npm install --save-dev deep-freeze`
 
 ```jsx
@@ -213,7 +221,7 @@ describe('noteReducer', () => {
 })
 ```
 
-**CombineReducers & Middleware:**
+**CombineReducers & Middleware:** . 
 
 ```javascript
 import React from 'react'
@@ -235,8 +243,20 @@ ReactDOM.render(
   document.getElementById('root')
 )
 ```
+Redux Thunk for async actions:   
+https://github.com/reduxjs/redux-thunk . 
 
-**ReactRouter**
+`npm install redux-thunk`
+
+```javascript
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import rootReducer from './reducers/index';
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
+```
+
+**React Router**  
 `npm install --save react-router-dom`
 
 ```javascript
@@ -279,7 +299,7 @@ https://github.com/ReactTraining/react-router/blob/master/packages/react-router/
 >BrowserRouter is a Router that uses the HTML5 history API (pushState, replaceState and the popState event) to keep your UI in sync with the URL.
 
 
-**ReactTestingLibrary**
+**ReactTestingLibrary** . 
 https://testing-library.com/docs/react-testing-library/api#debug
 
 `npm install --save-dev @testing-library/react @testing-library/jest-dom`
@@ -307,7 +327,6 @@ test('renders content', () => {
   )
 })
 component.debug()
-
 ```
 
 ```javascript
@@ -332,7 +351,7 @@ test('renders content', () => {
 })
 ```
 
-**Cypress**
+### Cypress . 
 
 `npm install --save-dev cypress`
 
@@ -340,10 +359,10 @@ test('renders content', () => {
 - To run headlessly: `"cypress:run": "cypress run"`
 - To backend `package.json` script block: `"start:test": "cross-env NODE_ENV=test node index.js"`
 
-Run FE & BE:
+Run FE & BE:  
 `npm run cypress:open`
 
-Testing controller for managing db state:
+Testing controller for managing db state:  
 ```javascript
 // App.js
 if (process.env.NODE_ENV === 'test') {
@@ -352,7 +371,7 @@ if (process.env.NODE_ENV === 'test') {
 }
 ```
 
-Example testing controller:
+Example testing controller:  
 
 ```javascript
 const router = require('express').Router()
@@ -366,7 +385,7 @@ router.post('/reset', async (request, response) => {
 
 module.exports = router
 ```
-The to beforeEach() in FE tests, reset db:
+beforeEach() in FE tests, reset db:
 ```javascript
 beforeEach(function() {
   cy.request('POST', 'http://localhost:3001/api/testing/reset')
@@ -380,9 +399,31 @@ beforeEach(function() {
 })
 ```
 
-**axios**
+## Dev Links . 
 
-**localStorage for JWT**
+**axios** . 
+https://github.com/axios/axios
+`npm install axios`
+E.g. from docs:
+```javascript
+const axios = require('axios');
+
+// Make a request for a user with a given ID
+axios.get('/user?ID=12345')
+  .then(function (response) {
+    // handle success
+    console.log(response);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .finally(function () {
+    // always executed
+  });
+```
+
+**localStorage for JWT** . 
 ```javascript
 useEffect(() => {
   const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
@@ -397,7 +438,7 @@ window.localStorage.removeItem('loggedNoteappUser')
 window.localStorage.clear()
 ```
 
-**ESLint**
+**ESLint** . 
 `npm install eslint --save-dev`
 `node_modules/.bin/eslint --init`
 
@@ -456,8 +497,8 @@ module.exports = {
   }
 };
 ```
-
-**.eslintignore**
+**.eslintignore** . 
+E.g.  
 ```
 cypress
 node_modules
@@ -467,10 +508,10 @@ build
 Add script to package.json:
 `"eslint": "eslint ."`
 
-**Webpack**
-See webpack-from-scratch repo (LINK)
+**Webpack** . 
+See [webpack-from-scratch](https://github.com/ClareBee/fullstackopen/tree/master/07/webpack_from_scratch)
 
-**MaterialUI**
+**MaterialUI** . 
 https://material-ui.com/
 
 `npm i @material-ui/core`
@@ -484,5 +525,18 @@ https://material-ui.com/
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 ```
 
-**Handy Blog Post**:
-https://alligator.io/react/material-ui/
+**Handy Blog Post**:  
+https://alligator.io/react/material-ui/ . 
+
+**SemanticUI** . 
+https://react.semantic-ui.com/ . 
+` yarn add semantic-ui-react`
+e.g.
+```javascript
+import React from 'react'
+import { Button } from 'semantic-ui-react'
+
+const ButtonExampleButton = () => <Button>Click Here</Button>
+
+export default ButtonExampleButton
+```
