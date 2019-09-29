@@ -1,3 +1,5 @@
-`npx jest tests/name_of_test_file.test.js --runInBand`
-`npx jest -t 'name of a specific test'`
-`npx jest -t 'wordintestname' --runInBand`
+### Bloglist Backend
+
+To be run alongside Blogslist Frontend Redux
+
+`npm run start`

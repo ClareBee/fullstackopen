@@ -1,9 +1,8 @@
-import React from 'react';
-import './App.css';
+import React from 'react'
 import Course from './Course/course'
 
 const App = ({courses}) => {
-  const courseData = 
+  const courseData =
     courses.map(course => <Course course={course} key={course.id} />)
 
   return (

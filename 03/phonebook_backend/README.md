@@ -1,3 +1,4 @@
+
 https://abracadabrant-vin-37062.herokuapp.com
 
 Frontend - production build via `npm run build`
@@ -5,13 +6,14 @@ Frontend - production build via `npm run build`
 and add to package.json
 `  "proxy": "http://localhost:3001"`
 
-Backend
-Add cors package
-Procfile for Heroku `web: node index.js`
+### Backend
+- Add cors package
+- Procfile for Heroku `web: node index.js`
 `git push heroku master`
-Serve up frontend folder
+- Serve up frontend folder
 `app.use(express.static('build'))`
 or streamlined via scripts:
+
 ```json
 {
   "deploy": "git push heroku master",
@@ -20,7 +22,7 @@ or streamlined via scripts:
   "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
 }
 ```
-Deploying db to production:
+- Deploying db to production:
 `heroku config:set MONGODB_URI=mongodb+srv://clarebee:{password}@cluster0-qugsl.mongodb.net/people?retryWrites=true`
 
 `node_modules/.bin/eslint --init`
