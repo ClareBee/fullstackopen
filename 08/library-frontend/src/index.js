@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 
 import ApolloClient, { gql } from 'apollo-boost'
+import { ApolloProvider } from "@apollo/react-hooks"
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql'
@@ -22,4 +23,9 @@ client.query({ query })
     console.log(response.data)
   })
 
-ReactDOM.render(<App />, document.getElementById('root'));
+  ReactDOM.render(
+    <ApolloProvider client={client} >
+      <App />
+    </ApolloProvider>,
+    document.getElementById('root')
+  )

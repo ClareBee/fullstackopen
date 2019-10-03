@@ -1,12 +1,19 @@
 
 import React from 'react'
+import { gql } from 'apollo-boost'
+import { useApolloClient } from '@apollo/react-hooks'
 
-const Books = (props) => {
-  if (!props.show) {
+const Books = ({ show, result }) => {
+  const client = useApolloClient()
+
+  if (!show) {
     return null
   }
+  if (result.loading) {
+    return <div>loading...</div>
+  }
 
-  const books = []
+  const books = result.data.allBooks
 
   return (
     <div>
