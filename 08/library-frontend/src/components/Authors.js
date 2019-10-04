@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { gql } from 'apollo-boost'
-import { useApolloClient } from '@apollo/react-hooks'
 import { useQuery } from '@apollo/react-hooks'
+import UpdateAuthor from './UpdateAuthor'
 
 
 const ALL_AUTHORS = gql`
@@ -14,8 +14,8 @@ const ALL_AUTHORS = gql`
 }
 `
 
-const Authors = ({ show}) => {
-  const { loading, error, data} = useQuery(ALL_AUTHORS)
+const Authors = ({ show }) => {
+  const { loading, error, data } = useQuery(ALL_AUTHORS)
 
   if (!show) {
     return null
@@ -30,6 +30,11 @@ const Authors = ({ show}) => {
   return (
     <div>
       <h2>authors</h2>
+      {error &&
+         <div style={{ color: 'red' }}>
+           {error}
+         </div>
+      }
       <table>
         <tbody>
           <tr>
@@ -50,7 +55,7 @@ const Authors = ({ show}) => {
           )}
         </tbody>
       </table>
-
+      <UpdateAuthor authors={authors} refresh={refresh}/>
     </div>
   )
 }

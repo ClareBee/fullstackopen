@@ -26,7 +26,11 @@ const Books = ({ show }) => {
   return (
     <div>
       <h2>books</h2>
-
+      {error &&
+         <div style={{ color: 'red' }}>
+           {error}
+         </div>
+      }
       <table>
         <tbody>
           <tr>

@@ -4,6 +4,7 @@ import Authors from './components/Authors'
 import Books from './components/Books'
 import NewBook from './components/NewBook'
 
+
 const App = () => {
   const [page, setPage] = useState('authors')
 
@@ -19,10 +20,7 @@ const App = () => {
 
       <Books show={ page === 'books'} />
 
-
-      <NewBook
-        show={page === 'add'}
-      />
+      <NewBook show={page === 'add'} />
 
     </div>
   )
