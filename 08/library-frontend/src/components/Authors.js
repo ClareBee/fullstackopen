@@ -55,7 +55,7 @@ const Authors = ({ show }) => {
           )}
         </tbody>
       </table>
-      <UpdateAuthor authors={authors} refresh={refresh}/>
+      <UpdateAuthor authors={authors} />
     </div>
   )
 }
