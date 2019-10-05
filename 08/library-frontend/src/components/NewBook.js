@@ -51,7 +51,7 @@ const NewBook = (props) => {
   const [addBook, { loading }] = useMutation(ADD_BOOK,
     {
         onError: handleError,
-        refetchQueries: [{ query: ALL_BOOKS }, { query: ALL_AUTHORS}]
+        refetchQueries: [{ query: ALL_BOOKS }, { query: ALL_AUTHORS }]
     }
   );
 
