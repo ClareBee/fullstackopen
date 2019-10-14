@@ -24,8 +24,8 @@ const typeDefs = gql`
     genres: [String!]
   }
   type Author {
-    name: String!
-    bookCount: Int!
+    name: String
+    bookCount: Int
     born: Int
   }
   type Query {
@@ -58,39 +58,38 @@ const resolvers = {
     authorCount: () => {
       return Author.collection.countDocuments()
     },
-    allBooks: (root, args) => {
+    allBooks: async (root, args) => {
+      console.log(root, args)
       if(!args.author && !args.genre){
         return Book.find({}).populate('author')
       }
       if(args.author) {
-        return Book.find({ author: args.author }).populate('author')
+        let authorToFindBy = await Author.findOne({ name: args.author})
+        return Book.find({author: authorToFindBy._id}).populate('author')
+        // why doesn't this work?
+        // return Book.find({'author.name': args.author}).populate('author')
       }
       if(args.genre){
         return Book.find({ genres: args.genre }).populate('author')
       }
     },
-    // allAuthors: () => {
-    //   return authors.map(author => {
-    //     return {
-    //       name: author.name,
-    //       born: author.born,
-    //       bookCount: books.filter(book => book.author === author.name).length
-    //     }
-    //   })
-    // }
+    allAuthors: () => {
+      return Author.find({})
+    }
   },
   Mutation: {
     addBook: async (root, args) => {
-      // if (!books.find(book => book.author === args.author)){
-      //   const author = { name: args.author, bookCount: 1, id: uuid()}
-      //   authors = authors.concat(author)
-      // }
       let author = await Author.findOne({ name: args.authorInput.name })
+      console.log('found', author)
       if(!author){
-        author = new Author({ name: args.authorInput.name, bookCount: 1 })
+        author = new Author({ bookCount: 1, name: args.authorInput.name })
+        console.log('new', author)
       }
       console.log(author)
-      const book = new Book({ ...args, author: author })
+
+      const book = new Book({ ...args})
+      console.log(book)
+      book.author = author
       try {
         await author.save()
         await book.save()
