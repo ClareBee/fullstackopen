@@ -7,8 +7,10 @@ const ALL_BOOKS = gql`
 {
   allBooks  {
     title
-    author
     published
+    author {
+      name
+    }
   }
 }
 `
@@ -39,14 +41,17 @@ const Books = ({ show }) => {
               author
             </th>
             <th>
+              genres
+            </th>
+            <th>
               published
             </th>
           </tr>
-          {books.map(a =>
-            <tr key={a.title}>
-              <td>{a.title}</td>
-              <td>{a.author}</td>
-              <td>{a.published}</td>
+          {books.map(book =>
+            <tr key={book.title}>
+              <td>{book.title}</td>
+              <td>{book.author && book.author.name}</td>
+              <td>{book.published}</td>
             </tr>
           )}
         </tbody>

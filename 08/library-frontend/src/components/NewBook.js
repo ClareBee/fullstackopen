@@ -6,7 +6,9 @@ const ALL_BOOKS = gql`
 {
   allBooks  {
     title
-    author
+    author {
+      name
+    }
     published
   }
 }
@@ -22,15 +24,17 @@ const ALL_AUTHORS = gql`
 `
 
 const ADD_BOOK = gql`
-  mutation AddBook($title: String!, $author: String!, $published: Int!, $genres: [String!]) {
+  mutation AddBook($title: String!, $authorInput: AuthorInput!, $published: Int!, $genres: [String!]) {
     addBook (
       title: $title
-      author: $author
+      authorInput: $authorInput
       published: $published
       genres: $genres
     ){
       title
-      author
+      author {
+        name
+      }
       published
       genres
     }
@@ -69,7 +73,7 @@ const NewBook = (props) => {
 
   const submit = async (e) => {
     e.preventDefault()
-    addBook({ variables: { author, title, published, genres }})
+    addBook({ variables: { authorInput: { name: author }, title, published, genres }})
     console.log('add book...')
 
     setTitle('')
