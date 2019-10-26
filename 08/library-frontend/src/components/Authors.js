@@ -33,7 +33,7 @@ const Authors = ({ show }) => {
       <h2>authors</h2>
       {error &&
          <div style={{ color: 'red' }}>
-           {error}
+           {error.graphQLErrors}
          </div>
       }
       <table>
