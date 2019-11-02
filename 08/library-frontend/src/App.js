@@ -5,6 +5,7 @@ import { useMutation, useApolloClient } from '@apollo/react-hooks'
 import Authors from './components/Authors'
 import Books from './components/Books'
 import NewBook from './components/NewBook'
+import Recommendations from './components/Recommendations'
 import LoginForm from './components/LoginForm'
 
 const LOGIN = gql`
@@ -57,16 +58,16 @@ const App = () => {
         {token && (
           <React.Fragment>
             <button onClick={() => setPage('add')}>add book</button>
+            <button onClick={() => setPage('recommendations')}>recommendations</button>
             <button onClick={logout}>logout</button>
           </React.Fragment>
         )}
       </div>
       {errorNotification()}
       <Authors show={page === 'authors'} token={token} />
-
       <Books show={page === 'books'} />
-
       <NewBook show={page === 'add'} />
+      <Recommendations show={page === 'recommendations'} token={token} />
       {!token && (
         <LoginForm
           show={page === 'login'}

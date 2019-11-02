@@ -25,7 +25,7 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true 
 const typeDefs = gql`
   type Visitor {
     username: String!
-    favoriteGenre: String!
+    favoriteGenre: String
     id: ID!
   }
   type Token {
