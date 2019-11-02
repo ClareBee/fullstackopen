@@ -46,43 +46,35 @@ const App = () => {
       {errorMessage}
     </div>
 
-  if (!token) {
-    return (
-      <div>
-        {errorNotification()}
-        <h2>Login</h2>
-        <LoginForm
-          login={login}
-          setToken={(token) => setToken(token)}
-        />
-      </div>
-    )
-  }
   return (
     <div>
       <div>
         <button onClick={() => setPage('authors')}>authors</button>
         <button onClick={() => setPage('books')}>books</button>
-        <button onClick={() => setPage('add')}>add book</button>
         {!token && (
           <button onClick={() => setPage('login')}>login</button>
         )}
         {token && (
-          <button onClick={logout}>logout</button>
+          <React.Fragment>
+            <button onClick={() => setPage('add')}>add book</button>
+            <button onClick={logout}>logout</button>
+          </React.Fragment>
         )}
       </div>
-
-      <Authors show={page === 'authors'} />
+      {errorNotification()}
+      <Authors show={page === 'authors'} token={token} />
 
       <Books show={page === 'books'} />
 
       <NewBook show={page === 'add'} />
-
-      <LoginForm
-        show={page === 'login'}
-        login={login}
-        setToken={(token) => setToken(token)}
-      />
+      {!token && (
+        <LoginForm
+          show={page === 'login'}
+          login={login}
+          setToken={(token) => setToken(token)}
+          setPage={setPage}
+        />
+      )}
 
     </div>
   )

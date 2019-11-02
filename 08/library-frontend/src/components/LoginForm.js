@@ -4,6 +4,9 @@ const LoginForm = (props) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
+  if (!props.show) {
+    return null
+  }
   const submit = async (event) => {
     event.preventDefault()
 
@@ -14,7 +17,8 @@ const LoginForm = (props) => {
     if (result) {
       const token = result.data.login.value
       props.setToken(token)
-      localStorage.setItem('phonenumbers-user-token', token)
+      localStorage.setItem('user-token', token)
+      props.setPage('books')
     }
   }
 
