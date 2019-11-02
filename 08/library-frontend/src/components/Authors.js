@@ -14,7 +14,7 @@ const ALL_AUTHORS = gql`
 }
 `
 
-const Authors = ({ show }) => {
+const Authors = ({ show, token }) => {
   const { loading, error, data } = useQuery(ALL_AUTHORS)
 
   if (!show) {
@@ -56,7 +56,7 @@ const Authors = ({ show }) => {
           )}
         </tbody>
       </table>
-      <UpdateAuthor authors={authors} />
+      <UpdateAuthor authors={authors} token={token}/>
     </div>
   )
 }
