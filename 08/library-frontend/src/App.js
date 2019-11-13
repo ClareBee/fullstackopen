@@ -65,7 +65,7 @@ const App = () => {
       </div>
       {errorNotification()}
       <Authors show={page === 'authors'} token={token} />
-      <Books show={page === 'books'} />
+      <Books show={page === 'books'} client={client}/>
       <NewBook show={page === 'add'} />
       <Recommendations show={page === 'recommendations'} token={token} />
       {!token && (

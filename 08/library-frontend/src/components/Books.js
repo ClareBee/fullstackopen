@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 
@@ -15,9 +15,37 @@ const ALL_BOOKS = gql`
   }
 }
 `
-const Books = ({ show }) => {
-  const [ chosenGenre, setChosenGenre ] = useState('')
+
+const RECOMMENDED_BOOKS = gql`
+  query booksByGenre($genre: String!) {
+    allBooks(genre: $genre)  {
+      title
+      published
+      author {
+        name
+      }
+      genres
+    }
+  }
+`
+const Books = ({ show, client }) => {
+  const [ genres, setGenres ] = useState('')
+  const [ books, setBooks ] = useState([])
   const { loading, error, data } = useQuery(ALL_BOOKS)
+
+
+  useEffect(() => {
+    const dbBooks = data && data.allBooks
+    setBooks(dbBooks)
+  }, [data])
+
+  useEffect(() => {
+    if(books && books.length > 1){
+      const allGenres = books.map(book => book.genres).flat().filter(genre => !!genre)
+      setGenres(allGenres)
+    }
+    return;
+  }, [books])
 
   if (!show) {
     return null
@@ -26,21 +54,27 @@ const Books = ({ show }) => {
     return <div>loading...</div>
   }
 
-  const dbBooks = data.allBooks
-  const books =
-    !chosenGenre ? dbBooks :
-    dbBooks.filter(book => book.genres.includes(chosenGenre))
-  console.log('books', books)
   if(!books){
     return (
       <p>No books</p>
     )
   }
+
+  const showGenres = async (genre) => {
+    console.log('client', client)
+    const { data } = await client.query({
+      query: RECOMMENDED_BOOKS,
+      variables: { genre }
+    })
+    setBooks(data.allBooks)
+  }
+
   const handleGenre = (e) => {
     e.preventDefault()
-    setChosenGenre(e.target.value)
+    showGenres(e.target.value)
+
+    // setChosenGenre(e.target.value)
   }
-  const genres = dbBooks.map(book => book.genres).flat().filter(genre => !!genre)
   return (
     <div>
       <h2>books</h2>

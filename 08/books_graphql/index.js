@@ -86,6 +86,7 @@ const resolvers = {
     },
     allBooks: async (root, args) => {
       console.log(root, args)
+      console.log('hello there')
       if(!args.author && !args.genre){
         return Book.find({}).populate('author')
       }
