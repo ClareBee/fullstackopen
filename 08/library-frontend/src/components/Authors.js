@@ -24,9 +24,7 @@ const Authors = ({ show, token }) => {
   if (loading) {
     return <div>loading...</div>
   }
-
   const authors = data.allAuthors
-  console.log('authors', authors)
 
   return (
     <div>

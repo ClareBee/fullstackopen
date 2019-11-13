@@ -11,10 +11,6 @@ const ALL_BOOKS = gql`
     }
     published
   }
-}
-`
-const ALL_AUTHORS = gql`
-{
   allAuthors  {
     name
     born
@@ -22,6 +18,11 @@ const ALL_AUTHORS = gql`
   }
 }
 `
+// const ALL_AUTHORS = gql`
+// {
+//
+// }
+// `
 
 const ADD_BOOK = gql`
   mutation AddBook($title: String!, $authorInput: AuthorInput!, $published: Int!, $genres: [String!]) {
@@ -55,7 +56,15 @@ const NewBook = (props) => {
   const [addBook, { loading }] = useMutation(ADD_BOOK,
     {
         onError: handleError,
-        refetchQueries: [{ query: ALL_BOOKS }, { query: ALL_AUTHORS }]
+        // refetchQueries: [{ query: ALL_AUTHORS }],
+        update: (store, response) => {
+          const dataInStore = store.readQuery({ query: ALL_BOOKS })
+          dataInStore.allBooks.push(response.data.addBook)
+          store.writeQuery({
+            query: ALL_BOOKS,
+            data: dataInStore
+          })
+        }
     }
   );
 
