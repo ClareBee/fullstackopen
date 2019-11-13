@@ -166,6 +166,7 @@ const resolvers = {
       return visitor
     },
     login: async (root, args) => {
+      console.log('logging in', args)
       const user = await Visitor.findOne({ username: args.username })
 
       if ( !user || args.password !== 'secret' ) {
