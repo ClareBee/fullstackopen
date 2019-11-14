@@ -1,73 +1,6 @@
 import React, { useState } from 'react'
-import { useMutation } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-
-const ALL_BOOKS = gql`
-{
-  allBooks  {
-    title
-    author {
-      name
-    }
-    published
-  }
-  allAuthors  {
-    name
-    born
-    bookCount
-  }
-}
-`
-// const ALL_AUTHORS = gql`
-// {
-//
-// }
-// `
-
-const ADD_BOOK = gql`
-  mutation AddBook($title: String!, $authorInput: AuthorInput!, $published: Int!, $genres: [String!]) {
-    addBook (
-      title: $title
-      authorInput: $authorInput
-      published: $published
-      genres: $genres
-    ){
-      title
-      author {
-        name
-      }
-      published
-      genres
-    }
-  }
-`
 
 const NewBook = (props) => {
-  const [errorMessage, setErrorMessage] = useState(null)
-
-  const handleError = (error) => {
-    console.log('error', error)
-    setErrorMessage(error.networkError || error.graphQLErrors[0].message)
-    setTimeout(() => {
-      setErrorMessage(null)
-    }, 10000)
-  }
-
-  const [addBook, { loading }] = useMutation(ADD_BOOK,
-    {
-        onError: handleError,
-        // refetchQueries: [{ query: ALL_AUTHORS }],
-        update: (store, response) => {
-          const dataInStore = store.readQuery({ query: ALL_BOOKS })
-          dataInStore.allBooks.push(response.data.addBook)
-          store.writeQuery({
-            query: ALL_BOOKS,
-            data: dataInStore
-          })
-        }
-    }
-  );
-
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [published, setPublished] = useState('')
@@ -78,11 +11,9 @@ const NewBook = (props) => {
     return null
   }
 
-  if (loading) return <p>Loading....</p>
-
   const submit = async (e) => {
     e.preventDefault()
-    addBook({ variables: { authorInput: { name: author }, title, published, genres }})
+    props.addBook({ variables: { authorInput: { name: author }, title, published, genres }})
     console.log('add book...')
 
     setTitle('')
@@ -99,11 +30,6 @@ const NewBook = (props) => {
 
   return (
     <div>
-      {errorMessage &&
-        <div style={{ color: 'red' }}>
-          {errorMessage}
-        </div>
-      }
       <form
         onSubmit={submit}>
         <div>
@@ -138,7 +64,7 @@ const NewBook = (props) => {
         <div>
           genres: {genres.join(' ')}
         </div>
-        <button type='submit'>create book</button>
+        <button type="submit">create book</button>
       </form>
     </div>
   )

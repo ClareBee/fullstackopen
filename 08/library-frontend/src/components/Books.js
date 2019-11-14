@@ -1,7 +1,8 @@
-
 import React, { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
+
+const uuidv4 = require('uuid/v4');
 
 const ALL_BOOKS = gql`
 {
@@ -15,7 +16,6 @@ const ALL_BOOKS = gql`
   }
 }
 `
-
 const RECOMMENDED_BOOKS = gql`
   query booksByGenre($genre: String!) {
     allBooks(genre: $genre)  {
@@ -33,7 +33,6 @@ const Books = ({ show, client }) => {
   const [ books, setBooks ] = useState([])
   const { loading, error, data } = useQuery(ALL_BOOKS)
 
-
   useEffect(() => {
     const dbBooks = data && data.allBooks
     setBooks(dbBooks)
@@ -42,7 +41,8 @@ const Books = ({ show, client }) => {
   useEffect(() => {
     if(books && books.length > 1){
       const allGenres = books.map(book => book.genres).flat().filter(genre => !!genre)
-      setGenres(allGenres)
+      const uniqueGenres = [...new Set(allGenres)]
+      setGenres(uniqueGenres)
     }
     return;
   }, [books])
@@ -61,7 +61,6 @@ const Books = ({ show, client }) => {
   }
 
   const showGenres = async (genre) => {
-    console.log('client', client)
     const { data } = await client.query({
       query: RECOMMENDED_BOOKS,
       variables: { genre }
@@ -69,12 +68,18 @@ const Books = ({ show, client }) => {
     setBooks(data.allBooks)
   }
 
+  const getAllBooks = async () => {
+    const { data } = await client.query({
+      query: ALL_BOOKS
+    })
+    setBooks(data.allBooks)
+  }
+
   const handleGenre = (e) => {
     e.preventDefault()
     showGenres(e.target.value)
-
-    // setChosenGenre(e.target.value)
   }
+
   return (
     <div>
       <h2>books</h2>
@@ -110,8 +115,9 @@ const Books = ({ show, client }) => {
         </tbody>
       </table>
       {genres.map(genre => (
-        <button value={genre} key={genre} onClick={(e) => handleGenre(e)}>{genre}</button>
+        <button value={genre} key={uuidv4()} onClick={(e) => handleGenre(e)}>{genre}</button>
       ))}
+      <button onClick={(e) => getAllBooks(e)}>All books</button>
     </div>
   )
 }

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
 import { useApolloClient } from '@apollo/react-hooks'
-
 
 const USER_AND_BOOKS = gql`
 {
@@ -51,14 +49,12 @@ const Recommendations = ({ token, show }) => {
     const userBooks = books.filter(book => (
       book.genres.includes(user.favoriteGenre)
     ))
-    console.log('userBooks', userBooks)
-    console.log('user', user.favoriteGenre)
     if(!user.favoriteGenre){
       return (
         <p>You haven't chosen a favourite genre</p>
       )
     }
-    if (!!userBooks){
+    if (userBooks.length === 0){
       return (
         <div>
           <p>Your favourite genre is {user.favoriteGenre}</p>
@@ -67,15 +63,16 @@ const Recommendations = ({ token, show }) => {
       )
     }
     return (
-      <ul>
-      {userBooks.map(book => (
-        <li key={book.published}>{book.title}</li>
-      ))}
-      </ul>
+      <div>
+        <p>Your favourite genre is {user.favoriteGenre}</p>
+        <ul>
+        {userBooks.map(book => (
+          <li key={book.published}>{book.title}</li>
+        ))}
+        </ul>
+      </div>
     )
   }
-  console.log('books', books)
-  console.log('user', user)
   return (
     formatBooks(books, user)
   )
