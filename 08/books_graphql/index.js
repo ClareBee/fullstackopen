@@ -1,4 +1,6 @@
 require('dotenv').config()
+const { PubSub } = require('apollo-server')
+const pubsub = new PubSub()
 
 const { ApolloServer, UserInputError, gql, AuthenticationError } = require('apollo-server')
 const mongoose = require('mongoose')
@@ -73,6 +75,9 @@ const typeDefs = gql`
       password: String!
     ): Token
   }
+  type Subscription {
+    bookAdded: Book!
+  }
 `
 
 const resolvers = {
@@ -85,8 +90,6 @@ const resolvers = {
       return Author.collection.countDocuments()
     },
     allBooks: async (root, args) => {
-      console.log(root, args)
-      console.log('hello there')
       if(!args.author && !args.genre){
         return Book.find({}).populate('author')
       }
@@ -131,6 +134,8 @@ const resolvers = {
           invalidArgs: args,
         })
       }
+      pubsub.publish('BOOK_ADDED', { bookAdded: book })
+
       return book.populate('author')
     },
     editAuthor: async (root, args, { currentUser }) => {
@@ -153,20 +158,16 @@ const resolvers = {
     },
     createVisitor: async (root, args) => {
       const visitor = new Visitor({ username: args.username, favoriteGenre: args.genre })
-      console.log(visitor)
       try {
         await visitor.save()
       } catch(error) {
-        console.log('error', error)
         throw new UserInputError(error.message, {
           invalidArgs: args,
         })
       }
-      console.log('visitor', visitor)
       return visitor
     },
     login: async (root, args) => {
-      console.log('logging in', args)
       const user = await Visitor.findOne({ username: args.username })
 
       if ( !user || args.password !== 'secret' ) {
@@ -177,10 +178,14 @@ const resolvers = {
         username: user.username,
         id: user._id,
       }
-      console.log(visitorForToken)
       return { value: jwt.sign(visitorForToken, JWT_SECRET) }
     },
-  }
+  },
+  Subscription: {
+    bookAdded: {
+      subscribe: () => pubsub.asyncIterator(['BOOK_ADDED'])
+    },
+  },
 }
 
 const server = new ApolloServer({
@@ -198,6 +203,7 @@ const server = new ApolloServer({
   }
 })
 
-server.listen().then(({ url }) => {
+server.listen().then(({ url, subscriptionsUrl }) => {
   console.log(`Server ready at ${url}`)
+  console.log(`Subscriptions ready at ${subscriptionsUrl}`)
 })
