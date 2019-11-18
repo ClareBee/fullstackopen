@@ -36,8 +36,6 @@ const authLink = setContext((_, { headers }) => {
 const link = split(
   ({ query }) => {
     const { kind, operation } = getMainDefinition(query)
-    console.log('main definition query', query )
-    console.log('main definition operation', operation)
     return kind === 'OperationDefinition' && operation === 'subscription'
   },
   wsLink,

@@ -1,23 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import gql from 'graphql-tag'
 import { useApolloClient } from '@apollo/react-hooks'
-
-const USER_AND_BOOKS = gql`
-{
-  me  {
-    username
-    favoriteGenre
-  }
-  allBooks  {
-    title
-    published
-    author {
-      name
-    }
-    genres
-  }
-}
-`
+import { USER_AND_BOOKS } from '../graphql/queries'
 
 const Recommendations = ({ token, show }) => {
   const client = useApolloClient(USER_AND_BOOKS)
@@ -34,7 +17,7 @@ const Recommendations = ({ token, show }) => {
       setUser(data.me)
     }
     showUser()
-  }, [])
+  }, [client])
 
   if (!show) {
     return null

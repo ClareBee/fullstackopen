@@ -9,3 +9,31 @@ export const ALL_BOOKS = gql`
   }
   ${BOOK_DETAILS}
 `
+export const RECOMMENDED_BOOKS = gql`
+  query booksByGenre($genre: String!) {
+    allBooks(genre: $genre)  {
+      ...BookDetails
+    }
+  }
+  ${BOOK_DETAILS}
+`
+export const USER_AND_BOOKS = gql`
+{
+  me  {
+    username
+    favoriteGenre
+  }
+  allBooks  {
+    ...BookDetails
+  }
+}
+`
+export const ALL_AUTHORS = gql`
+{
+  allAuthors  {
+    name
+    born
+    bookCount
+  }
+}
+`

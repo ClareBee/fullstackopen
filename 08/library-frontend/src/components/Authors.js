@@ -1,18 +1,7 @@
 import React from 'react'
-import { gql } from 'apollo-boost'
 import { useQuery } from '@apollo/react-hooks'
 import UpdateAuthor from './UpdateAuthor'
-
-
-const ALL_AUTHORS = gql`
-{
-  allAuthors  {
-    name
-    born
-    bookCount
-  }
-}
-`
+import { ALL_AUTHORS } from '../graphql/queries'
 
 const Authors = ({ show, token }) => {
   const { loading, error, data } = useQuery(ALL_AUTHORS)

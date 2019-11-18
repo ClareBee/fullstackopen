@@ -1,32 +1,14 @@
 import React, { useState } from 'react'
 import Select from 'react-select'
-
+import { ALL_AUTHORS } from '../graphql/queries'
+import { UPDATE_AUTHOR } from '../graphql/mutations'
 import { useMutation } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
-
-const UPDATE_AUTHOR = gql`
-  mutation editAuthor($name: String!, $setBornTo: Int!){
-    editAuthor(name: $name, setBornTo: $setBornTo){
-      name
-      born
-    }
-  }
-`;
-
-const ALL_AUTHORS = gql`
-{
-  allAuthors  {
-    name
-    born
-    bookCount
-  }
-}
-`
 
 const UpdateAuthor = (props) => {
   const [born, setBorn] = useState('')
   const [selected, setSelected] = useState('')
-  const [updateAuthor] = useMutation(UPDATE_AUTHOR,
+
+  const [updateAuthor, { loading: mutationLoading, error: mutationError }] = useMutation(UPDATE_AUTHOR,
     {
       refetchQueries: [{ query: ALL_AUTHORS }]
     }
@@ -64,12 +46,14 @@ const UpdateAuthor = (props) => {
       <div>
         <label>Born:</label>
         <input
-          type ='number'
+          type="number"
           value={born}
           onChange={({ target }) => setBorn(parseInt(target.value))}
         />
       </div>
-      <button type='submit'>Update Author</button>
+      <button type="submit">Update Author</button>
+      {mutationLoading && <p>Loading...</p>}
+      {mutationError && <p>Error :( Please make sure you're logged & try again</p>}
     </form>
   )
 }

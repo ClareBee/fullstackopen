@@ -1,33 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/react-hooks'
-import { gql } from 'apollo-boost'
-
+import { ALL_BOOKS, RECOMMENDED_BOOKS } from '../graphql/queries'
 const uuidv4 = require('uuid/v4');
 
-const ALL_BOOKS = gql`
-{
-  allBooks  {
-    title
-    published
-    author {
-      name
-    }
-    genres
-  }
-}
-`
-const RECOMMENDED_BOOKS = gql`
-  query booksByGenre($genre: String!) {
-    allBooks(genre: $genre)  {
-      title
-      published
-      author {
-        name
-      }
-      genres
-    }
-  }
-`
+
 const Books = ({ show, client }) => {
   const [ genres, setGenres ] = useState('')
   const [ books, setBooks ] = useState([])
