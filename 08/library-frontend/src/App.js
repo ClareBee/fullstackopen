@@ -1,55 +1,14 @@
 import React, { useState } from 'react'
-import { gql } from 'apollo-boost'
 import { useMutation, useSubscription, useApolloClient } from '@apollo/react-hooks'
 
-import BOOK_DETAILS from './fragments/book_fragment'
 import Authors from './components/Authors'
 import Books from './components/Books'
 import NewBook from './components/NewBook'
 import Recommendations from './components/Recommendations'
 import LoginForm from './components/LoginForm'
-
-const LOGIN = gql`
-  mutation login($username: String!, $password: String!) {
-    login(username: $username, password: $password)  {
-      value
-    }
-  }
-`
-const ALL_BOOKS = gql`
-  {
-    allBooks  {
-      ...BookDetails
-    }
-  }
-  ${BOOK_DETAILS}
-`
-const ADD_BOOK = gql`
-  mutation AddBook($title: String!, $authorInput: AuthorInput!, $published: Int!, $genres: [String!]) {
-    addBook (
-      title: $title
-      authorInput: $authorInput
-      published: $published
-      genres: $genres
-    ){
-      title
-      author {
-        name
-      }
-      published
-      genres
-    }
-  }
-`
-
-const BOOK_ADDED = gql`
-  subscription {
-    bookAdded {
-      ...BookDetails
-    }
-  }
-  ${BOOK_DETAILS}
-`
+import { LOGIN, ADD_BOOK } from './graphql/mutations'
+import { ALL_BOOKS } from './graphql/queries'
+import { BOOK_ADDED } from './graphql/subscription'
 
 const App = () => {
   const [errorMessage, setErrorMessage] = useState(null)

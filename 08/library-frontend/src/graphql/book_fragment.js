@@ -1,6 +1,6 @@
 import { gql } from 'apollo-boost';
 
-const BOOK_DETAILS = gql`
+export const BOOK_DETAILS = gql`
   fragment BookDetails on Book {
     title
     author {
@@ -10,6 +10,3 @@ const BOOK_DETAILS = gql`
     genres
   }
 `
-
-console.log(BOOK_DETAILS)
-export default BOOK_DETAILS
