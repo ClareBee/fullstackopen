@@ -66,9 +66,9 @@ const App = () => {
     }, 10000)
   }
   const updateCacheWith = addedBook => {
-    const includedIn = (set, object) =>
-      set.map(p => p.id).includes(object.id)
-    console.log('added book', addedBook)
+    const includedIn = (set, object) => {
+      return set.map(p => p.title).includes(object.title)
+    }
     const dataInStore = client.readQuery({ query: ALL_BOOKS })
     if (!includedIn(dataInStore.allBooks, addedBook)) {
       dataInStore.allBooks.push(addedBook)
@@ -81,7 +81,6 @@ const App = () => {
 
   useSubscription(BOOK_ADDED, {
     onSubscriptionData: ({ subscriptionData }) => {
-      console.log('subscription', subscriptionData)
       const addedBook = subscriptionData.data.bookAdded
       notify(`${addedBook.title} added`)
       updateCacheWith(addedBook)
@@ -98,7 +97,6 @@ const App = () => {
   const [addBook] = useMutation(ADD_BOOK, {
     onError: handleError,
     update: (store, response) => {
-      console.log('response', response.data)
       updateCacheWith(response.data.addBook)
     }
   })

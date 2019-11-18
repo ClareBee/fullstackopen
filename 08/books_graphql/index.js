@@ -1,11 +1,10 @@
 require('dotenv').config()
-const { PubSub } = require('apollo-server')
-const pubsub = new PubSub()
 
 const { ApolloServer, UserInputError, gql, AuthenticationError } = require('apollo-server')
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
-
+const { PubSub } = require('apollo-server')
+const pubsub = new PubSub()
 
 const Book = require('./models/book')
 const Author = require('./models/author')
