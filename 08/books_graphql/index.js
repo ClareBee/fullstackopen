@@ -106,6 +106,16 @@ const resolvers = {
       return Author.find({})
     }
   },
+  Author: {
+    bookCount: async (root) => {
+      console.log('root', root)
+      const books = await Book.find({
+        author: root
+      })
+      console.log('books', books)
+      return books.length
+    }
+  },
   Mutation: {
     addBook: async (root, args, { currentUser }) => {
       if (!currentUser) {
@@ -113,7 +123,6 @@ const resolvers = {
       }
       let author = await Author.findOne({ name: args.authorInput.name })
       if(author && author.bookCount){
-        console.log('author book count', author)
         author.bookCount = author.bookCount + 1
       }
       if(author && !author.bookCount) {
@@ -133,7 +142,6 @@ const resolvers = {
           invalidArgs: args,
         })
       }
-      console.log('publishing')
       pubsub.publish('BOOK_ADDED', { bookAdded: book })
 
       return book.populate('author')
