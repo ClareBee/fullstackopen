@@ -58,12 +58,16 @@ const NewBook = (props) => {
             value={genre}
             onChange={({ target }) => setGenre(target.value)}
           />
-          <button onClick={addGenre} type="button">add genre</button>
+          <button
+            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+            onClick={addGenre} type="button">add genre</button>
         </div>
         <div>
           genres: {genres.join(' ')}
         </div>
-        <button type="submit">create book</button>
+        <button
+          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+          type="submit">create book</button>
       </form>
     </div>
   )

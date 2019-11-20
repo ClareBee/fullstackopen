@@ -13,32 +13,37 @@ const Authors = ({ show, token }) => {
   if (loading) {
     return <div>loading...</div>
   }
+  if (!data) {
+    return <div>Back end not connected</div>
+  }
   const authors = data.allAuthors
 
   return (
-    <div>
-      <h2>authors</h2>
+    <div className="w-100 p-5 m-2 bg-gray-300">
+      <h2 className="text-3xl text-gray-700">Authors</h2>
       {error &&
          <div style={{ color: 'red' }}>
            {error.graphQLErrors}
          </div>
       }
-      <table>
+      <table className="table-auto mb-4">
         <tbody>
           <tr>
-            <th></th>
-            <th>
-              born
+            <th className="w-1/2 px-4 py-2 text-left text-gray-700">
+              Author
             </th>
-            <th>
-              books
+            <th className="w-1/2 px-4 py-2 text-left text-gray-700">
+              Born
+            </th>
+            <th className="w-1/2 px-4 py-2 text-left text-gray-700">
+              Books
             </th>
           </tr>
           {authors.map(author =>
             <tr key={author.name}>
-              <td>{author.name}</td>
-              <td>{author.born}</td>
-              <td>{author.bookCount}</td>
+              <td className="border border-white px-4 py-2">{author.name}</td>
+              <td className="border border-white px-4 py-2">{author.born}</td>
+              <td className="border border-white px-4 py-2">{author.bookCount}</td>
             </tr>
           )}
         </tbody>

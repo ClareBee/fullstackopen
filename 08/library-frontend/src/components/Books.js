@@ -58,7 +58,7 @@ const Books = ({ show, client }) => {
 
   return (
     <div>
-      <h2>books</h2>
+      <h2 className="text-3xl">Books</h2>
       {error &&
          <div style={{ color: 'red' }}>
            {error}
@@ -91,9 +91,21 @@ const Books = ({ show, client }) => {
         </tbody>
       </table>
       {genres.map(genre => (
-        <button value={genre} key={uuidv4()} onClick={(e) => handleGenre(e)}>{genre}</button>
+        <button
+          value={genre}
+          key={uuidv4()}
+          onClick={(e) => handleGenre(e)}
+          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+        >
+          {genre}
+        </button>
       ))}
-      <button onClick={(e) => getAllBooks(e)}>All books</button>
+      <button
+        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+        onClick={(e) => getAllBooks(e)}
+      >
+        All books
+      </button>
     </div>
   )
 }

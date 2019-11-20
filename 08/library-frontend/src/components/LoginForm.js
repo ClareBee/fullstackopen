@@ -23,22 +23,48 @@ const LoginForm = (props) => {
   }
 
   return (
-    <div>
-      <form onSubmit={submit}>
-        <div>
-          username <input
+    <div className="w-full max-w-xs">
+      <form
+        onSubmit={submit}
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+      >
+        <div className="mb-4">
+          <label
+            for="username"
+            className="block text-gray-700 text-sm font-bold mb-2"
+          >
+          Username:
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             value={username}
+            id="username"
             onChange={({ target }) => setUsername(target.value)}
           />
         </div>
-        <div>
-          password <input
-            type='password'
+        <div className="mb-6">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            for="password"
+          >
+            Password:
+          </label>
+          <input
+            id="password"
+            type="password"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" placeholder="******************"
             value={password}
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-        <button type='submit'>login</button>
+        <div className="flex items-center justify-between">
+          <button
+            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+            type="submit"
+          >
+            Login
+          </button>
+        </div>
       </form>
     </div>
   )
