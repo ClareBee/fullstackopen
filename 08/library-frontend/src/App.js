@@ -76,18 +76,48 @@ const App = () => {
     </div>
 
   return (
-    <div>
-      <div>
-        <button onClick={() => setPage('authors')}>authors</button>
-        <button onClick={() => setPage('books')}>books</button>
+    <div className="w-3/4 my-4 m-auto">
+      <div className="bg-white h-12 flex justify-between m-2">
+        <button
+          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+          onClick={() => setPage('authors')}
+        >
+          Authors
+        </button>
+        <button
+          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+          onClick={() => setPage('books')}
+        >
+          Books
+        </button>
         {!token && (
-          <button onClick={() => setPage('login')}>login</button>
+          <button
+            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+            onClick={() => setPage('login')}
+          >
+            Login
+          </button>
         )}
         {token && (
           <React.Fragment>
-            <button onClick={() => setPage('add')}>add book</button>
-            <button onClick={() => setPage('recommendations')}>recommendations</button>
-            <button onClick={logout}>logout</button>
+            <button
+              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+              onClick={() => setPage('add')}
+            >
+              Add book
+            </button>
+            <button
+              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+              onClick={() => setPage('recommendations')}
+            >
+              Recommendations
+            </button>
+            <button
+              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+              onClick={logout}
+            >
+              Logout
+            </button>
           </React.Fragment>
         )}
       </div>
