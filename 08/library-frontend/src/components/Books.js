@@ -57,55 +57,57 @@ const Books = ({ show, client }) => {
   }
 
   return (
-    <div>
-      <h2 className="text-3xl">Books</h2>
+    <div className="w-100 p-5 m-2 bg-gray-300">
+      <h2 className="text-3xl text-gray-700">Books</h2>
       {error &&
          <div style={{ color: 'red' }}>
            {error}
          </div>
       }
-      <table>
+      <table className="table-auto mb-4">
         <tbody>
           <tr>
-            <th>
-              title
+            <th className="w-1/2 px-4 py-2 text-left text-gray-700">
+              Title
             </th>
-            <th>
-              author
+            <th className="w-1/2 px-4 py-2 text-left text-gray-700">
+              Author
             </th>
-            <th>
-              genres
+            <th className="w-1/2 px-4 py-2 text-left text-gray-700">
+              Genres
             </th>
-            <th>
-              published
+            <th className="w-1/2 px-4 py-2 text-left text-gray-700">
+              Published
             </th>
           </tr>
           {books.map(book =>
             <tr key={book.title}>
-              <td>{book.title}</td>
-              <td>{book.author && book.author.name}</td>
-              <td>{book.genres && book.genres.map(genre => genre)}</td>
-              <td>{book.published}</td>
+              <td className="border border-white px-4 py-2">{book.title}</td>
+              <td className="border border-white px-4 py-2">{book.author && book.author.name}</td>
+              <td className="border border-white px-4 py-2">{book.genres && book.genres.map(genre => genre)}</td>
+              <td className="border border-white px-4 py-2">{book.published}</td>
             </tr>
           )}
         </tbody>
       </table>
-      {genres.map(genre => (
+      <div className="flex flex-row justify-center">
+        {genres.map(genre => (
+          <button
+            value={genre}
+            key={uuidv4()}
+            onClick={(e) => handleGenre(e)}
+            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 m-2 rounded"
+          >
+            {genre}
+          </button>
+        ))}
         <button
-          value={genre}
-          key={uuidv4()}
-          onClick={(e) => handleGenre(e)}
-          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 m-2 rounded"
+          onClick={(e) => getAllBooks(e)}
         >
-          {genre}
+          All books
         </button>
-      ))}
-      <button
-        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-        onClick={(e) => getAllBooks(e)}
-      >
-        All books
-      </button>
+      </div>
     </div>
   )
 }

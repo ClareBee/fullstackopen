@@ -23,10 +23,10 @@ const LoginForm = (props) => {
   }
 
   return (
-    <div className="w-full max-w-xs">
+    <div className="w-full max-w-xs m-auto">
       <form
         onSubmit={submit}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 my-4 m-auto"
       >
         <div className="mb-4">
           <label
