@@ -108,11 +108,9 @@ const resolvers = {
   },
   Author: {
     bookCount: async (root) => {
-      console.log('root', root)
       const books = await Book.find({
         author: root
       })
-      console.log('books', books)
       return books.length
     }
   },
