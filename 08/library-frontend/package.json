@@ -7,6 +7,7 @@
     "apollo-boost": "^0.4.4",
     "apollo-link": "^1.2.13",
     "apollo-link-context": "^1.0.19",
+    "apollo-link-error": "^1.1.12",
     "apollo-link-ws": "^1.0.19",
     "autoprefixer": "^9.7.2",
     "graphql": "^14.5.8",
@@ -21,7 +22,7 @@
     "uuid": "^3.3.3"
   },
   "scripts": {
-    "build:style":"tailwind build src/styles/index.css -o src/styles/tailwind.css",
+    "build:style": "tailwind build src/styles/index.css -o src/styles/tailwind.css",
     "start": "npm run build:style && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

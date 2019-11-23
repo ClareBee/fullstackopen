@@ -42,7 +42,6 @@ const link = split(
   wsLink,
   authLink.concat(httpLink),
 )
-
 // link is how client contacts server w JWT from local storage in header if exists
 const client = new ApolloClient({
   link,

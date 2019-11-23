@@ -25,7 +25,7 @@ const Recommendations = ({ token, show }) => {
 
   if(!token){
     return (
-      <p>You need to log in to see this page</p>
+      <p className="mb-4 text-gray-700">You need to log in to see this page</p>
     )
   }
   const formatBooks = (books, user) => {
@@ -34,30 +34,33 @@ const Recommendations = ({ token, show }) => {
     ))
     if(!user.favoriteGenre){
       return (
-        <p>You haven't chosen a favourite genre</p>
+        <p className="mb-4 text-gray-700">You haven't chosen a favourite genre</p>
       )
     }
     if (userBooks.length === 0){
       return (
-        <div>
-          <p>Your favourite genre is {user.favoriteGenre}</p>
-          <p>No books match this</p>
-        </div>
+        <React.Fragment>
+          <p className="mb-4 text-gray-700">Your favourite genre is {user.favoriteGenre}</p>
+          <p className="mb-4 text-gray-700">No books currently match this</p>
+        </React.Fragment>
       )
     }
     return (
-      <div>
-        <p>Your favourite genre is {user.favoriteGenre}</p>
-        <ul>
+      <React.Fragment>
+        <p className="mb-4 text-gray-700">Your favourite genre is {user.favoriteGenre}</p>
+        <p className="mb-4 text-gray-700">Here are your matches:</p>
+        <ul className="list-none">
         {userBooks.map(book => (
           <li key={book.published}>{book.title}</li>
         ))}
         </ul>
-      </div>
+      </React.Fragment>
     )
   }
   return (
-    formatBooks(books, user)
+    <div className="w-100 p-5 m-2 bg-gray-300">
+      {formatBooks(books, user)}
+    </div>
   )
 }
 

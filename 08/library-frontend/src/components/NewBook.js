@@ -35,7 +35,7 @@ const NewBook = (props) => {
       >
         <div className="mb-4">
           <label
-            for="title"
+            htmlFor="title"
             className="block text-gray-700 text-sm font-bold mb-2"
           >
             Title
@@ -49,7 +49,7 @@ const NewBook = (props) => {
         </div>
         <div className="mb-4">
           <label
-            for="author"
+            htmlFor="author"
             className="block text-gray-700 text-sm font-bold mb-2"
           >
             Author
@@ -63,7 +63,7 @@ const NewBook = (props) => {
         </div>
         <div className="mb-4">
           <label
-            for="published"
+            htmlFor="published"
             className="block text-gray-700 text-sm font-bold mb-2"
           >
             Published
@@ -78,7 +78,7 @@ const NewBook = (props) => {
         </div>
         <div className="mb-4">
           <label
-            for="genre"
+            htmlFor="genre"
             className="block text-gray-700 text-sm font-bold mb-2"
           >
             Genres
