@@ -9,6 +9,7 @@ import LoginForm from './components/LoginForm'
 import { LOGIN, ADD_BOOK } from './graphql/mutations'
 import { ALL_BOOKS } from './graphql/queries'
 import { BOOK_ADDED } from './graphql/subscription'
+import library from './images/libraryshot.png'
 
 const App = () => {
   const [errorMessage, setErrorMessage] = useState(null)
@@ -76,21 +77,21 @@ const App = () => {
     </div>
 
   return (
-    <div className="w-3/4 my-4 m-auto">
-      <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6">
+    <div className="w-3/4 my-4 m-auto rounded-lg shadow">
+      <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6 shadow-lg">
         <div className="flex items-center flex-shrink-0 text-white mr-6">
           <span className="font-semibold text-2xl tracking-tight">BookApp</span>
         </div>
         <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
           <div className="text-sm lg:flex-grow">
             <button
-              className="block mt-4 lg:inline-block lg:mt-0 text-2xl text-xl text-teal-200 hover:text-white mr-4"
+              className="block mt-4 lg:inline-block lg:mt-0 text-2xl text-xl text-teal-200 hover:text-white active:text-white focus:text-white mr-4"
               onClick={() => setPage('authors')}
             >
               Authors
             </button>
             <button
-              className="block mt-4 lg:inline-block lg:mt-0 text-2xl text-teal-200 hover:text-white mr-4"
+              className="block mt-4 lg:inline-block lg:mt-0 text-2xl text-teal-200 hover:text-white active:text-white focus:text-white mr-4"
               onClick={() => setPage('books')}
             >
               Books
@@ -110,13 +111,13 @@ const App = () => {
             <React.Fragment>
               <div>
                 <button
-                  className="block mt-4 lg:inline-block lg:mt-0 text-2xl text-teal-200 hover:text-white mr-4"
+                  className="block mt-4 lg:inline-block lg:mt-0 text-2xl text-teal-200 hover:text-white active:text-white focus:text-white mr-4"
                   onClick={() => setPage('add')}
                 >
-                  Add book
+                  Add Book
                 </button>
                 <button
-                  className="block mt-4 lg:inline-block lg:mt-0 text-2xl text-teal-200 hover:text-white mr-4"
+                  className="block mt-4 lg:inline-block lg:mt-0 text-2xl text-teal-200 hover:text-white active:text-white focus:text-white mr-4"
                   onClick={() => setPage('recommendations')}
                 >
                   Recommendations
@@ -134,6 +135,7 @@ const App = () => {
           )}
           </div>
       </nav>
+      <div className="h-screen bg-cover p-4" style={{ backgroundImage: `url(${library})` }}>
       {errorNotification()}
       <Authors show={page === 'authors'} token={token} />
       <Books show={page === 'books'} client={client} />
@@ -147,7 +149,7 @@ const App = () => {
           setPage={setPage}
         />
       )}
-
+      </div>
     </div>
   )
 }

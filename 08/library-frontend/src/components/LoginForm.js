@@ -26,7 +26,7 @@ const LoginForm = (props) => {
     <div className="w-full max-w-md mx-auto p-8">
       <form
         onSubmit={submit}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 my-4 mx-auto border border-pink-500"
+        className="bg-white shadow-lg rounded px-8 pt-6 pb-8 my-4 mx-auto border-2 border-pink-500"
       >
         <div className="mb-4">
           <label

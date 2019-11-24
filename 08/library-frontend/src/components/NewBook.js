@@ -28,7 +28,7 @@ const NewBook = (props) => {
   }
 
   return (
-    <div className="w-100 p-5 m-2 bg-gray-300">
+    <div className="w-100 p-5 bg-gray-300 shadow border-4 border-white rounded">
       <h2 className="text-3xl text-gray-700">New Book</h2>
       <hr className="h-1 bg-pink-700" />
       <form

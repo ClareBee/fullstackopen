@@ -56,9 +56,7 @@ const Navigation = ({ users, blogs, currentUser, handleLogout }) => {
       <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <Link className={classes.link} to="/">
-            <Typography variant="h4">
-              BlogApp
-            </Typography>
+            <Header />
           </Link>
           <nav>
             <Link className={classes.link} to="/">Blogs</Link>
@@ -76,7 +74,6 @@ const Navigation = ({ users, blogs, currentUser, handleLogout }) => {
             : null }
         </Toolbar>
       </AppBar>
-      <Header />
       <Notification />
       <Route exact path="/" render={() => <BlogList />} />
       <Route exact path="/users" render={() => <UserList />} />

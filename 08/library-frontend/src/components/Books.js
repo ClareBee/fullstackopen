@@ -27,12 +27,12 @@ const Books = ({ show, client }) => {
     return null
   }
   if (loading) {
-    return <div className="text-2xl text-gray-500 mt-4">Loading...</div>
+    return <div className="text-2xl text-gray-700 p-4 shadow-lg">Loading...</div>
   }
 
   if(!books){
     return (
-      <div className="text-2xl text-gray-500 mt-4">
+      <div className="text-2xl text-gray-700 p-4 shadow-lg">
         <p>No books</p>
       </div>
     )
@@ -67,7 +67,7 @@ const Books = ({ show, client }) => {
   }
 
   return (
-    <div className="w-100 p-5 m-2 bg-gray-300">
+    <div className="w-100 p-5 bg-gray-300 shadow-lg border-4 border-white rounded">
       <h2 className="text-3xl text-gray-700">Books</h2>
       <hr className="h-1 bg-pink-700" />
 
@@ -102,7 +102,7 @@ const Books = ({ show, client }) => {
           )}
         </tbody>
       </table>
-      <div className="flex flex-row justify-center">
+      <div className="flex flex-row flex-wrap justify-center">
         {genres.map(genre => (
           <button
             value={genre}

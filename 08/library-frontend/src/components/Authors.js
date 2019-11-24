@@ -11,15 +11,15 @@ const Authors = ({ show, token }) => {
   }
 
   if (loading) {
-    return <div className="text-2xl text-gray-500 mt-4">Loading...</div>
+    return <div className="text-2xl text-gray-700 p-4 shadow-lg">Loading...</div>
   }
   if (!data) {
-    return <div className="text-2xl text-gray-500 mt-4"><p>Back end not connected</p></div>
+    return <div className="text-2xl text-gray-700 p-4 shadow-lg"><p>Back end not connected</p></div>
   }
   const authors = data.allAuthors
 
   return (
-    <div className="w-100 p-5 m-2 bg-gray-300">
+    <div className="w-100 p-5 bg-gray-300 shadow-lg border-4 border-white rounded">
       <h2 className="text-3xl text-gray-700">Authors</h2>
       <hr className="h-1 bg-pink-700" />
       {error &&

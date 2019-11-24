@@ -35,7 +35,7 @@ const UpdateAuthor = (props) => {
 
   return (
     <form
-      className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+      className="bg-white border-4 border-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
       onSubmit={submit}
     >
       <div className="mb-4">
