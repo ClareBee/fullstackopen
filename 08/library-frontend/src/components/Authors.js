@@ -11,10 +11,10 @@ const Authors = ({ show, token }) => {
   }
 
   if (loading) {
-    return <div>loading...</div>
+    return <div className="text-2xl text-gray-500 mt-4">Loading...</div>
   }
   if (!data) {
-    return <div>Back end not connected</div>
+    return <div className="text-2xl text-gray-500 mt-4"><p>Back end not connected</p></div>
   }
   const authors = data.allAuthors
 

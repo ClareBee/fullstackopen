@@ -27,12 +27,14 @@ const Books = ({ show, client }) => {
     return null
   }
   if (loading) {
-    return <div>loading...</div>
+    return <div className="text-2xl text-gray-500 mt-4">Loading...</div>
   }
 
   if(!books){
     return (
-      <p>No books</p>
+      <div className="text-2xl text-gray-500 mt-4">
+        <p>No books</p>
+      </div>
     )
   }
 

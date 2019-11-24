@@ -23,7 +23,7 @@ const LoginForm = (props) => {
   }
 
   return (
-    <div className="w-full max-w-xs mx-auto">
+    <div className="w-full max-w-md mx-auto p-8">
       <form
         onSubmit={submit}
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 my-4 mx-auto border border-pink-500"
@@ -31,7 +31,7 @@ const LoginForm = (props) => {
         <div className="mb-4">
           <label
             htmlFor="username"
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-gray-700 text-md font-bold mb-2"
           >
           Username:
           </label>
@@ -44,7 +44,7 @@ const LoginForm = (props) => {
         </div>
         <div className="mb-6">
           <label
-            className="block text-gray-700 text-sm font-bold mb-2"
+            className="block text-gray-700 text-md font-bold mb-2"
             htmlFor="password"
           >
             Password:

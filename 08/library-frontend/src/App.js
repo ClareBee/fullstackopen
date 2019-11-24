@@ -77,50 +77,63 @@ const App = () => {
 
   return (
     <div className="w-3/4 my-4 m-auto">
-      <div className="bg-white h-12 flex justify-between m-2">
-        <button
-          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-          onClick={() => setPage('authors')}
-        >
-          Authors
-        </button>
-        <button
-          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-          onClick={() => setPage('books')}
-        >
-          Books
-        </button>
-        {!token && (
-          <button
-            className="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
-            onClick={() => setPage('login')}
-          >
-            Login
-          </button>
-        )}
-        {token && (
-          <React.Fragment>
+      <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6">
+        <div className="flex items-center flex-shrink-0 text-white mr-6">
+          <span className="font-semibold text-2xl tracking-tight">BookApp</span>
+        </div>
+        <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+          <div className="text-sm lg:flex-grow">
             <button
-              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-              onClick={() => setPage('add')}
+              className="block mt-4 lg:inline-block lg:mt-0 text-2xl text-xl text-teal-200 hover:text-white mr-4"
+              onClick={() => setPage('authors')}
             >
-              Add book
+              Authors
             </button>
             <button
-              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-              onClick={() => setPage('recommendations')}
+              className="block mt-4 lg:inline-block lg:mt-0 text-2xl text-teal-200 hover:text-white mr-4"
+              onClick={() => setPage('books')}
             >
-              Recommendations
+              Books
             </button>
-            <button
-              className="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
-              onClick={logout}
-            >
-              Logout
-            </button>
-          </React.Fragment>
-        )}
-      </div>
+          </div>
+          {!token && (
+            <div>
+              <button
+                className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-pink-500 hover:bg-white mt-4 lg:mt-0"
+                onClick={() => setPage('login')}
+              >
+                Login
+              </button>
+            </div>
+          )}
+          {token && (
+            <React.Fragment>
+              <div>
+                <button
+                  className="block mt-4 lg:inline-block lg:mt-0 text-2xl text-teal-200 hover:text-white mr-4"
+                  onClick={() => setPage('add')}
+                >
+                  Add book
+                </button>
+                <button
+                  className="block mt-4 lg:inline-block lg:mt-0 text-2xl text-teal-200 hover:text-white mr-4"
+                  onClick={() => setPage('recommendations')}
+                >
+                  Recommendations
+                </button>
+              </div>
+              <div>
+                <button
+                  className="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
+                  onClick={logout}
+                >
+                  Logout
+                </button>
+              </div>
+            </React.Fragment>
+          )}
+          </div>
+      </nav>
       {errorNotification()}
       <Authors show={page === 'authors'} token={token} />
       <Books show={page === 'books'} client={client} />
