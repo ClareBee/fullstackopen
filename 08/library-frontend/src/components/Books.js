@@ -56,9 +56,19 @@ const Books = ({ show, client }) => {
     showGenres(e.target.value)
   }
 
+  const sortedByTitle = array => {
+    return array.sort((a, b) => {
+      let textA = a.title.toLowerCase();
+      let textB = b.title.toLowerCase();
+      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    })
+  }
+
   return (
     <div className="w-100 p-5 m-2 bg-gray-300">
       <h2 className="text-3xl text-gray-700">Books</h2>
+      <hr className="h-1 bg-pink-700" />
+
       {error &&
          <div style={{ color: 'red' }}>
            {error}
@@ -80,11 +90,11 @@ const Books = ({ show, client }) => {
               Published
             </th>
           </tr>
-          {books.map(book =>
+          {sortedByTitle(books).map(book =>
             <tr key={book.title}>
               <td className="border border-white px-4 py-2">{book.title}</td>
               <td className="border border-white px-4 py-2">{book.author && book.author.name}</td>
-              <td className="border border-white px-4 py-2">{book.genres && book.genres.map(genre => genre)}</td>
+              <td className="border border-white px-4 py-2">{book.genres && book.genres.map(genre => genre).join(', ')}</td>
               <td className="border border-white px-4 py-2">{book.published}</td>
             </tr>
           )}
@@ -96,13 +106,13 @@ const Books = ({ show, client }) => {
             value={genre}
             key={uuidv4()}
             onClick={(e) => handleGenre(e)}
-            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 m-2 rounded"
+            className="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 m-2 rounded"
           >
             {genre}
           </button>
         ))}
         <button
-          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 m-2 rounded"
+          className="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 m-2 rounded"
           onClick={(e) => getAllBooks(e)}
         >
           All books

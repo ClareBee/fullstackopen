@@ -1,3 +1,5 @@
+// file used in first stages of development - replaced with MongoDB
+
 const uuid = require('uuid/v1')
 
 let authors = [

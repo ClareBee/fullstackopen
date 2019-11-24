@@ -1,4 +1,11 @@
-`node index.js` launches playground on `localhost:4000`
+### Backend for Library
+<!-- insert link -->
 
-npm install --save apollo-server graphql
- npm install uuid
+### How to run
+`node index.js` launches server on `localhost:4000` & subscriptions on `localhost:4000/graphql`
+
+### Tech stack
+- MongoDB
+- Mongoose
+- GraphQL
+- ApolloServer

@@ -29,6 +29,8 @@ const NewBook = (props) => {
 
   return (
     <div className="w-100 p-5 m-2 bg-gray-300">
+      <h2 className="text-3xl text-gray-700">New Book</h2>
+      <hr className="h-1 bg-pink-700" />
       <form
         onSubmit={submit}
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 my-4 m-auto"
@@ -90,7 +92,7 @@ const NewBook = (props) => {
             onChange={({ target }) => setGenre(target.value)}
           />
           <button
-            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 m-4 rounded"
+            className="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 m-4 rounded"
             onClick={addGenre}
             type="button"
           >
@@ -100,12 +102,14 @@ const NewBook = (props) => {
         <div className="mb-4 text-gray-700">
           Genres: {genres.join(' ')}
         </div>
-        <button
-          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-          type="submit"
-        >
-          Create Book
-        </button>
+        <div className="flex flex-row-reverse">
+          <button
+            className="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded"
+            type="submit"
+          >
+            Create Book
+          </button>
+        </div>
       </form>
     </div>
   )

@@ -92,7 +92,7 @@ const App = () => {
         </button>
         {!token && (
           <button
-            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
             onClick={() => setPage('login')}
           >
             Login
@@ -113,7 +113,7 @@ const App = () => {
               Recommendations
             </button>
             <button
-              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+              className="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded"
               onClick={logout}
             >
               Logout

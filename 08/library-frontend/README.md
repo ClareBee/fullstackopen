@@ -1,20 +1,23 @@
-`yarn add apollo-boost react-apollo graphql`
+### Library App
+Simple app to add/edit books/authors to a collection
+Basic auth with JWT
 
-```jsx
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
-import ApolloClient, { gql } from 'apollo-boost'
-import { ApolloProvider } from 'react-apollo'
+To be run against NodeJS/GraphQL/ApolloServer Backend:
+<!-- insert link -->
 
-const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql'
-})
+### How to run
+`npm run start` opens app on `localhost:3000`
 
-ReactDOM.render(
-  <ApolloProvider client={client} >
-    <App />
-  </ApolloProvider>,
-  document.getElementById('root')
-)
-```
+### Tech stack
+- ReactJS via create-react-app
+- ApolloClient with `apollo-boost` - using hooks
+- WebSockets with Apollo Subscriptions
+- TailwindCSS & PostCSS
+
+<img src="assets/login.jpg" alt="login" width="650"/>
+<img src="assets/authors.jpg" alt="login" width="650"/>
+<img src="assets/books.jpg" alt="login" width="650"/>
+<img src="assets/newbook.jpg" alt="login" width="650"/>
+<img src="assets/recommendations.jpg" alt="login" width="650"/>
+
+<!-- insert screenshots -->

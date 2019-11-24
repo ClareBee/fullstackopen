@@ -23,10 +23,10 @@ const LoginForm = (props) => {
   }
 
   return (
-    <div className="w-full max-w-xs m-auto">
+    <div className="w-full max-w-xs mx-auto">
       <form
         onSubmit={submit}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 my-4 m-auto"
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 my-4 mx-auto border border-pink-500"
       >
         <div className="mb-4">
           <label
@@ -57,9 +57,9 @@ const LoginForm = (props) => {
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-        <div className="flex items-center justify-between">
+        <div className="flex flex-row-reverse">
           <button
-            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded"
             type="submit"
           >
             Login

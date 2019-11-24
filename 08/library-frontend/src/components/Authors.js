@@ -21,6 +21,7 @@ const Authors = ({ show, token }) => {
   return (
     <div className="w-100 p-5 m-2 bg-gray-300">
       <h2 className="text-3xl text-gray-700">Authors</h2>
+      <hr className="h-1 bg-pink-700" />
       {error &&
          <div style={{ color: 'red' }}>
            {error.graphQLErrors}

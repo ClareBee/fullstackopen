@@ -60,12 +60,14 @@ const UpdateAuthor = (props) => {
           onChange={({ target }) => setBorn(parseInt(target.value))}
         />
       </div>
-      <button
-        type="submit"
-        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Update Author
-      </button>
+      <div className="flex flex-row-reverse">
+        <button
+          type="submit"
+          className="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Update Author
+        </button>
+      </div>
       {mutationLoading && <p>Loading...</p>}
       {mutationError && <p>Error :( Please make sure you're logged & try again</p>}
     </form>

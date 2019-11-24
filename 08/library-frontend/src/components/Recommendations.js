@@ -47,11 +47,12 @@ const Recommendations = ({ token, show }) => {
     }
     return (
       <React.Fragment>
-        <p className="mb-4 text-gray-700">Your favourite genre is {user.favoriteGenre}</p>
-        <p className="mb-4 text-gray-700">Here are your matches:</p>
-        <ul className="list-none">
+        <h3 className="mb-4 text-gray-700">Your favourite genre is: <br/>
+          <span className="text-pink-500">{user.favoriteGenre}</span></h3>
+        <p className="mb-4 text-gray-700 underline">Here are your matches:</p>
+        <ul className="list-inside list-disc">
         {userBooks.map(book => (
-          <li key={book.published}>{book.title}</li>
+          <li className="border border-gray-500 p-2 rounded-sm shadow" key={book.published}>{book.title}</li>
         ))}
         </ul>
       </React.Fragment>
@@ -59,7 +60,11 @@ const Recommendations = ({ token, show }) => {
   }
   return (
     <div className="w-100 p-5 m-2 bg-gray-300">
-      {formatBooks(books, user)}
+      <h1 className="text-3xl text-gray-700">Recommendations</h1>
+      <hr className="h-1 bg-pink-700" />
+      <div className="w-80 p-5 my-1 mx-auto bg-white">
+        {formatBooks(books, user)}
+      </div>
     </div>
   )
 }
