@@ -5,18 +5,27 @@
 
 ___
 
-### Final Project: Bloglist
+## Final Projects: 
+
+### Bloglist
 - React/Redux FrontEnd with Custom Hooks: - [FrontEnd](https://github.com/ClareBee/fullstackopen/tree/master/07/bloglist_frontend_redux)
 
 - Express.js & MongoDB BackEnd: - [BackEnd](https://github.com/ClareBee/fullstackopen/tree/master/07/blog_list_backend)
 
 *Styled with MaterialUI, tested with Cypress & supertest*
 
-**Examples:**
-Bloglist:
-
 <img src="assets/bloglist.jpg" alt="bloglist" width="450"/>
 
+### BooksApp
+- React/ApolloClient FrontEnd with caching and basic auth: - [FrontEnd](https://github.com/ClareBee/fullstackopen/tree/master/08/library-frontend)
+- GraphQL/ApolloServer/NodeJS BackEnd, using MongoDB/Mongoose: - [BackEnd](https://github.com/ClareBee/fullstackopen/tree/master/08/books_graphql)
+
+*Styled with TailwindCSS*
+
+<img src="assets/authors.jpg" alt="authors" width="450" />
+
+**Examples:**
+ 
 Webpack:
 
 <img src="assets/webpack.jpg" alt="login" width="450"/>
@@ -28,8 +37,17 @@ Webpack:
 ___
 
 ## Syllabus & Coursework
-- [Part 8] work in progress
-  * **GraphQL**
+- [Part 8](https://github.com/ClareBee/fullstackopen/tree/master/08)
+  * **GraphQL and Apollo **
+  * GraphQL Server
+  * React and GraphQL
+  * Database and User Administration
+  * Login and Updating the Cache
+  * Fragments and Subscriptions
+    * Coursework:
+    - Final Project: BooksApp
+      - [FrontEnd](https://github.com/ClareBee/fullstackopen/tree/master/08/library-frontend)
+      - [BackEnd](https://github.com/ClareBee/fullstackopen/tree/master/08/books_graphql)
   
 - [Part 7](https://github.com/ClareBee/fullstackopen/tree/master/07)
   * **ReactRouter, Styling, Webpack**
@@ -41,9 +59,9 @@ ___
   * Legacy Class Components
   * E2E Testing with Cypress
   * Coursework:
-    - Final Project: Bloglist:
-      [FrontEnd](https://github.com/ClareBee/fullstackopen/tree/master/07/bloglist_frontend_redux)
-      [BackEnd](https://github.com/ClareBee/fullstackopen/tree/master/07/blog_list_backend)
+    - Final Project: Bloglist
+      - [FrontEnd](https://github.com/ClareBee/fullstackopen/tree/master/07/bloglist_frontend_redux)
+      - [BackEnd](https://github.com/ClareBee/fullstackopen/tree/master/07/blog_list_backend)
 
 - [Part 6](https://github.com/ClareBee/fullstackopen/tree/master/06)
   * **State Management with Redux**
